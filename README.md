@@ -1,7 +1,5 @@
-# APST01
+# APS - T01
 
-'''
-public static void main() {
-  System.out.println("Hello World!");
-}
-'''
+####Grupo: Breno Hease, Nycolas Monjardim, Paulo Amorim
+
+Esse é um trabalho da disciplina de APS
