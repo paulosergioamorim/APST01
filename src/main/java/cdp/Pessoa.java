@@ -3,15 +3,12 @@ package cdp;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
 import java.time.LocalDate;
-import java.util.Date;
 
 @MappedSuperclass
 public abstract class Pessoa {
     @Id
     private String nome;
-    @Column(name = "data_nascimento")
     private LocalDate data_nascimento;
     private long cpf;
 
