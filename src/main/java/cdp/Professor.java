@@ -7,8 +7,8 @@ import java.time.LocalDate;
 public class Professor extends Pessoa {
     private Titulo titulacao;
 
-    public Professor(String nome, LocalDate data_nascimento, long cpf, Titulo titulacao) {
-        super(nome, data_nascimento, cpf);
+    public Professor(String nome, LocalDate dataNascimento, long cpf, Titulo titulacao) {
+        super(nome, dataNascimento, cpf);
         this.titulacao = titulacao;
     }
 

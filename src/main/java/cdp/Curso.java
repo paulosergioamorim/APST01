@@ -1,6 +1,7 @@
 package cdp;
 
 import java.util.Collection;
+import java.util.List;
 
 public class Curso {
     private String nome;
@@ -12,7 +13,7 @@ public class Curso {
     }
 
     // relationship
-    private Collection<Turma> turmas;
+    private List<Turma> turmas;
 
     public String getNome() { return nome; }
 
@@ -22,9 +23,9 @@ public class Curso {
 
     public void setCarga_horaria(int carga_horaria) { this.carga_horaria = carga_horaria; }
 
-    public Collection<Turma> getTurmas() { return turmas; }
+    public List<Turma> getTurmas() { return turmas; }
 
-    public void setTurmas(Collection<Turma> turmas) { this.turmas = turmas; }
+    public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }
 
     public void addTurma(Turma turma) { this.turmas.add(turma); }
 }

@@ -1,41 +1,46 @@
 package cdp;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 public class Turma {
-    private Date data_inicio;
-    private Date data_fim;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
 
     private String horario;
-    private int limite_alunos;
-    private boolean fechada = false;
+    private int limiteAlunos;
+    private Estado estado;
+    private boolean fechada;
 
-    public Turma(Date data_inicio, Date data_fim, String horario, int limite_alunos, Curso curso) {
-        this.data_inicio = data_inicio;
-        this.data_fim = data_fim;
+    public Turma(LocalDate dataInicio, LocalDate dataFim, String horario, int limiteAlunos, Curso curso) {
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
         this.horario = horario;
-        this.limite_alunos = limite_alunos;
+        this.limiteAlunos = limiteAlunos;
         this.curso = curso;
+        this.estado = Estado.MatriculasAbertas;
     }
 
     // relationship
     private Curso curso;
+    private Professor responsavel;
+    private List<Matricula> matriculas;
 
-    public Date getData_inicio() { return data_inicio; }
+    public LocalDate getDataInicio() { return dataInicio; }
 
-    public void setData_inicio(Date data_inicio) { this.data_inicio = data_inicio; }
+    public void setDataInicio(LocalDate dataInicio) { this.dataInicio = dataInicio; }
 
-    public Date getData_fim() { return data_fim; }
+    public LocalDate getDataFim() { return dataFim; }
 
-    public void setData_fim(Date data_fim) { this.data_fim = data_fim; }
+    public void setDataFim(LocalDate dataFim) { this.dataFim = dataFim; }
 
     public String getHorario() { return horario; }
 
     public void setHorario(String horario) { this.horario = horario; }
 
-    public int getLimite_alunos() { return limite_alunos; }
+    public int getLimiteAlunos() { return limiteAlunos; }
 
-    public void setLimite_alunos(int limite_alunos) { this.limite_alunos = limite_alunos; }
+    public void setLimiteAlunos(int limiteAlunos) { this.limiteAlunos = limiteAlunos; }
 
     public boolean getFechada() { return fechada; }
 
@@ -45,5 +50,59 @@ public class Turma {
 
     public void setCurso(Curso curso) { this.curso = curso; }
 
-    public void obterEstado() { }
+    public Estado getEstado() { return estado; }
+
+    public void setEstado(Estado estado) { this.estado = estado; }
+
+    public Professor getResponsavel() { return responsavel; }
+
+    public void setResponsavel(Professor responsavel) { this.responsavel = responsavel; }
+
+    public List<Matricula> getMatriculas() { return matriculas; }
+
+    public Estado obterEstado() { return estado; }
+
+    public enum Estado {
+        MatriculasAbertas {
+            @Override
+            public Estado next() {
+                if (turma.matriculas.size() == turma.limiteAlunos) return MatriculasEncerradas;
+                if (LocalDate.now().isBefore(turma.dataInicio)) return EmAndamento;
+                else return null;
+            }
+        },
+        MatriculasEncerradas {
+            @Override
+            public Estado next() {
+                if (LocalDate.now().isBefore(turma.dataInicio)) return EmAndamento;
+                else return null;
+            }
+        },
+        EmAndamento {
+            @Override
+            public Estado next() {
+                if (LocalDate.now().isBefore(turma.dataFim)) return AulasEncerradas;
+                else return null;
+            }
+        },
+        AulasEncerradas {
+            @Override
+            public Estado next() {
+                return Fechada;
+            }
+        },
+        Fechada {
+            @Override public Estado next() { return null; }
+        };
+
+        public Turma turma;
+
+        Estado(Turma turma) {
+            this.turma = turma;
+        }
+
+        Estado() { }
+
+        public abstract Estado next();
+    }
 }

@@ -1,17 +1,15 @@
 package cdp;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
 public class Matricula {
     private double nota;
-    @NotNull
-    private Date data_matricula;
+    private Date dataMatricula;
 
-    public Matricula(double nota, @NotNull Date data_matricula, Aluno aluno, Turma turma) {
+    public Matricula(double nota, Date dataMatricula, Aluno aluno, Turma turma) {
         this.nota = nota;
-        this.data_matricula = data_matricula;
+        this.dataMatricula = dataMatricula;
         this.aluno = aluno;
         this.turma = turma;
     }
@@ -24,9 +22,9 @@ public class Matricula {
 
     public void setNota(double nota) { this.nota = nota; }
 
-    public @NotNull Date getData_matricula() { return data_matricula; }
+    public Date getDataMatricula() { return dataMatricula; }
 
-    public void setData_matricula(@NotNull Date data_matricula) { this.data_matricula = data_matricula; }
+    public void setDataMatricula(Date dataMatricula) { this.dataMatricula = dataMatricula; }
 
     public Aluno getAluno() { return aluno; }
 
