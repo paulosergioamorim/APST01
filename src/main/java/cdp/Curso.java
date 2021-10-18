@@ -1,6 +1,5 @@
 package cdp;
 
-import java.util.Collection;
 import java.util.List;
 
 public class Curso {
@@ -9,7 +8,7 @@ public class Curso {
 
     public Curso(String nome, int cargaHoraria) {
         this.nome = nome;
-        this.carga_horaria = carga_horaria;
+        this.cargaHoraria = cargaHoraria;
     }
 
     // relationship
