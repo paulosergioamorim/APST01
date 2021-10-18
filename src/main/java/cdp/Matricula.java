@@ -1,13 +1,12 @@
 package cdp;
 
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Matricula {
     private double nota;
-    private Date dataMatricula;
+    private LocalDate dataMatricula;
 
-    public Matricula(double nota, Date dataMatricula, Aluno aluno, Turma turma) {
+    public Matricula(double nota, LocalDate dataMatricula, Aluno aluno, Turma turma) {
         this.nota = nota;
         this.dataMatricula = dataMatricula;
         this.aluno = aluno;
@@ -22,9 +21,9 @@ public class Matricula {
 
     public void setNota(double nota) { this.nota = nota; }
 
-    public Date getDataMatricula() { return dataMatricula; }
+    public LocalDate getDataMatricula() { return dataMatricula; }
 
-    public void setDataMatricula(Date dataMatricula) { this.dataMatricula = dataMatricula; }
+    public void setDataMatricula(LocalDate dataMatricula) { this.dataMatricula = dataMatricula; }
 
     public Aluno getAluno() { return aluno; }
 
