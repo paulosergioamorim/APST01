@@ -4,7 +4,10 @@ import cci.ControladorPrincipal;
 import cdp.RegexFilter;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.util.regex.Pattern;
 
 public class JanCadCurso extends JFrame {
     private final ControladorPrincipal controlador;

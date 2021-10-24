@@ -23,7 +23,7 @@ public class ControladorPrincipal {
 
     public void exibirJanCadCurso() {
         if (janCadCurso == null) janCadCurso = new JanCadCurso(this);
-        janPrincipal.setVisible(false);
+        //janPrincipal.setVisible(false);
         janCadCurso.setVisible(true);
     }
 

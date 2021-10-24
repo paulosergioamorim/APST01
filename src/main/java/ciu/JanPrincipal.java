@@ -7,6 +7,8 @@ import java.awt.*;
 
 public class JanPrincipal extends JFrame {
     private final ControladorPrincipal controlador;
+    private final JPanel panel;
+    private final JButton addCurso;
 
     public JanPrincipal(ControladorPrincipal controlador) {
         super("Título");
