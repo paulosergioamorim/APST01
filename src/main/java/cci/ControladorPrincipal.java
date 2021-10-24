@@ -6,6 +6,13 @@ import ciu.JanPrincipal;
 
 import javax.swing.*;
 
+/**
+ * Controller Class
+ * @author Paulo Sergio
+ * @author Breno Haese
+ * @author Nycolas Monjardim
+ */
+
 public class ControladorPrincipal {
     private JFrame janPrincipal;
     private JFrame janCadCurso;
@@ -23,11 +30,14 @@ public class ControladorPrincipal {
 
     public void exibirJanCadCurso() {
         if (janCadCurso == null) janCadCurso = new JanCadCurso(this);
-        //janPrincipal.setVisible(false);
+        janPrincipal.setVisible(false);
         janCadCurso.setVisible(true);
     }
 
-    public void cadastrarCurso(String nome, int ch) { aplGerenciarCurso.cadastrarCurso(nome,ch); }
+    public void cadastrarCurso(String nome, int ch) {
+        aplGerenciarCurso.cadastrarCurso(nome,ch);
+        exibirJanPrincipal();
+    }
 
     public static void main(String[] args) { new ControladorPrincipal(); }
 }
