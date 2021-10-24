@@ -1,4 +1,4 @@
-package cdp;
+package cgd;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
