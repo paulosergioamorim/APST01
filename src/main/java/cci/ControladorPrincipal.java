@@ -9,9 +9,12 @@ import javax.swing.*;
 public class ControladorPrincipal {
     private JFrame janPrincipal;
     private JFrame janCadCurso;
-    private final AplGerenciarCurso aplGerenciarCurso = new AplGerenciarCurso();
+    private final AplGerenciarCurso aplGerenciarCurso;
 
-    { this.exibirJanPrincipal(); }
+    public ControladorPrincipal() {
+        this.aplGerenciarCurso = new AplGerenciarCurso();
+        this.exibirJanPrincipal();
+    }
 
     public void exibirJanPrincipal() {
         if (janPrincipal == null) janPrincipal = new JanPrincipal(this);
