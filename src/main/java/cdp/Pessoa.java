@@ -15,6 +15,8 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
+    public int getIdade() { return LocalDate.now().getYear() - dataNascimento.getYear(); }
+
     public Pessoa() { }
 
     public long getCpf() { return cpf; }
@@ -29,5 +31,5 @@ public abstract class Pessoa {
 
     public void setNome(String nome) { this.nome = nome; }
 
-    public int getIdade() { return LocalDate.now().getYear() - dataNascimento.getYear(); }
+    @Override public String toString() { return nome; }
 }

@@ -34,9 +34,9 @@ public class ControladorPrincipal {
         janCadCurso.setVisible(true);
     }
 
-    public void cadastrarCurso(String nome, int ch) {
+    public int cadastrarCurso(String nome, int ch) {
         aplGerenciarCurso.cadastrarCurso(nome,ch);
-        exibirJanPrincipal();
+        return 0;
     }
 
     public static void main(String[] args) { new ControladorPrincipal(); }

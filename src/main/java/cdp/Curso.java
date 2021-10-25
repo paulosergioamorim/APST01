@@ -1,5 +1,6 @@
 package cdp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Curso {
@@ -9,6 +10,8 @@ public class Curso {
     public Curso(String nome, int cargaHoraria) {
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
+
+        turmas = new ArrayList<>();
     }
 
     // relationship
@@ -23,8 +26,6 @@ public class Curso {
     public void setCargaHoraria(int cargaHoraria) { this.cargaHoraria = cargaHoraria; }
 
     public List<Turma> getTurmas() { return turmas; }
-
-    public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }
 
     public void addTurma(Turma turma) { this.turmas.add(turma); }
 }

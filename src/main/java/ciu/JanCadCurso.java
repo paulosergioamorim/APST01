@@ -38,6 +38,7 @@ public class JanCadCurso extends JFrame {
             var nome = nomeTextField.getText();
             var ch = Integer.parseInt(chTextField.getText());
             controlador.cadastrarCurso(nome, ch);
+            controlador.exibirJanPrincipal();
             this.dispose();
         } catch (NumberFormatException ignored) {
             JOptionPane.showMessageDialog(this, "O campo Carga Horária só pode receber inteiros!");
