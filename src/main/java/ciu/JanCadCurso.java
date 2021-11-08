@@ -1,7 +1,6 @@
 package ciu;
 
 import cci.ControladorPrincipal;
-import cdp.Curso;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -35,8 +34,8 @@ public class JanCadCurso extends JFrame {
 
     private final ActionListener enviarButtonListener = e -> {
         try {
-            var nome = nomeTextField.getText();
-            var ch = Integer.parseInt(chTextField.getText());
+            String nome = nomeTextField.getText();
+            int ch = Integer.parseInt(chTextField.getText());
             controlador.cadastrarCurso(nome, ch);
             controlador.exibirJanPrincipal();
             this.dispose();

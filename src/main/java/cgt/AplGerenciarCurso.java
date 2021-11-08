@@ -10,7 +10,7 @@ public class AplGerenciarCurso {
 
     public int cadastrarCurso(String nome, int ch) {
         try {
-            var curso = new Curso(nome,ch);
+            Curso curso = new Curso(nome,ch);
             lstCursos.add(curso);
             return 1; // success
         } catch (Exception e) {
