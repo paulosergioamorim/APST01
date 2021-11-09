@@ -1,13 +1,16 @@
 package ciu;
 
 import cci.ControladorPrincipal;
+import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class JanCadProfessor extends JFrame {
     private JPanel panel;
+    private JButton Voltar;
 
     public JanCadProfessor(ControladorPrincipal controlador) {
         super("Cadastro de Professor");
@@ -16,6 +19,8 @@ public class JanCadProfessor extends JFrame {
         this.setResizable(false);
         this.setSize(300, 300);
         this.setLocationRelativeTo(null);
+
+        Voltar.addActionListener(e -> controlador.exibirJanPrincipal());
     }
 
     {
@@ -34,8 +39,19 @@ public class JanCadProfessor extends JFrame {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         panel.setBackground(new Color(-13487566));
+        Voltar = new JButton();
+        Voltar.setBackground(new Color(-10855846));
+        Voltar.setBorderPainted(false);
+        Voltar.setFocusPainted(false);
+        Voltar.setForeground(new Color(-3289651));
+        Voltar.setText("Voltar");
+        panel.add(Voltar, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        panel.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final Spacer spacer2 = new Spacer();
+        panel.add(spacer2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
     }
 
     /**
