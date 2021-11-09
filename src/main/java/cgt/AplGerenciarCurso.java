@@ -12,9 +12,9 @@ public class AplGerenciarCurso {
         try {
             Curso curso = new Curso(nome,ch);
             lstCursos.add(curso);
-            return 1; // success
+            return 0; // success
         } catch (Exception e) {
-            return 0; // error
+            return 1; // error
         }
     }
 }

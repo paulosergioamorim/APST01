@@ -9,19 +9,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JanPrincipal extends JFrame {
-    private JPanel mainPanel;
-    private JButton cadastrarCursoButton;
-    private final ControladorPrincipal controlador;
+    private JPanel Panel;
+    private JButton CadastrarCurso;
+    private JButton CadastrarProfessor;
 
     public JanPrincipal(ControladorPrincipal controlador) {
         super("App");
-        super.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        super.setContentPane(mainPanel);
-        super.setSize(400, 400);
-        super.setResizable(false);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setContentPane(Panel);
+        this.setSize(400, 400);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
 
-        this.controlador = controlador;
-        cadastrarCursoButton.addActionListener(e -> controlador.exibirJanCadCurso());
+        CadastrarCurso.addActionListener(e -> controlador.exibirJanCadCurso());
+        CadastrarProfessor.addActionListener(e -> controlador.exibirJanCadProfessor());
     }
 
     {
@@ -39,23 +40,30 @@ public class JanPrincipal extends JFrame {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
-        mainPanel.setBackground(new Color(-14803426));
-        cadastrarCursoButton = new JButton();
-        cadastrarCursoButton.setBackground(new Color(-11513776));
-        cadastrarCursoButton.setBorderPainted(false);
-        cadastrarCursoButton.setFocusPainted(false);
-        cadastrarCursoButton.setForeground(new Color(-3289651));
-        cadastrarCursoButton.setText("Cadastrar Curso");
-        mainPanel.add(cadastrarCursoButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel = new JPanel();
+        Panel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
+        Panel.setBackground(new Color(-13487566));
+        CadastrarCurso = new JButton();
+        CadastrarCurso.setBackground(new Color(-11513776));
+        CadastrarCurso.setBorderPainted(false);
+        CadastrarCurso.setFocusPainted(false);
+        CadastrarCurso.setForeground(new Color(-3289651));
+        CadastrarCurso.setText("Cadastrar Curso");
+        Panel.add(CadastrarCurso, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
-        mainPanel.add(spacer1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        Panel.add(spacer1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        CadastrarProfessor = new JButton();
+        CadastrarProfessor.setBackground(new Color(-11513776));
+        CadastrarProfessor.setBorderPainted(false);
+        CadastrarProfessor.setFocusPainted(false);
+        CadastrarProfessor.setForeground(new Color(-3289651));
+        CadastrarProfessor.setText("Cadastrar Professor");
+        Panel.add(CadastrarProfessor, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
      * @noinspection ALL
      */
-    public JComponent $$$getRootComponent$$$() { return mainPanel; }
+    public JComponent $$$getRootComponent$$$() { return Panel; }
 
 }
