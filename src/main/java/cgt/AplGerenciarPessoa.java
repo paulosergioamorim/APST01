@@ -7,6 +7,7 @@ import cdp.Professor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AplGerenciarPessoa {
     private final List<Pessoa> lstPessoas = new ArrayList<>();
@@ -55,11 +56,21 @@ public class AplGerenciarPessoa {
      * Retorna uma lista com todos os alunos cadastrados.
      * @return lista de pessoas
      */
-    public List<Aluno> getAlunos() { return (List<Aluno>) lstPessoas.stream().filter(p -> p instanceof Aluno); }
+    public List<Aluno> getAlunos() {
+        return lstPessoas.stream()
+                .filter(aluno -> aluno instanceof Aluno)
+                .map(p -> (Aluno) p)
+                .collect(Collectors.toList());
+    }
 
     /**
      * Retorna uma lista com todos os professores cadastrados.
      * @return lista de professores
      */
-    public List<Professor> getProfessores() { return (List<Professor>) lstPessoas.stream().filter(p -> p instanceof Professor); }
+    public List<Professor> getProfessores() {
+        return lstPessoas.stream()
+                .filter(professor -> professor instanceof Professor)
+                .map(professor -> (Professor) professor)
+                .collect(Collectors.toList());
+    }
 }
