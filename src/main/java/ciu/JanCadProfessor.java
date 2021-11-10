@@ -1,7 +1,6 @@
 package ciu;
 
 import cci.ControladorPrincipal;
-import cdp.Professor;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
