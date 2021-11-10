@@ -13,6 +13,12 @@ public class AplGerenciarCurso {
     private final List<Curso> lstCursos = new ArrayList<>();
     private final List<Turma> lstTurmas = new ArrayList<>();
 
+    /**
+     * Cadastra um curso.
+     * @param nome nome do curso
+     * @param ch carga horária do curso
+     * @return 0 se o curso foi cadastrado com sucesso, 1 se o curso já existe
+     */
     public int cadastrarCurso(String nome, int ch) {
         try {
             Curso curso = new Curso(nome,ch);
@@ -23,6 +29,16 @@ public class AplGerenciarCurso {
         }
     }
 
+    /**
+     * Cadastra uma turma.
+     * @param dataInicio data de início da turma
+     * @param dataFim data de fim da turma
+     * @param horario horario de início da turma
+     * @param limiteAlunos limite de alunos da turma
+     * @param curso cursos que a turma pertence
+     * @param professor responsável da turma
+     * @return 0 se a turma foi cadastrada com sucesso, 1 se o curso não existe, 2 se o professor não existe, 3 se a turma já existe
+     */
     public int cadastrarTurma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos, Curso curso, Professor professor) {
         try {
             if (dataInicio.isBefore(LocalDate.now()))

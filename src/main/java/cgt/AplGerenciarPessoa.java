@@ -7,7 +7,6 @@ import cdp.Professor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AplGerenciarPessoa {
     private final List<Pessoa> lstPessoas = new ArrayList<>();
@@ -28,6 +27,14 @@ public class AplGerenciarPessoa {
         }
     }
 
+    /**
+     * Cadastra um professor.
+     * @param nome nome do professor
+     * @param dataNascimento data de nascimento do professor
+     * @param cpf cpf do professor
+     * @param titulacao titulação do professor
+     * @return 0 se sucesso, 1 se cpf já cadastrado, 2 se nome já cadastrado, 3 se data de nascimento deve ser anterior a data atual, 4 se erro ao cadastrar professor
+     */
     public int cadastrarProfessor(String nome, LocalDate dataNascimento, long cpf, String titulacao) {
         try {
             if (lstPessoas.stream().anyMatch(p -> p.getCpf() == cpf))
@@ -44,7 +51,15 @@ public class AplGerenciarPessoa {
         }
     }
 
+    /**
+     * Retorna uma lista com todos os alunos cadastrados.
+     * @return lista de pessoas
+     */
     public List<Aluno> getAlunos() { return (List<Aluno>) lstPessoas.stream().filter(p -> p instanceof Aluno); }
 
+    /**
+     * Retorna uma lista com todos os professores cadastrados.
+     * @return lista de professores
+     */
     public List<Professor> getProfessores() { return (List<Professor>) lstPessoas.stream().filter(p -> p instanceof Professor); }
 }
