@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Turma {
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
-    private LocalTime horario;
-    private int limiteAlunos;
+    private final LocalDate dataInicio;
+    private final LocalDate dataFim;
+    private final LocalTime horario;
+    private final int limiteAlunos;
     private boolean fechada;
 
     private Object estado;
@@ -18,12 +18,11 @@ public class Turma {
     private Professor responsavel;
     private final List<Matricula> matriculas;
 
-    public Turma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos, Curso curso) {
+    public Turma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos) {
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.horario = horario;
         this.limiteAlunos = limiteAlunos;
-        this.curso = curso;
         this.fechada = false;
 
         matriculas = new ArrayList<>();
@@ -43,7 +42,11 @@ public class Turma {
 
     public Curso getCurso() { return curso; }
 
+    public void setCurso(Curso curso) { this.curso = curso; }
+
     public Professor getResponsavel() { return responsavel; }
+
+    public void setResponsavel(Professor responsavel) { this.responsavel = responsavel; }
 
     public List<Matricula> getMatriculas() { return matriculas; }
 }

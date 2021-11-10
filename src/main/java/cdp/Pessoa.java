@@ -3,9 +3,9 @@ package cdp;
 import java.time.LocalDate;
 
 public abstract class Pessoa {
-    private long cpf;
-    private String nome;
-    private LocalDate dataNascimento;
+    private final long cpf;
+    private final String nome;
+    private final LocalDate dataNascimento;
 
     public int getIdade() { return LocalDate.now().getYear() - dataNascimento.getYear(); }
 
