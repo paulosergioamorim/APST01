@@ -1,12 +1,15 @@
 package ciu;
 
 import cci.ControladorPrincipal;
+import cdp.Professor;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.text.ParseException;
 import java.time.LocalDate;
 
 public class JanCadProfessor extends JFrame {
@@ -14,9 +17,9 @@ public class JanCadProfessor extends JFrame {
     private JButton Voltar;
     private JButton Enviar;
     private JTextField Nome;
-    private JTextField DataNascimento;
     private JTextField Titulacao;
-    private JTextField Cpf;
+    private JFormattedTextField Cpf;
+    private JFormattedTextField DataNascimento;
 
     public JanCadProfessor(ControladorPrincipal controlador) {
         super("Cadastro de Professor");
@@ -25,6 +28,17 @@ public class JanCadProfessor extends JFrame {
         this.setResizable(false);
         this.setSize(300, 300);
         this.setLocationRelativeTo(null);
+
+        try {
+            MaskFormatter cpfFormatter = new MaskFormatter("###.###.###-##");
+            cpfFormatter.setPlaceholderCharacter('_');
+            cpfFormatter.install(Cpf);
+            MaskFormatter dataNascimentoFormatter = new MaskFormatter("####-##-##");
+            dataNascimentoFormatter.setPlaceholderCharacter('_');
+            dataNascimentoFormatter.install(DataNascimento);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         Voltar.addActionListener(e -> controlador.exibirJanPrincipal());
         Enviar.addActionListener(e -> {
@@ -80,11 +94,11 @@ public class JanCadProfessor extends JFrame {
         Panel.add(Enviar, new GridConstraints(9, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Nome = new JTextField();
         Panel.add(Nome, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        DataNascimento = new JTextField();
+        DataNascimento = new JFormattedTextField();
         Panel.add(DataNascimento, new GridConstraints(5, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-3289651));
-        label1.setText("Data de Nascimento (yyyy-mm-dd)");
+        label1.setText("Data de Nascimento");
         Panel.add(label1, new GridConstraints(4, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Titulacao = new JTextField();
         Panel.add(Titulacao, new GridConstraints(7, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
@@ -102,7 +116,7 @@ public class JanCadProfessor extends JFrame {
         label4.setForeground(new Color(-3289651));
         label4.setText("CPF");
         Panel.add(label4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Cpf = new JTextField();
+        Cpf = new JFormattedTextField();
         Panel.add(Cpf, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
     }
 

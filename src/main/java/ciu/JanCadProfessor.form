@@ -42,7 +42,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="68a61" class="javax.swing.JTextField" binding="DataNascimento">
+      <component id="fa608" class="javax.swing.JFormattedTextField" binding="DataNascimento">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -56,7 +56,7 @@
         </constraints>
         <properties>
           <foreground color="-3289651"/>
-          <text value="Data de Nascimento (yyyy-mm-dd)"/>
+          <text value="Data de Nascimento"/>
         </properties>
       </component>
       <component id="6c5d9" class="javax.swing.JTextField" binding="Titulacao">
@@ -99,7 +99,7 @@
           <text value="CPF"/>
         </properties>
       </component>
-      <component id="b5240" class="javax.swing.JTextField" binding="Cpf">
+      <component id="52566" class="javax.swing.JFormattedTextField" binding="Cpf">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
