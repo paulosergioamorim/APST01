@@ -9,9 +9,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cgt.AplGerenciarPessoa.lstPessoas;
+
 public class AplGerenciarCurso {
-    private final List<Curso> lstCursos = new ArrayList<>();
-    private final List<Turma> lstTurmas = new ArrayList<>();
+    public static final List<Curso> lstCursos = new ArrayList<>();
+    public static final List<Turma> lstTurmas = new ArrayList<>();
 
     /**
      * Cadastra um curso.
@@ -41,21 +43,23 @@ public class AplGerenciarCurso {
      */
     public int cadastrarTurma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos, Curso curso, Professor professor) {
         try {
-            if (dataInicio.isBefore(LocalDate.now()))
+            if (dataInicio.isAfter(LocalDate.now()))
                 return 1; // data de inicio deve ser anterior a data atual
-            if (dataFim.isAfter(dataInicio))
+            if (dataFim.isBefore(dataInicio))
                 return 2; // data de fim deve ser depois da dataInicio
             if (limiteAlunos < 0)
                 return 3; // limite de alunos deve ser maior do que zero
             if (!lstCursos.contains(curso) || curso == null)
                 return 4; // curso não existe
+            if (!lstPessoas.contains(professor) || professor == null)
+                return 5; // professor não existe
             Turma turma = new Turma(dataInicio, dataFim, horario, limiteAlunos);
             turma.setCurso(curso);
             turma.setResponsavel(professor);
             lstTurmas.add(turma);
             return 0; // sucesso
         } catch (Exception e) {
-            return 5; // erro ao cadastrar turma
+            return 6; // erro ao cadastrar turma
         }
     }
 }

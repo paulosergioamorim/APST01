@@ -12,6 +12,7 @@ public class JanPrincipal extends JFrame {
     private JPanel Panel;
     private JButton CadastrarCurso;
     private JButton CadastrarProfessor;
+    private JButton CadastrarTurma;
 
     public JanPrincipal(ControladorPrincipal controlador) {
         super("App");
@@ -23,6 +24,7 @@ public class JanPrincipal extends JFrame {
 
         CadastrarCurso.addActionListener(e -> controlador.exibirJanCadCurso());
         CadastrarProfessor.addActionListener(e -> controlador.exibirJanCadProfessor());
+        CadastrarTurma.addActionListener(e -> controlador.exibirJanCadTurma());
     }
 
     {
@@ -41,10 +43,8 @@ public class JanPrincipal extends JFrame {
      */
     private void $$$setupUI$$$() {
         Panel = new JPanel();
-        Panel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
+        Panel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         Panel.setBackground(new Color(-13487566));
-        final Spacer spacer1 = new Spacer();
-        Panel.add(spacer1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         CadastrarProfessor = new JButton();
         CadastrarProfessor.setBackground(new Color(-11513776));
         CadastrarProfessor.setBorderPainted(false);
@@ -57,14 +57,23 @@ public class JanPrincipal extends JFrame {
         CadastrarProfessor.setFocusable(true);
         CadastrarProfessor.setForeground(new Color(-3289651));
         CadastrarProfessor.setText("Cadastrar Professor");
-        Panel.add(CadastrarProfessor, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel.add(CadastrarProfessor, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         CadastrarCurso = new JButton();
         CadastrarCurso.setBackground(new Color(-11513776));
         CadastrarCurso.setBorderPainted(false);
         CadastrarCurso.setFocusPainted(false);
         CadastrarCurso.setForeground(new Color(-3289651));
         CadastrarCurso.setText("Cadastrar Curso");
-        Panel.add(CadastrarCurso, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel.add(CadastrarCurso, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        CadastrarTurma = new JButton();
+        CadastrarTurma.setBackground(new Color(-11513776));
+        CadastrarTurma.setBorderPainted(false);
+        CadastrarTurma.setFocusPainted(false);
+        CadastrarTurma.setForeground(new Color(-3289651));
+        CadastrarTurma.setText("Cadastrar Turma");
+        Panel.add(CadastrarTurma, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        Panel.add(spacer1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
     }
 
     /**

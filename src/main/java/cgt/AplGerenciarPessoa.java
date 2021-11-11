@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AplGerenciarPessoa {
-    private final List<Pessoa> lstPessoas = new ArrayList<>();
+    public static final List<Pessoa> lstPessoas = new ArrayList<>();
 
     public int cadastrarAluno(String nome, LocalDate dataNascimento, long cpf) {
         try {
@@ -54,9 +54,9 @@ public class AplGerenciarPessoa {
 
     /**
      * Retorna uma lista com todos os alunos cadastrados.
-     * @return lista de pessoas
+     * @return lista de alunos
      */
-    public List<Aluno> getAlunos() {
+    public static List<Aluno> getAlunos() {
         return lstPessoas.stream()
                 .filter(aluno -> aluno instanceof Aluno)
                 .map(p -> (Aluno) p)
@@ -67,7 +67,7 @@ public class AplGerenciarPessoa {
      * Retorna uma lista com todos os professores cadastrados.
      * @return lista de professores
      */
-    public List<Professor> getProfessores() {
+    public static List<Professor> getProfessores() {
         return lstPessoas.stream()
                 .filter(professor -> professor instanceof Professor)
                 .map(professor -> (Professor) professor)
