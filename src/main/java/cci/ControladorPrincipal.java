@@ -4,10 +4,7 @@ import cdp.Curso;
 import cdp.Professor;
 import cgt.AplGerenciarCurso;
 import cgt.AplGerenciarPessoa;
-import ciu.JanCadCurso;
-import ciu.JanCadProfessor;
-import ciu.JanCadTurma;
-import ciu.JanPrincipal;
+import ciu.*;
 
 import javax.swing.*;
 import java.time.LocalDate;
@@ -26,11 +23,13 @@ public class ControladorPrincipal {
     private JanCadCurso janCadCurso;
     private JanCadProfessor janCadProfessor;
     private JanCadTurma janCadTurma;
+    private JanCadAluno janCadAluno;
 
     public ControladorPrincipal() { this.exibirJanPrincipal(); }
 
     /**
-     * Exibe a janela principal
+     * Exibe a janela principal.
+     * Caso as outras janelas estejam abertas, elas são fechadas.
      */
     public void exibirJanPrincipal() {
         janPrincipal = (janPrincipal == null) ? new JanPrincipal(this) : janPrincipal;
@@ -38,10 +37,11 @@ public class ControladorPrincipal {
         if (janCadCurso != null) janCadCurso = null;
         if (janCadProfessor != null) janCadProfessor = null;
         if (janCadTurma != null) janCadTurma = null;
+        if (janCadAluno != null) janCadAluno = null;
     }
 
     /**
-     * Exibe a tela de cadastro de curso
+     * Exibe a tela de cadastro de curso e esconde a janela principal
      */
     public void exibirJanCadCurso() {
         janCadCurso = (janCadCurso == null) ? new JanCadCurso(this) : janCadCurso;
@@ -50,7 +50,7 @@ public class ControladorPrincipal {
     }
 
     /**
-     * Exibe a tela de cadastro de professor
+     * Exibe a tela de cadastro de professor e esconde a janela principal
      */
     public void exibirJanCadProfessor() {
         janCadProfessor = (janCadProfessor == null) ? new JanCadProfessor(this) : janCadProfessor;
@@ -59,12 +59,21 @@ public class ControladorPrincipal {
     }
 
     /**
-     * Exibe a tela de cadastro de turma
+     * Exibe a tela de cadastro de turma e esconde a janela principal
      */
     public void exibirJanCadTurma() {
         janCadTurma = (janCadTurma == null) ? new JanCadTurma(this) : janCadTurma;
         janPrincipal.setVisible(false);
         janCadTurma.setVisible(true);
+    }
+
+    /**
+     * Exibe a tela de cadastro de aluno e esconde a janela principal
+     */
+    public void exibirJanCadAluno() {
+        janCadAluno = (janCadAluno == null) ? new JanCadAluno(this) : janCadAluno;
+        janPrincipal.setVisible(false);
+        janCadAluno.setVisible(true);
     }
 
     /**
@@ -77,8 +86,8 @@ public class ControladorPrincipal {
         switch (response) {
             case 0:
                 JOptionPane.showMessageDialog(janCadCurso, "Curso cadastrado com sucesso");
-                this.janCadCurso.dispose();
-                this.janPrincipal.setVisible(true);
+                janCadCurso.getNome().setText(null);
+                janCadCurso.getCh().setText(null);
                 break;
             case 1:
                 JOptionPane.showMessageDialog(janCadCurso, "Ocorreu um erro");
@@ -100,8 +109,9 @@ public class ControladorPrincipal {
         switch (response) {
             case 0:
                 JOptionPane.showMessageDialog(janCadProfessor, "Professor cadastrado com sucesso");
-                this.janCadProfessor.dispose();
-                this.janPrincipal.setVisible(true);
+                janCadProfessor.getCpf().setText(null);
+                janCadProfessor.getNome().setText(null);
+                janCadProfessor.getDataNascimento().setText(null);
                 break;
             case 1:
                 JOptionPane.showMessageDialog(janCadProfessor, "Esse cpf já foi cadastrado");
@@ -138,8 +148,12 @@ public class ControladorPrincipal {
         switch (response) {
             case 0:
                 JOptionPane.showMessageDialog(janCadTurma, "Turma cadastrada com sucesso");
-                this.janCadTurma.dispose();
-                this.janPrincipal.setVisible(true);
+                janCadTurma.getDataInicio().setText(null);
+                janCadTurma.getDataFim().setText(null);
+                janCadTurma.getHorario().setText(null);
+                janCadTurma.getLimiteAlunos().setText(null);
+                janCadTurma.getCurso().setSelectedItem(null);
+                janCadTurma.getProfessor().setSelectedItem(null);
                 break;
             case 1:
                 JOptionPane.showMessageDialog(janCadTurma, "A data de início deve ser anterior à data atual");
