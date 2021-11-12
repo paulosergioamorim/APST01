@@ -2,8 +2,6 @@ package cdp;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Turma {
     private final LocalDate dataInicio;
@@ -12,11 +10,11 @@ public class Turma {
     private final int limiteAlunos;
     private boolean fechada;
 
-    private Object estado;
+    private String estado;
 
     private Curso curso;
     private Professor responsavel;
-    private final List<Matricula> matriculas;
+    private final Matricula[] matriculas;
 
     public Turma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos) {
         this.dataInicio = dataInicio;
@@ -25,10 +23,35 @@ public class Turma {
         this.limiteAlunos = limiteAlunos;
         this.fechada = false;
 
-        matriculas = new ArrayList<>();
+        matriculas = new Matricula[limiteAlunos];
     }
 
-    public Object obterEstado() { return estado; }
+    public String obterEstado() {
+        if (dataInicio.isBefore(LocalDate.now()))
+            estado = "Em andamento";
+        else if (matriculas.length == limiteAlunos)
+            estado = "Matriculas Encerradas";
+        else if (dataFim.isBefore(LocalDate.now()))
+            estado = "Aulas Encerradas";
+        else if (fechada)
+            estado = "Fechada";
+        else estado = "Matriculas Abertas";
+        return estado;
+    }
+
+    public void addMatricula(Matricula matricula) {
+        if (matriculas.length == limiteAlunos)
+            return;
+        for (Matricula m : matriculas)
+            if (m == null) m = matricula;
+    }
+
+    public int vagas() {
+        for (int i = matriculas.length; i > 0; i--)
+            if (matriculas[i - 1] != null)
+                return i;
+        return matriculas.length;
+    }
 
     public LocalDate getDataInicio() { return dataInicio; }
 
@@ -48,5 +71,8 @@ public class Turma {
 
     public void setResponsavel(Professor responsavel) { this.responsavel = responsavel; }
 
-    public List<Matricula> getMatriculas() { return matriculas; }
+    public Matricula[] getMatriculas() { return matriculas; }
+
+    @Override
+    public String toString() { return "[" + dataInicio + " - " + dataFim + "] " + horario + " - " + curso; }
 }

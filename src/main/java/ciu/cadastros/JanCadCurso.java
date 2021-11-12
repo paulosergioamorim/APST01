@@ -1,22 +1,22 @@
-package ciu;
+package ciu.cadastros;
 
 import cci.ControladorPrincipal;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
-import javax.swing.text.MaskFormatter;
 import java.awt.*;
 
+import static cdp.Formatters.*;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class JanCadCurso extends JFrame {
+    private final ControladorPrincipal controlador;
+
     private JPanel Panel;
     private JTextField Nome;
     private JFormattedTextField Ch;
-    private JButton Enviar;
-
-    private final ControladorPrincipal controlador;
+    private JButton Salvar;
 
     public JanCadCurso(ControladorPrincipal controlador) {
         super("Cadastro de Curso");
@@ -28,13 +28,9 @@ public class JanCadCurso extends JFrame {
 
         this.controlador = controlador;
 
-        try {
-            MaskFormatter chMask = new MaskFormatter("####");
-            chMask.setPlaceholderCharacter('_');
-            chMask.install(Ch);
-        } catch (Exception e) { e.printStackTrace(); }
+        Ch.setFormatterFactory(getFormatterFactory(int4Mask));
 
-        Enviar.addActionListener(e -> {
+        Salvar.addActionListener(e -> {
             try {
                 String nome = Nome.getText();
                 int ch = Integer.parseInt(Ch.getText());
@@ -85,13 +81,13 @@ public class JanCadCurso extends JFrame {
         Panel.add(label2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Nome = new JTextField();
         Panel.add(Nome, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Enviar = new JButton();
-        Enviar.setBackground(new Color(-10855846));
-        Enviar.setBorderPainted(false);
-        Enviar.setFocusPainted(false);
-        Enviar.setForeground(new Color(-3289651));
-        Enviar.setText("Enviar");
-        Panel.add(Enviar, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Salvar = new JButton();
+        Salvar.setBackground(new Color(-10855846));
+        Salvar.setBorderPainted(false);
+        Salvar.setFocusPainted(false);
+        Salvar.setForeground(new Color(-3289651));
+        Salvar.setText("Salvar");
+        Panel.add(Salvar, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Ch = new JFormattedTextField();
         Ch.setMargin(new Insets(2, 6, 2, 6));
         Panel.add(Ch, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

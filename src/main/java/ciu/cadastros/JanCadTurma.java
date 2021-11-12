@@ -1,4 +1,4 @@
-package ciu;
+package ciu.cadastros;
 
 import cci.ControladorPrincipal;
 import cdp.Curso;
@@ -7,27 +7,25 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
-import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
+import static cdp.Formatters.*;
 import static cgt.AplGerenciarCurso.lstCursos;
 import static cgt.AplGerenciarPessoa.getProfessores;
 
 public class JanCadTurma extends JFrame {
+    private final ControladorPrincipal controlador;
+
     private JPanel Panel;
-    private JButton Enviar;
+    private JButton Salvar;
     private JFormattedTextField DataFim;
     private JFormattedTextField DataInicio;
     private JFormattedTextField LimiteAlunos;
     private JFormattedTextField Horario;
     private JComboBox<Curso> Curso;
     private JComboBox<Professor> Professor;
-
-    private final ControladorPrincipal controlador;
 
     public JanCadTurma(ControladorPrincipal controlador) {
         super("Cadastro de Turma");
@@ -42,29 +40,18 @@ public class JanCadTurma extends JFrame {
         DefaultComboBoxModel<Curso> modelCurso = new DefaultComboBoxModel<>();
         modelCurso.addAll(lstCursos);
         Curso.setModel(modelCurso);
+
         DefaultComboBoxModel<Professor> modelProfessor = new DefaultComboBoxModel<>();
         modelProfessor.addAll(getProfessores());
         Professor.setModel(modelProfessor);
 
-        try {
-            MaskFormatter maskDataInicio = new MaskFormatter("##/##/####");
-            maskDataInicio.setPlaceholderCharacter('_');
-            maskDataInicio.install(DataInicio);
-            MaskFormatter maskDataFim = new MaskFormatter("##/##/####");
-            maskDataFim.setPlaceholderCharacter('_');
-            maskDataFim.install(DataFim);
-            MaskFormatter maskHorario = new MaskFormatter("##:##");
-            maskHorario.setPlaceholderCharacter('_');
-            maskHorario.install(Horario);
-            MaskFormatter maskLimite = new MaskFormatter("###");
-            maskLimite.setPlaceholderCharacter('_');
-            maskLimite.install(LimiteAlunos);
-        } catch (ParseException e) { e.printStackTrace(); }
+        LimiteAlunos.setFormatterFactory(getFormatterFactory(int3Mask));
+        DataInicio.setFormatterFactory(getFormatterFactory(dateMask));
+        DataFim.setFormatterFactory(getFormatterFactory(dateMask));
+        Horario.setFormatterFactory(getFormatterFactory(timeMask));
 
-        Enviar.addActionListener(e -> {
+        Salvar.addActionListener(e -> {
             try {
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
                 LocalDate dataInicio = LocalDate.parse(DataInicio.getText(), dateFormatter);
                 LocalDate dataFim = LocalDate.parse(DataFim.getText(), dateFormatter);
                 int limiteAlunos = Integer.parseInt(LimiteAlunos.getText());
@@ -114,13 +101,13 @@ public class JanCadTurma extends JFrame {
         Panel = new JPanel();
         Panel.setLayout(new GridLayoutManager(7, 2, new Insets(10, 10, 10, 10), -1, -1));
         Panel.setBackground(new Color(-13487566));
-        Enviar = new JButton();
-        Enviar.setBackground(new Color(-11513776));
-        Enviar.setBorderPainted(false);
-        Enviar.setFocusPainted(false);
-        Enviar.setForeground(new Color(-3289651));
-        Enviar.setText("Enviar");
-        Panel.add(Enviar, new GridConstraints(6, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Salvar = new JButton();
+        Salvar.setBackground(new Color(-11513776));
+        Salvar.setBorderPainted(false);
+        Salvar.setFocusPainted(false);
+        Salvar.setForeground(new Color(-3289651));
+        Salvar.setText("Salvar");
+        Panel.add(Salvar, new GridConstraints(6, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-3289651));
         label1.setText("Data Final");

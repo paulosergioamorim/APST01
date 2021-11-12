@@ -1,10 +1,10 @@
 package cci;
 
-import cdp.Curso;
-import cdp.Professor;
+import cdp.*;
 import cgt.AplGerenciarCurso;
 import cgt.AplGerenciarPessoa;
-import ciu.*;
+import ciu.JanPrincipal;
+import ciu.cadastros.*;
 
 import javax.swing.*;
 import java.time.LocalDate;
@@ -17,15 +17,20 @@ import java.time.LocalTime;
  * @author Nycolas Monjardim
  */
 public class ControladorPrincipal {
-    private final AplGerenciarCurso aplGerenciarCurso = new AplGerenciarCurso();
-    private final AplGerenciarPessoa aplGerenciarPessoa = new AplGerenciarPessoa();
+    private final AplGerenciarCurso aplGerenciarCurso;
+    private final AplGerenciarPessoa aplGerenciarPessoa;
     private JanPrincipal janPrincipal;
     private JanCadCurso janCadCurso;
     private JanCadProfessor janCadProfessor;
     private JanCadTurma janCadTurma;
     private JanCadAluno janCadAluno;
+    private JanCadMatricula janCadMatricula;
 
-    public ControladorPrincipal() { this.exibirJanPrincipal(); }
+    {
+        this.exibirJanPrincipal();
+        this.aplGerenciarCurso = new AplGerenciarCurso();
+        this.aplGerenciarPessoa = new AplGerenciarPessoa();
+    }
 
     /**
      * Exibe a janela principal.
@@ -38,6 +43,7 @@ public class ControladorPrincipal {
         if (janCadProfessor != null) janCadProfessor = null;
         if (janCadTurma != null) janCadTurma = null;
         if (janCadAluno != null) janCadAluno = null;
+        if (janCadMatricula != null) janCadMatricula = null;
     }
 
     /**
@@ -74,6 +80,15 @@ public class ControladorPrincipal {
         janCadAluno = (janCadAluno == null) ? new JanCadAluno(this) : janCadAluno;
         janPrincipal.setVisible(false);
         janCadAluno.setVisible(true);
+    }
+
+    /**
+     * Exibe a tela de matricula e esconde a janela principal
+     */
+    public void exibirJanCadMatricula() {
+        janCadMatricula = (janCadMatricula == null) ? new JanCadMatricula(this) : janCadMatricula;
+        janPrincipal.setVisible(false);
+        janCadMatricula.setVisible(true);
     }
 
     /**
@@ -118,18 +133,15 @@ public class ControladorPrincipal {
                 janCadProfessor.getCpf().setText(null);
                 break;
             case 2:
-                JOptionPane.showMessageDialog(janCadProfessor, "Esse nome já foi cadastrado");
-                janCadProfessor.getNome().setText(null);
-                break;
-            case 3:
                 JOptionPane.showMessageDialog(janCadProfessor, "Essa data é futura");
                 janCadProfessor.getDataNascimento().setText(null);
                 break;
-            case 4:
+            case 3:
                 JOptionPane.showMessageDialog(janCadProfessor, "Ocorreu um erro");
                 janCadProfessor.getCpf().setText(null);
                 janCadProfessor.getNome().setText(null);
                 janCadProfessor.getDataNascimento().setText(null);
+                janCadProfessor.getTitulacao().setText(null);
                 break;
         }
     }
@@ -185,6 +197,43 @@ public class ControladorPrincipal {
                 janCadTurma.getProfessor().setSelectedItem(null);
                 break;
         }
+    }
+
+    public void cadastrarAluno(String nome, LocalDate dataNascimento, long cpf) {
+        int response = aplGerenciarPessoa.cadastrarAluno(nome,dataNascimento,cpf);
+        switch (response) {
+            case 0:
+                JOptionPane.showMessageDialog(janCadAluno, "Aluno cadastrado com sucesso");
+                janCadAluno.getNome().setText(null);
+                janCadAluno.getDataNascimento().setText(null);
+                janCadAluno.getCpf().setText(null);
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(janCadAluno,"Esse cpf já foi cadastrado");
+                janCadAluno.getCpf().setText(null);
+                break;
+            case 2:
+                JOptionPane.showMessageDialog(janCadAluno,"Essa data é futura");
+                janCadAluno.getDataNascimento().setText(null);
+                break;
+            case 3:
+                JOptionPane.showMessageDialog(janCadAluno,"Ocorreu um erro");
+                janCadAluno.getNome().setText(null);
+                janCadAluno.getDataNascimento().setText(null);
+                janCadAluno.getCpf().setText(null);
+                break;
+        }
+    }
+
+    /**
+     * Efetua a matrícula de um aluno em uma turma
+     * @param aluno Aluno a ser matriculado
+     * @param turma Turma que a matricula pertence
+     */
+    public void efetuarMatricula(Aluno aluno, Turma turma) {
+        Matricula matricula = new Matricula(aluno,turma);
+        turma.addMatricula(matricula);
+        JOptionPane.showMessageDialog(janCadAluno, "Aluno matriculado com sucesso");
     }
 
     public static void main(String[] args) { new ControladorPrincipal(); }

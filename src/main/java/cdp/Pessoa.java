@@ -21,5 +21,6 @@ public abstract class Pessoa {
 
     public String getNome() { return nome; }
 
-    @Override public String toString() { return nome; }
+    @Override
+    public String toString() { return nome; }
 }

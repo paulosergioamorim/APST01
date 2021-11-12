@@ -1,6 +1,7 @@
 package cgt;
 
 import cdp.Curso;
+import cdp.Matricula;
 import cdp.Professor;
 import cdp.Turma;
 
@@ -8,12 +9,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static cgt.AplGerenciarPessoa.lstPessoas;
 
 public class AplGerenciarCurso {
-    public static final List<Curso> lstCursos = new ArrayList<>();
-    public static final List<Turma> lstTurmas = new ArrayList<>();
+    public static final List<Curso> lstCursos;
+    public static final List<Turma> lstTurmas;
+
+    static {
+        lstCursos = new ArrayList<>();
+        lstTurmas = new ArrayList<>();
+    }
 
     /**
      * Cadastra um curso.
@@ -57,9 +64,16 @@ public class AplGerenciarCurso {
             turma.setCurso(curso);
             turma.setResponsavel(professor);
             lstTurmas.add(turma);
+            lstCursos.get(lstCursos.indexOf(curso)).addTurma(turma);
             return 0; // sucesso
         } catch (Exception e) {
             return 6; // erro ao cadastrar turma
         }
+    }
+
+    public static List<Turma> getTurmasVagas() {
+        return lstTurmas.stream()
+                .filter(turma -> turma.getMatriculas()[turma.getMatriculas().length - 1] == null)
+                .collect(Collectors.toList());
     }
 }
