@@ -45,7 +45,7 @@ public class JanCadTurma extends JFrame {
         modelProfessor.addAll(getProfessores());
         Professor.setModel(modelProfessor);
 
-        LimiteAlunos.setFormatterFactory(getFormatterFactory(int3Mask));
+        LimiteAlunos.setFormatterFactory(getFormatterFactory(int2Mask));
         DataInicio.setFormatterFactory(getFormatterFactory(dateMask));
         DataFim.setFormatterFactory(getFormatterFactory(dateMask));
         Horario.setFormatterFactory(getFormatterFactory(timeMask));

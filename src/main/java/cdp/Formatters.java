@@ -11,7 +11,7 @@ public class Formatters {
     public static MaskFormatter cpfMask;
     public static MaskFormatter dateMask;
     public static MaskFormatter timeMask;
-    public static MaskFormatter int3Mask;
+    public static MaskFormatter int2Mask;
     public static MaskFormatter int4Mask;
 
     public static DefaultFormatterFactory getFormatterFactory(MaskFormatter mask) { return new DefaultFormatterFactory(mask); }
@@ -20,8 +20,8 @@ public class Formatters {
         dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         try {
-            int3Mask = new MaskFormatter("###");
-            int3Mask.setPlaceholderCharacter('0');
+            int2Mask = new MaskFormatter("##");
+            int2Mask.setPlaceholderCharacter('0');
             int4Mask = new MaskFormatter("####");
             int4Mask.setPlaceholderCharacter('0');
             cpfMask = new MaskFormatter("###.###.###-##");

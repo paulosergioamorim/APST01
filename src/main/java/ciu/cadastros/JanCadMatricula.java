@@ -40,17 +40,18 @@ public class JanCadMatricula extends JFrame {
         modelTurma.addAll(getTurmasVagas());
         Turma.setModel(modelTurma);
 
-        Turma.addActionListener(e -> update());
+        Turma.addActionListener(e -> updateTurmas());
         Matricular.addActionListener(e -> {
             if (Turma.getSelectedItem() != null && Aluno.getSelectedItem() != null) {
                 Aluno aluno = (Aluno) Aluno.getSelectedItem();
                 Turma turma = (Turma) Turma.getSelectedItem();
                 controlador.efetuarMatricula(aluno, turma);
+                this.updateTurmas();
             }
         });
     }
 
-    public void update() {
+    public void updateTurmas() {
         if (Turma.getSelectedItem() != null) {
             Turma turma = (Turma) Turma.getSelectedItem();
             vagas.setText("Vagas disponíveis: " + turma.vagas());
@@ -79,27 +80,31 @@ public class JanCadMatricula extends JFrame {
      */
     private void $$$setupUI$$$() {
         Panel = new JPanel();
-        Panel.setLayout(new GridLayoutManager(5, 2, new Insets(10, 10, 10, 10), -1, -1));
+        Panel.setLayout(new GridLayoutManager(4, 2, new Insets(10, 10, 10, 10), -1, -1));
         Panel.setBackground(new Color(-13158601));
         Matricular = new JButton();
+        Matricular.setBackground(new Color(-11513776));
+        Matricular.setBorderPainted(false);
+        Matricular.setFocusPainted(false);
+        Matricular.setForeground(new Color(-3289651));
         Matricular.setText("Matricular");
-        Panel.add(Matricular, new GridConstraints(4, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel.add(Matricular, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-3289651));
         label1.setText("Aluno");
         Panel.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Aluno = new JComboBox();
-        Panel.add(Aluno, new GridConstraints(0, 1, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label2 = new JLabel();
-        label2.setForeground(new Color(-3289651));
-        label2.setText("Turma");
-        Panel.add(label2, new GridConstraints(1, 0, 3, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel.add(Aluno, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         vagas = new JLabel();
         vagas.setForeground(new Color(-3289651));
         vagas.setText("Vagas Disponíveis");
-        Panel.add(vagas, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel.add(vagas, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Turma = new JComboBox();
         Panel.add(Turma, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label2 = new JLabel();
+        label2.setForeground(new Color(-3289651));
+        label2.setText("Turma");
+        Panel.add(label2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

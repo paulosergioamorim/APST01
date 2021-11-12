@@ -1,7 +1,6 @@
 package cgt;
 
 import cdp.Curso;
-import cdp.Matricula;
 import cdp.Professor;
 import cdp.Turma;
 
@@ -73,7 +72,7 @@ public class AplGerenciarCurso {
 
     public static List<Turma> getTurmasVagas() {
         return lstTurmas.stream()
-                .filter(turma -> turma.getMatriculas()[turma.getMatriculas().length - 1] == null)
+                .filter(turma -> turma.vagas() > 0)
                 .collect(Collectors.toList());
     }
 }

@@ -2,6 +2,10 @@ package cdp;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class Turma {
     private final LocalDate dataInicio;
@@ -29,7 +33,7 @@ public class Turma {
     public String obterEstado() {
         if (dataInicio.isBefore(LocalDate.now()))
             estado = "Em andamento";
-        else if (matriculas.length == limiteAlunos)
+        else if (vagas() == 0)
             estado = "Matriculas Encerradas";
         else if (dataFim.isBefore(LocalDate.now()))
             estado = "Aulas Encerradas";
@@ -40,18 +44,16 @@ public class Turma {
     }
 
     public void addMatricula(Matricula matricula) {
-        if (matriculas.length == limiteAlunos)
-            return;
-        for (Matricula m : matriculas)
-            if (m == null) m = matricula;
+        if (vagas() == 0) return;
+        for (Matricula m : matriculas) {
+            if (m == null) {
+                m = matricula;
+                return;
+            }
+        }
     }
 
-    public int vagas() {
-        for (int i = matriculas.length; i > 0; i--)
-            if (matriculas[i - 1] != null)
-                return i;
-        return matriculas.length;
-    }
+    public long vagas() { return Arrays.stream(matriculas).filter(Objects::isNull).count(); }
 
     public LocalDate getDataInicio() { return dataInicio; }
 
