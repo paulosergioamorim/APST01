@@ -8,3 +8,5 @@ permite o cadastro de cursos, turmas, professores, alunos e matrículas.
 O objetivo é implementar a arquitetura MVC (Model, View, Control), que busca
 separar a lógica de negócios, da interface de usuário, das classes do domínio
 do problema, e da persistência, fornecendo ao projeto uma melhor organização de código.
+
+Parte 2: implementar os cadastros de Professor, aluno e turma. (15/11 10 pontos)
