@@ -8,11 +8,7 @@ public class Matricula {
     private Aluno aluno;
     private Turma turma;
 
-    public Matricula(Aluno aluno, Turma turma) {
-        this.aluno = aluno;
-        this.turma = turma;
-        this.dataMatricula = LocalDate.now();
-    }
+    { this.dataMatricula = LocalDate.now(); }
 
     public double getNota() { return nota; }
 

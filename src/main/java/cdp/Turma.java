@@ -2,9 +2,7 @@ package cdp;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class Turma {
@@ -43,16 +41,25 @@ public class Turma {
         return estado;
     }
 
+    /**
+     * Adiciona uma matrícula na turma
+     * @param matricula Matricula a ser adicionada na turma
+     */
     public void addMatricula(Matricula matricula) {
         if (vagas() == 0) return;
         for (Matricula m : matriculas) {
             if (m == null) {
                 m = matricula;
+                obterEstado();
                 return;
             }
         }
     }
 
+    /**
+     * Verifica se a turma possui vagas disponíveis
+     * @return o número de vagas disponíveis
+     */
     public long vagas() { return Arrays.stream(matriculas).filter(Objects::isNull).count(); }
 
     public LocalDate getDataInicio() { return dataInicio; }
@@ -76,5 +83,5 @@ public class Turma {
     public Matricula[] getMatriculas() { return matriculas; }
 
     @Override
-    public String toString() { return "[" + dataInicio + " - " + dataFim + "] " + horario + " - " + curso; }
+    public String toString() { return "[" + dataInicio + " - " + dataFim + "] " + horario + " - " + curso + " - " + responsavel; }
 }

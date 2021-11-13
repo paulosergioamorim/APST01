@@ -70,6 +70,10 @@ public class AplGerenciarCurso {
         }
     }
 
+    /**
+     * Lista de turmas que possuem vagas disponíveis para alunos se matricularem
+     * @return Uma lista de turmas que vagas > 0
+     */
     public static List<Turma> getTurmasVagas() {
         return lstTurmas.stream()
                 .filter(turma -> turma.vagas() > 0)

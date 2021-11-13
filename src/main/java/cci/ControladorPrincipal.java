@@ -9,6 +9,7 @@ import ciu.cadastros.*;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 /**
  * Controller Class
@@ -19,6 +20,7 @@ import java.time.LocalTime;
 public class ControladorPrincipal {
     private final AplGerenciarCurso aplGerenciarCurso;
     private final AplGerenciarPessoa aplGerenciarPessoa;
+
     private JanPrincipal janPrincipal;
     private JanCadCurso janCadCurso;
     private JanCadProfessor janCadProfessor;
@@ -26,7 +28,7 @@ public class ControladorPrincipal {
     private JanCadAluno janCadAluno;
     private JanCadMatricula janCadMatricula;
 
-    {
+    public ControladorPrincipal() {
         this.exibirJanPrincipal();
         this.aplGerenciarCurso = new AplGerenciarCurso();
         this.aplGerenciarPessoa = new AplGerenciarPessoa();
@@ -39,11 +41,7 @@ public class ControladorPrincipal {
     public void exibirJanPrincipal() {
         janPrincipal = (janPrincipal == null) ? new JanPrincipal(this) : janPrincipal;
         janPrincipal.setVisible(true);
-        if (janCadCurso != null) janCadCurso = null;
-        if (janCadProfessor != null) janCadProfessor = null;
-        if (janCadTurma != null) janCadTurma = null;
-        if (janCadAluno != null) janCadAluno = null;
-        if (janCadMatricula != null) janCadMatricula = null;
+        this.closeAll();
     }
 
     /**
@@ -92,10 +90,18 @@ public class ControladorPrincipal {
     }
 
     /**
-     * Cadastra um curso
-     * @param nome Nome do curso
-     * @param ch Carga horária do curso
+     * Fecha todas as janelas exceto a principal, como o método de fechar essas janelas é DISPOSE_ON_CLOSE,
+     * ou seja, a janela é fechada, mas o código ainda continua rodando. Para encerrar o código também devemos anular
+     * o valor das janelas.
      */
+    public void closeAll() {
+        janCadCurso = null;
+        janCadProfessor = null;
+        janCadTurma = null;
+        janCadAluno = null;
+        janCadMatricula = null;
+    }
+
     public void cadastrarCurso(String nome, int ch) {
         int response = aplGerenciarCurso.cadastrarCurso(nome,ch);
         switch (response) {
@@ -112,13 +118,6 @@ public class ControladorPrincipal {
         }
     }
 
-    /**
-     * Cadastra um professor
-     * @param nome Nome do professor
-     * @param cpf CPF do professor
-     * @param dataNascimento Data de nascimento do professor
-     * @param titulacao Titulação do professor
-     */
     public void cadastrarProfessor(String nome, LocalDate dataNascimento, long cpf, String titulacao) {
         int response = aplGerenciarPessoa.cadastrarProfessor(nome,dataNascimento,cpf,titulacao);
         switch (response) {
@@ -146,15 +145,6 @@ public class ControladorPrincipal {
         }
     }
 
-    /**
-     * Cadastra uma turma
-     * @param dataInicio Data de início da turma
-     * @param dataFim Data de fim da turma
-     * @param horario Horário da turma
-     * @param limiteAlunos Limite de alunos da turma
-     * @param curso Curso da turma
-     * @param professor Professor da turma
-     */
     public void cadastrarTurma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos, Curso curso, Professor professor) {
         int response = aplGerenciarCurso.cadastrarTurma(dataInicio,dataFim,horario,limiteAlunos,curso,professor);
         switch (response) {
@@ -228,12 +218,35 @@ public class ControladorPrincipal {
     /**
      * Efetua a matrícula de um aluno em uma turma
      * @param aluno Aluno a ser matriculado
-     * @param turma Turma que a matricula pertence
+     * @param turma Turma da qual o aluno será matriculado
      */
     public void efetuarMatricula(Aluno aluno, Turma turma) {
-        Matricula matricula = new Matricula(aluno,turma);
-        turma.addMatricula(matricula);
-        JOptionPane.showMessageDialog(janCadAluno, "Aluno matriculado com sucesso");
+        String estadoTurma = turma.obterEstado();
+        switch (estadoTurma) {
+            case "Em Andamento":
+                JOptionPane.showMessageDialog(janCadMatricula, "A matrícula não pode ser realizada pois a turma está em andamento");
+                return;
+            case "Matriculas Encerradas":
+                JOptionPane.showMessageDialog(janCadMatricula, "Não há vagas disponíveis nessa turma");
+                return;
+            case "Aulas Encerradas":
+                JOptionPane.showMessageDialog(janCadMatricula, "Não há mais aulas disponíveis nessa turma");
+                return;
+            case "Fechada":
+                JOptionPane.showMessageDialog(janCadMatricula, "A matrícula não pode ser realizada pois a turma está fechada");
+                return;
+            case "Matriculas Abertas":
+                break;
+        }
+        if (Arrays.stream(turma.getMatriculas()).anyMatch(m -> m.getAluno().equals(aluno)))
+            JOptionPane.showMessageDialog(janCadMatricula, "Esse aluno já está matriculado nessa turma");
+        else {
+            Matricula matricula = new Matricula();
+            matricula.setAluno(aluno);
+            matricula.setTurma(turma);
+            turma.addMatricula(matricula);
+            JOptionPane.showMessageDialog(janCadAluno, "Aluno matriculado com sucesso");
+        }
     }
 
     public static void main(String[] args) { new ControladorPrincipal(); }

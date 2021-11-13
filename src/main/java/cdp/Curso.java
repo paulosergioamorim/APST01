@@ -6,6 +6,7 @@ import java.util.List;
 public class Curso {
     private String nome;
     private int cargaHoraria;
+    private List<Turma> turmas;
 
     public Curso(String nome, int cargaHoraria) {
         this.nome = nome;
@@ -13,9 +14,6 @@ public class Curso {
 
         turmas = new ArrayList<>();
     }
-
-    // relationship
-    private List<Turma> turmas;
 
     public String getNome() { return nome; }
 
