@@ -3,9 +3,11 @@ package cdp;
 import java.time.LocalDate;
 
 public abstract class Pessoa {
-    private final long cpf;
-    private final String nome;
-    private final LocalDate dataNascimento;
+    private String nome;
+
+    private LocalDate dataNascimento;
+
+    private long cpf;
 
     public Pessoa(String nome, LocalDate dataNascimento, long cpf) {
         this.nome = nome;
@@ -13,12 +15,21 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
+    public int getIdade() { return LocalDate.now().getYear() - dataNascimento.getYear(); }
+
+    public Pessoa() { }
+
     public long getCpf() { return cpf; }
 
-    public String getNome() { return nome; }
+    public void setCpf(long cpf) { this.cpf = cpf; }
 
     public LocalDate getDataNascimento() { return dataNascimento; }
 
-    @Override
-    public String toString() { return nome; }
+    public void setDataNascimento(LocalDate data_nascimento) { this.dataNascimento = data_nascimento; }
+
+    public String getNome() { return nome; }
+
+    public void setNome(String nome) { this.nome = nome; }
+
+    @Override public String toString() { return nome; }
 }

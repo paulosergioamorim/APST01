@@ -4,15 +4,18 @@ import java.time.LocalDate;
 
 public class Matricula {
     private double nota;
-    private final LocalDate dataMatricula;
-    private final Aluno aluno;
-    private final Turma turma;
+    private LocalDate dataMatricula;
 
-    public Matricula(Aluno aluno, Turma turma) {
+    public Matricula(double nota, LocalDate dataMatricula, Aluno aluno, Turma turma) {
+        this.nota = nota;
+        this.dataMatricula = dataMatricula;
         this.aluno = aluno;
         this.turma = turma;
-        this.dataMatricula = LocalDate.now();
     }
+
+    // relationships
+    private Aluno aluno;
+    private Turma turma;
 
     public double getNota() { return nota; }
 
@@ -20,8 +23,13 @@ public class Matricula {
 
     public LocalDate getDataMatricula() { return dataMatricula; }
 
+    public void setDataMatricula(LocalDate dataMatricula) { this.dataMatricula = dataMatricula; }
+
     public Aluno getAluno() { return aluno; }
+
+    public void setAluno(Aluno aluno) { this.aluno = aluno; }
 
     public Turma getTurma() { return turma; }
 
+    public void setTurma(Turma turma) { this.turma = turma; }
 }

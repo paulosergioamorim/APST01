@@ -6,13 +6,16 @@ import java.util.List;
 public class Curso {
     private String nome;
     private int cargaHoraria;
-    private List<Turma> turmas;
 
     public Curso(String nome, int cargaHoraria) {
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
-        this.turmas = new ArrayList<>();
+
+        turmas = new ArrayList<>();
     }
+
+    // relationship
+    private List<Turma> turmas;
 
     public String getNome() { return nome; }
 
@@ -24,9 +27,5 @@ public class Curso {
 
     public List<Turma> getTurmas() { return turmas; }
 
-    public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }
-
     public void addTurma(Turma turma) { this.turmas.add(turma); }
-
-    @Override public String toString() { return nome; }
 }
