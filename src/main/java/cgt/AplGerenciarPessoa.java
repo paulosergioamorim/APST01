@@ -14,6 +14,13 @@ public class AplGerenciarPessoa {
 
     static { lstPessoas = new ArrayList<>(); }
 
+    /**
+     * Cadastra um aluno.
+     * @param nome nome do aluno
+     * @param dataNascimento data de nascimento do aluno
+     * @param cpf cpf do aluno
+     * @return 0 se sucesso, 1 se cpf já cadastrado, 2 se nome já cadastrado, 3 se data de nascimento deve ser anterior a data atual, 4 se erro ao cadastrar aluno
+     */
     public int cadastrarAluno(String nome, LocalDate dataNascimento, long cpf) {
         try {
             if (lstPessoas.stream().anyMatch(p -> p.getCpf() == cpf))
