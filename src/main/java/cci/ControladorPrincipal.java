@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Controller Class
@@ -104,11 +105,8 @@ public class ControladorPrincipal {
                 janCadCurso.getNome().setText(null);
                 janCadCurso.getCh().setText(null);
                 break;
-            case 1:
-                JOptionPane.showMessageDialog(janCadCurso, "Ocorreu um erro");
-                janCadCurso.getNome().setText(null);
-                janCadCurso.getCh().setText(null);
-                break;
+            case 1: JOptionPane.showMessageDialog(janCadCurso, "Preencha os campos para cadastrar o curso"); break;
+            case 2: JOptionPane.showMessageDialog(janCadCurso, "Um curso com esse nome já existe"); break;
         }
     }
 
@@ -120,22 +118,10 @@ public class ControladorPrincipal {
                 janCadProfessor.getCpf().setText(null);
                 janCadProfessor.getNome().setText(null);
                 janCadProfessor.getDataNascimento().setText(null);
-                break;
-            case 1:
-                JOptionPane.showMessageDialog(janCadProfessor, "Esse cpf já foi cadastrado");
-                janCadProfessor.getCpf().setText(null);
-                break;
-            case 2:
-                JOptionPane.showMessageDialog(janCadProfessor, "Essa data é futura");
-                janCadProfessor.getDataNascimento().setText(null);
-                break;
-            case 3:
-                JOptionPane.showMessageDialog(janCadProfessor, "Ocorreu um erro");
-                janCadProfessor.getCpf().setText(null);
-                janCadProfessor.getNome().setText(null);
-                janCadProfessor.getDataNascimento().setText(null);
                 janCadProfessor.getTitulacao().setText(null);
                 break;
+            case 1: JOptionPane.showMessageDialog(janCadProfessor, "Esse cpf já foi cadastrado"); break;
+            case 2: JOptionPane.showMessageDialog(janCadProfessor, "A data de nascimento é futura"); break;
         }
     }
 
@@ -151,35 +137,10 @@ public class ControladorPrincipal {
                 janCadTurma.getCurso().setSelectedItem(null);
                 janCadTurma.getProfessor().setSelectedItem(null);
                 break;
-            case 1:
-                JOptionPane.showMessageDialog(janCadTurma, "A data de início deve ser anterior à data atual");
-                janCadTurma.getDataInicio().setText(null);
-                break;
-            case 2:
-                JOptionPane.showMessageDialog(janCadTurma, "A data final deve ser posterior à data de início");
-                janCadTurma.getDataFim().setText(null);
-                break;
-            case 3:
-                JOptionPane.showMessageDialog(janCadTurma, "O limite de alunos deve ser maior que 0");
-                janCadTurma.getLimiteAlunos().setText(null);
-                break;
-            case 4:
-                JOptionPane.showMessageDialog(janCadTurma, "O curso fornecido não existe");
-                janCadTurma.getCurso().setSelectedIndex(0);
-                break;
-            case 5:
-                JOptionPane.showMessageDialog(janCadTurma, "O professor não existe");
-                janCadTurma.getProfessor().setSelectedIndex(0);
-                break;
-            case 6:
-                JOptionPane.showMessageDialog(janCadTurma, "Ocorreu um erro");
-                janCadTurma.getDataInicio().setText(null);
-                janCadTurma.getDataFim().setText(null);
-                janCadTurma.getHorario().setText(null);
-                janCadTurma.getLimiteAlunos().setText(null);
-                janCadTurma.getCurso().setSelectedItem(null);
-                janCadTurma.getProfessor().setSelectedItem(null);
-                break;
+            case 1: JOptionPane.showMessageDialog(janCadTurma, "A data final deve ser posterior à data de início"); break;
+            case 2: JOptionPane.showMessageDialog(janCadTurma, "O limite de alunos deve ser maior que 0"); break;
+            case 3: JOptionPane.showMessageDialog(janCadTurma, "O curso fornecido não existe"); break;
+            case 4: JOptionPane.showMessageDialog(janCadTurma, "O professor não existe"); break;
         }
     }
 
@@ -192,20 +153,8 @@ public class ControladorPrincipal {
                 janCadAluno.getDataNascimento().setText(null);
                 janCadAluno.getCpf().setText(null);
                 break;
-            case 1:
-                JOptionPane.showMessageDialog(janCadAluno,"Esse cpf já foi cadastrado");
-                janCadAluno.getCpf().setText(null);
-                break;
-            case 2:
-                JOptionPane.showMessageDialog(janCadAluno,"Essa data é futura");
-                janCadAluno.getDataNascimento().setText(null);
-                break;
-            case 3:
-                JOptionPane.showMessageDialog(janCadAluno,"Ocorreu um erro");
-                janCadAluno.getNome().setText(null);
-                janCadAluno.getDataNascimento().setText(null);
-                janCadAluno.getCpf().setText(null);
-                break;
+            case 1: JOptionPane.showMessageDialog(janCadAluno,"Esse cpf já foi cadastrado"); break;
+            case 2: JOptionPane.showMessageDialog(janCadAluno,"A data de nascimento é futura"); break;
         }
     }
 
@@ -217,30 +166,21 @@ public class ControladorPrincipal {
     public void efetuarMatricula(Aluno aluno, Turma turma) {
         String estadoTurma = turma.obterEstado();
         switch (estadoTurma) {
-            case "Em Andamento":
-                JOptionPane.showMessageDialog(janCadMatricula, "A matrícula não pode ser realizada pois a turma está em andamento");
-                return;
-            case "Matriculas Encerradas":
-                JOptionPane.showMessageDialog(janCadMatricula, "Não há vagas disponíveis nessa turma");
-                return;
-            case "Aulas Encerradas":
-                JOptionPane.showMessageDialog(janCadMatricula, "Não há mais aulas disponíveis nessa turma");
-                return;
-            case "Fechada":
-                JOptionPane.showMessageDialog(janCadMatricula, "A matrícula não pode ser realizada pois a turma está fechada");
-                return;
-            case "Matriculas Abertas":
-                break;
+            case "Em Andamento": JOptionPane.showMessageDialog(janCadMatricula, "A matrícula não pode ser realizada pois a turma está em andamento"); return;
+            case "Matriculas Encerradas": JOptionPane.showMessageDialog(janCadMatricula, "Não há vagas disponíveis nessa turma"); return;
+            case "Aulas Encerradas": JOptionPane.showMessageDialog(janCadMatricula, "Não há mais aulas disponíveis nessa turma"); return;
+            case "Fechada": JOptionPane.showMessageDialog(janCadMatricula, "A matrícula não pode ser realizada pois a turma está fechada"); return;
         }
-        if (Arrays.stream(turma.getMatriculas()).anyMatch(m -> m.getAluno().equals(aluno)))
-            JOptionPane.showMessageDialog(janCadMatricula, "Esse aluno já está matriculado nessa turma");
-        else {
-            Matricula matricula = new Matricula(aluno, turma);
-            turma.addMatricula(matricula);
-            JOptionPane.showMessageDialog(janCadAluno, "Aluno matriculado com sucesso");
-            janCadMatricula.getAluno().setSelectedItem(null);
-            janCadMatricula.getTurma().setSelectedItem(null);
+        if (Arrays.stream(turma.getMatriculas())
+                .filter(Objects::nonNull)
+                .anyMatch(matricula -> matricula.getAluno().equals(aluno))
+        ) {
+            JOptionPane.showMessageDialog(janCadMatricula, "O aluno já está matriculado nessa turma");
+            return;
         }
+        Matricula matricula = new Matricula(aluno, turma);
+        turma.addMatricula(matricula);
+        JOptionPane.showMessageDialog(janCadAluno, "Aluno matriculado com sucesso");
     }
 
     public static void main(String[] args) { new ControladorPrincipal(); }

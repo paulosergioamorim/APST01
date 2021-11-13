@@ -24,6 +24,9 @@ public class JanPrincipal extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
+        ImageIcon icon = new ImageIcon("src/main/resources/images/icon.png");
+        this.setIconImage(icon.getImage());
+
         CadastrarCurso.addActionListener(e -> controlador.exibirJanCadCurso());
         CadastrarProfessor.addActionListener(e -> controlador.exibirJanCadProfessor());
         CadastrarTurma.addActionListener(e -> controlador.exibirJanCadTurma());

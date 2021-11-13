@@ -28,12 +28,14 @@ public class AplGerenciarCurso {
      * @return 0 se o curso foi cadastrado com sucesso, 1 se o curso já existe
      */
     public int cadastrarCurso(String nome, int ch) {
-        try {
+        if (nome.isEmpty() || ch <= 0)
+            return 1; // nome e carga horária não podem ser vazios
+        else if (lstCursos.stream().anyMatch(c -> c.getNome().equals(nome)))
+            return 2; // um curso com esse nome já existe
+        else {
             Curso curso = new Curso(nome,ch);
             lstCursos.add(curso);
             return 0; // sucesso
-        } catch (Exception e) {
-            return 1; // erro ao cadastrar curso
         }
     }
 
@@ -48,23 +50,19 @@ public class AplGerenciarCurso {
      * @return 0 se a turma foi cadastrada com sucesso, 1 se o curso não existe, 2 se o responsavel não existe, 3 se a turma já existe
      */
     public int cadastrarTurma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos, Curso curso, Professor responsavel) {
-        try {
-            if (dataInicio.isAfter(LocalDate.now()))
-                return 1; // data de inicio deve ser anterior a data atual
-            if (dataFim.isBefore(dataInicio))
-                return 2; // data de fim deve ser depois da dataInicio
-            if (limiteAlunos < 0)
-                return 3; // limite de alunos deve ser maior do que zero
-            if (!lstCursos.contains(curso) || curso == null)
-                return 4; // curso não existe
-            if (!lstPessoas.contains(responsavel) || responsavel == null)
-                return 5; // responsavel não existe
+        if (dataFim.isBefore(dataInicio))
+            return 1; // data de fim deve ser depois da dataInicio
+        else if (limiteAlunos < 0)
+            return 2; // limite de alunos deve ser maior do que zero
+        else if (!lstCursos.contains(curso) || curso == null)
+            return 3; // curso não existe
+        else if (!lstPessoas.contains(responsavel) || responsavel == null)
+            return 4; // responsavel não existe
+        else {
             Turma turma = new Turma(dataInicio, dataFim, horario, limiteAlunos, curso, responsavel);
             lstTurmas.add(turma);
             lstCursos.get(lstCursos.indexOf(curso)).addTurma(turma);
             return 0; // sucesso
-        } catch (Exception e) {
-            return 6; // erro ao cadastrar turma
         }
     }
 

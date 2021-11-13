@@ -32,6 +32,9 @@ public class JanCadMatricula extends JFrame {
 
         this.controlador = controlador;
 
+        ImageIcon icon = new ImageIcon("src/main/resources/images/icon.png");
+        this.setIconImage(icon.getImage());
+
         DefaultComboBoxModel<Aluno> modelAluno = new DefaultComboBoxModel<>();
         modelAluno.addAll(getAlunos());
         Aluno.setModel(modelAluno);

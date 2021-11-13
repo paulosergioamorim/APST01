@@ -30,6 +30,9 @@ public class JanCadProfessor extends JFrame {
 
         this.controlador = controlador;
 
+        ImageIcon icon = new ImageIcon("src/main/resources/images/icon.png");
+        this.setIconImage(icon.getImage());
+
         Cpf.setFormatterFactory(getFormatterFactory(cpfMask));
         DataNascimento.setFormatterFactory(getFormatterFactory(dateMask));
 
@@ -41,7 +44,7 @@ public class JanCadProfessor extends JFrame {
                 String titulacao = Titulacao.getText();
                 controlador.cadastrarProfessor(nome, dataNascimento, cpf, titulacao);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao cadastrar professor", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar professor", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
@@ -52,11 +55,11 @@ public class JanCadProfessor extends JFrame {
         super.dispose();
     }
 
-    public JTextField getCpf() { return Cpf; }
+    public JFormattedTextField getCpf() { return Cpf; }
 
     public JTextField getNome() { return Nome; }
 
-    public JTextField getDataNascimento() { return DataNascimento; }
+    public JFormattedTextField getDataNascimento() { return DataNascimento; }
 
     public JTextField getTitulacao() { return Titulacao; }
 

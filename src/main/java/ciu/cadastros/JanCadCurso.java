@@ -28,6 +28,9 @@ public class JanCadCurso extends JFrame {
 
         this.controlador = controlador;
 
+        ImageIcon icon = new ImageIcon("src/main/resources/images/icon.png");
+        this.setIconImage(icon.getImage());
+
         Ch.setFormatterFactory(getFormatterFactory(int4Mask));
 
         Salvar.addActionListener(e -> {
@@ -74,11 +77,11 @@ public class JanCadCurso extends JFrame {
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-3289651));
         label1.setText("Carga Horária");
-        Panel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setForeground(new Color(-3289651));
         label2.setText("Nome");
-        Panel.add(label2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel.add(label2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Nome = new JTextField();
         Panel.add(Nome, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Salvar = new JButton();

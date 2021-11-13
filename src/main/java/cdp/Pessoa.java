@@ -13,13 +13,11 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
-    public int getIdade() { return LocalDate.now().getYear() - dataNascimento.getYear(); }
-
     public long getCpf() { return cpf; }
 
-    public LocalDate getDataNascimento() { return dataNascimento; }
-
     public String getNome() { return nome; }
+
+    public LocalDate getDataNascimento() { return dataNascimento; }
 
     @Override
     public String toString() { return nome; }

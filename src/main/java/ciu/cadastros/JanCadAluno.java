@@ -29,6 +29,9 @@ public class JanCadAluno extends JFrame {
 
         this.controlador = controlador;
 
+        ImageIcon icon = new ImageIcon("src/main/resources/images/icon.png");
+        this.setIconImage(icon.getImage());
+
         Cpf.setFormatterFactory(getFormatterFactory(cpfMask));
         DataNascimento.setFormatterFactory(getFormatterFactory(dateMask));
 
@@ -88,7 +91,7 @@ public class JanCadAluno extends JFrame {
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-3289651));
         label1.setText("Nome");
-        Panel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setForeground(new Color(-3289651));
         label2.setText("Data de Nascimento");
@@ -96,7 +99,7 @@ public class JanCadAluno extends JFrame {
         final JLabel label3 = new JLabel();
         label3.setForeground(new Color(-3289651));
         label3.setText("CPF");
-        Panel.add(label3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Panel.add(label3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

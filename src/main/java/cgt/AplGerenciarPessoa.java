@@ -22,16 +22,14 @@ public class AplGerenciarPessoa {
      * @return 0 se sucesso, 1 se cpf já cadastrado, 2 se nome já cadastrado, 3 se data de nascimento deve ser anterior a data atual, 4 se erro ao cadastrar aluno
      */
     public int cadastrarAluno(String nome, LocalDate dataNascimento, long cpf) {
-        try {
-            if (lstPessoas.stream().anyMatch(p -> p.getCpf() == cpf))
-                return 1; // cpf já cadastrado
-            if (dataNascimento.isAfter(LocalDate.now()))
-                return 2; // data de nascimento deve ser anterior a data atual
+        if (lstPessoas.stream().anyMatch(p -> p.getCpf() == cpf))
+            return 1; // cpf já cadastrado
+        else if (dataNascimento.isAfter(LocalDate.now()))
+            return 2; // data de nascimento deve ser anterior a data atual
+        else {
             Aluno aluno = new Aluno(nome, dataNascimento, cpf);
             lstPessoas.add(aluno);
             return 0; // sucesso
-        } catch (Exception e) {
-            return 3; // erro ao cadastrar aluno
         }
     }
 
@@ -44,16 +42,14 @@ public class AplGerenciarPessoa {
      * @return 0 se sucesso, 1 se cpf já cadastrado, 2 se nome já cadastrado, 3 se data de nascimento deve ser anterior a data atual, 4 se erro ao cadastrar professor
      */
     public int cadastrarProfessor(String nome, LocalDate dataNascimento, long cpf, String titulacao) {
-        try {
-            if (lstPessoas.stream().anyMatch(p -> p.getCpf() == cpf))
-                return 1; // cpf já cadastrado
-            if (dataNascimento.isAfter(LocalDate.now()))
-                return 2; // data de nascimento deve ser anterior a data atual
+        if (lstPessoas.stream().anyMatch(p -> p.getCpf() == cpf))
+            return 1; // cpf já cadastrado
+        else if (dataNascimento.isAfter(LocalDate.now()))
+            return 2; // data de nascimento deve ser anterior a data atual
+        else {
             Professor professor = new Professor(nome, dataNascimento, cpf, titulacao);
             lstPessoas.add(professor);
             return 0; // sucesso
-        } catch (Exception e) {
-            return 3; // erro ao cadastrar professor
         }
     }
 
