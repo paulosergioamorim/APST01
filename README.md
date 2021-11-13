@@ -4,8 +4,5 @@
 
 Esse é um trabalho da disciplina de APS
 
-```
-public static void main(String[] args) {
-    System.out.println("Hello World!");
-}
-```
+Parte 1: Entender a arquitetura, implementar todas
+as classes do CDP e o cadastro de Curso (25/10 15 pontos)
