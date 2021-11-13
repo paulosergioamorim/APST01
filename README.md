@@ -8,3 +8,5 @@ permite o cadastro de cursos, turmas, professores, alunos e matrículas.
 O objetivo é implementar a arquitetura MVC (Model, View, Control), que busca
 separar a lógica de negócios, da interface de usuário, das classes do domínio
 do problema, e da persistência, fornecendo ao projeto uma melhor organização de código.
+
+Parte 3: incluir acesso ao banco de dados, criando as classes da CGD. (05/12 15 pontos)
