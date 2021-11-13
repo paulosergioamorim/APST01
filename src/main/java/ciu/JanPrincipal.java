@@ -47,7 +47,7 @@ public class JanPrincipal extends JFrame {
      */
     private void $$$setupUI$$$() {
         Panel = new JPanel();
-        Panel.setLayout(new GridLayoutManager(6, 1, new Insets(0, 0, 0, 0), -1, -1));
+        Panel.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), -1, -1));
         Panel.setBackground(new Color(-13487566));
         CadastrarProfessor = new JButton();
         CadastrarProfessor.setBackground(new Color(-11513776));
