@@ -235,9 +235,7 @@ public class ControladorPrincipal {
         if (Arrays.stream(turma.getMatriculas()).anyMatch(m -> m.getAluno().equals(aluno)))
             JOptionPane.showMessageDialog(janCadMatricula, "Esse aluno já está matriculado nessa turma");
         else {
-            Matricula matricula = new Matricula();
-            matricula.setAluno(aluno);
-            matricula.setTurma(turma);
+            Matricula matricula = new Matricula(aluno, turma);
             turma.addMatricula(matricula);
             JOptionPane.showMessageDialog(janCadAluno, "Aluno matriculado com sucesso");
             janCadMatricula.getAluno().setSelectedItem(null);

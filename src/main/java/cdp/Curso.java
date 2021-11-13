@@ -11,8 +11,7 @@ public class Curso {
     public Curso(String nome, int cargaHoraria) {
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
-
-        turmas = new ArrayList<>();
+        this.turmas = new ArrayList<>();
     }
 
     public String getNome() { return nome; }

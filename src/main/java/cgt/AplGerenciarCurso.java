@@ -44,10 +44,10 @@ public class AplGerenciarCurso {
      * @param horario horario de início da turma
      * @param limiteAlunos limite de alunos da turma
      * @param curso cursos que a turma pertence
-     * @param professor responsável da turma
-     * @return 0 se a turma foi cadastrada com sucesso, 1 se o curso não existe, 2 se o professor não existe, 3 se a turma já existe
+     * @param responsavel responsável da turma
+     * @return 0 se a turma foi cadastrada com sucesso, 1 se o curso não existe, 2 se o responsavel não existe, 3 se a turma já existe
      */
-    public int cadastrarTurma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos, Curso curso, Professor professor) {
+    public int cadastrarTurma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos, Curso curso, Professor responsavel) {
         try {
             if (dataInicio.isAfter(LocalDate.now()))
                 return 1; // data de inicio deve ser anterior a data atual
@@ -57,11 +57,9 @@ public class AplGerenciarCurso {
                 return 3; // limite de alunos deve ser maior do que zero
             if (!lstCursos.contains(curso) || curso == null)
                 return 4; // curso não existe
-            if (!lstPessoas.contains(professor) || professor == null)
-                return 5; // professor não existe
-            Turma turma = new Turma(dataInicio, dataFim, horario, limiteAlunos);
-            turma.setCurso(curso);
-            turma.setResponsavel(professor);
+            if (!lstPessoas.contains(responsavel) || responsavel == null)
+                return 5; // responsavel não existe
+            Turma turma = new Turma(dataInicio, dataFim, horario, limiteAlunos, curso, responsavel);
             lstTurmas.add(turma);
             lstCursos.get(lstCursos.indexOf(curso)).addTurma(turma);
             return 0; // sucesso

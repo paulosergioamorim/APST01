@@ -5,10 +5,14 @@ import java.time.LocalDate;
 public class Matricula {
     private double nota;
     private final LocalDate dataMatricula;
-    private Aluno aluno;
-    private Turma turma;
+    private final Aluno aluno;
+    private final Turma turma;
 
-    { this.dataMatricula = LocalDate.now(); }
+    public Matricula(Aluno aluno, Turma turma) {
+        this.aluno = aluno;
+        this.turma = turma;
+        this.dataMatricula = LocalDate.now();
+    }
 
     public double getNota() { return nota; }
 
@@ -18,9 +22,6 @@ public class Matricula {
 
     public Aluno getAluno() { return aluno; }
 
-    public void setAluno(Aluno aluno) { this.aluno = aluno; }
-
     public Turma getTurma() { return turma; }
 
-    public void setTurma(Turma turma) { this.turma = turma; }
 }

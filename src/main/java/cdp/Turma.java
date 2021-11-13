@@ -18,11 +18,13 @@ public class Turma {
     private Professor responsavel;
     private final Matricula[] matriculas;
 
-    public Turma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos) {
+    public Turma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos, Curso curso, Professor responsavel) {
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.horario = horario;
         this.limiteAlunos = limiteAlunos;
+        this.curso = curso;
+        this.responsavel = responsavel;
         this.fechada = false;
 
         matriculas = new Matricula[limiteAlunos];
@@ -74,11 +76,7 @@ public class Turma {
 
     public Curso getCurso() { return curso; }
 
-    public void setCurso(Curso curso) { this.curso = curso; }
-
     public Professor getResponsavel() { return responsavel; }
-
-    public void setResponsavel(Professor responsavel) { this.responsavel = responsavel; }
 
     public Matricula[] getMatriculas() { return matriculas; }
 
