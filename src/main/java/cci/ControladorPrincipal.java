@@ -45,44 +45,34 @@ public class ControladorPrincipal {
     }
 
     /**
-     * Exibe a tela de cadastro de curso e esconde a janela principal
+     * Os métodos abaixo servem para exibir as janelas de cadastro de cursos,
+     * professores, turmas, alunos e matrículas, e fecham a janela principal.
      */
+
     public void exibirJanCadCurso() {
         janCadCurso = (janCadCurso == null) ? new JanCadCurso(this) : janCadCurso;
         janPrincipal.setVisible(false);
         janCadCurso.setVisible(true);
     }
 
-    /**
-     * Exibe a tela de cadastro de professor e esconde a janela principal
-     */
     public void exibirJanCadProfessor() {
         janCadProfessor = (janCadProfessor == null) ? new JanCadProfessor(this) : janCadProfessor;
         janPrincipal.setVisible(false);
         janCadProfessor.setVisible(true);
     }
 
-    /**
-     * Exibe a tela de cadastro de turma e esconde a janela principal
-     */
     public void exibirJanCadTurma() {
         janCadTurma = (janCadTurma == null) ? new JanCadTurma(this) : janCadTurma;
         janPrincipal.setVisible(false);
         janCadTurma.setVisible(true);
     }
 
-    /**
-     * Exibe a tela de cadastro de aluno e esconde a janela principal
-     */
     public void exibirJanCadAluno() {
         janCadAluno = (janCadAluno == null) ? new JanCadAluno(this) : janCadAluno;
         janPrincipal.setVisible(false);
         janCadAluno.setVisible(true);
     }
 
-    /**
-     * Exibe a tela de matricula e esconde a janela principal
-     */
     public void exibirJanCadMatricula() {
         janCadMatricula = (janCadMatricula == null) ? new JanCadMatricula(this) : janCadMatricula;
         janPrincipal.setVisible(false);
@@ -90,9 +80,9 @@ public class ControladorPrincipal {
     }
 
     /**
-     * Fecha todas as janelas exceto a principal, como o método de fechar essas janelas é DISPOSE_ON_CLOSE,
-     * ou seja, a janela é fechada, mas o código ainda continua rodando. Para encerrar o código também devemos anular
-     * o valor das janelas.
+     * Fecha todas as janelas exceto a principal, como o método de fechar essas janelas é
+     * DISPOSE_ON_CLOSE, ou seja, a janela é fechada, mas o código ainda continua rodando,
+     * para encerrar o código também devemos anular o valor delas.
      */
     public void closeAll() {
         janCadCurso = null;
@@ -101,6 +91,10 @@ public class ControladorPrincipal {
         janCadAluno = null;
         janCadMatricula = null;
     }
+
+    /**
+     * Métodos de cadastro de cursos, professores, turmas, alunos e matrículas.
+     */
 
     public void cadastrarCurso(String nome, int ch) {
         int response = aplGerenciarCurso.cadastrarCurso(nome,ch);
@@ -246,6 +240,8 @@ public class ControladorPrincipal {
             matricula.setTurma(turma);
             turma.addMatricula(matricula);
             JOptionPane.showMessageDialog(janCadAluno, "Aluno matriculado com sucesso");
+            janCadMatricula.getAluno().setSelectedItem(null);
+            janCadMatricula.getTurma().setSelectedItem(null);
         }
     }
 
