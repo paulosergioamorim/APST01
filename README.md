@@ -1,6 +1,6 @@
 # APS - T01
 
-####Grupo: Breno Haese, Nycolas Monjardim, Paulo Amorim
+Grupo: Breno Haese, Nycolas Monjardim, Paulo Amorim
 
 Esse é o trabalho final da disciplina de APS (Análise e Projeto de Sistemas).
 O trabalho consiste em um sistema de uma escola de cursos de informática que
