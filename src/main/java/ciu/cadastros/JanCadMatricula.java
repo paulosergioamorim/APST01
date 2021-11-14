@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import static cgt.AplGerenciarCurso.getTurmasVagas;
-import static cgt.AplGerenciarPessoa.getAlunos;
+import static cgt.AplGerenciarPessoas.getAlunos;
 
 public class JanCadMatricula extends JFrame {
     private final ControladorPrincipal controlador;
@@ -20,7 +20,7 @@ public class JanCadMatricula extends JFrame {
     private JButton Matricular;
     private JComboBox<Aluno> Aluno;
     private JComboBox<Turma> Turma;
-    private JLabel vagas;
+    private JLabel Vagas;
 
     public JanCadMatricula(ControladorPrincipal controlador) {
         super("Cadastro de Matricula");
@@ -57,7 +57,7 @@ public class JanCadMatricula extends JFrame {
     public void updateTurmas() {
         if (Turma.getSelectedItem() != null) {
             Turma turma = (Turma) Turma.getSelectedItem();
-            vagas.setText("Vagas disponíveis: " + turma.vagas());
+            Vagas.setText("Vagas disponíveis: " + turma.getVagas());
         }
     }
 
@@ -102,10 +102,10 @@ public class JanCadMatricula extends JFrame {
         Panel.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Aluno = new JComboBox();
         Panel.add(Aluno, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        vagas = new JLabel();
-        vagas.setForeground(new Color(-3289651));
-        vagas.setText("Vagas Disponíveis");
-        Panel.add(vagas, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Vagas = new JLabel();
+        Vagas.setForeground(new Color(-3289651));
+        Vagas.setText("Vagas Disponíveis");
+        Panel.add(Vagas, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Turma = new JComboBox();
         Panel.add(Turma, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();

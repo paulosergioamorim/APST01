@@ -37,13 +37,13 @@
         </constraints>
         <properties/>
       </component>
-      <component id="89f4f" class="javax.swing.JLabel" binding="vagas">
+      <component id="34cff" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <foreground color="-3289651"/>
-          <text value="Vagas Disponíveis"/>
+          <text value="Turma"/>
         </properties>
       </component>
       <component id="e27ab" class="javax.swing.JComboBox" binding="Turma">
@@ -52,13 +52,13 @@
         </constraints>
         <properties/>
       </component>
-      <component id="34cff" class="javax.swing.JLabel">
+      <component id="89f4f" class="javax.swing.JLabel" binding="Vagas">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <foreground color="-3289651"/>
-          <text value="Turma"/>
+          <text value="Vagas Disponíveis"/>
         </properties>
       </component>
     </children>

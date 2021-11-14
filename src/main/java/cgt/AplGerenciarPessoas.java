@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AplGerenciarPessoa {
+public class AplGerenciarPessoas {
     public static final List<Pessoa> lstPessoas;
 
     static { lstPessoas = new ArrayList<>(); }

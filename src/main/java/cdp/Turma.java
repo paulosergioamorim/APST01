@@ -2,9 +2,7 @@ package cdp;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class Turma {
@@ -40,7 +38,7 @@ public class Turma {
             estado = "Fechada";
         else if (dataFim.isBefore(LocalDate.now()))
             estado = "Aulas Encerradas";
-        else if (vagas() == 0)
+        else if (getVagas() == 0)
             estado = "Matriculas Encerradas";
         else if (dataInicio.isBefore(LocalDate.now()))
             estado = "Em andamento";
@@ -53,7 +51,7 @@ public class Turma {
      * @param matricula Matricula a ser adicionada na turma
      */
     public void addMatricula(Matricula matricula) {
-        if (vagas() == 0) return;
+        if (getVagas() == 0) return;
         for (int i = 0; i < matriculas.length; i++)
             if (matriculas[i] == null) {
                 matriculas[i] = matricula;
@@ -62,10 +60,13 @@ public class Turma {
     }
 
     /**
-     * Verifica se a turma possui vagas disponíveis
-     * @return o número de vagas disponíveis
+     * @return o número de vagas disponíveis na turma
      */
-    public long vagas() { return Arrays.stream(matriculas).filter(Objects::isNull).count(); }
+    public long getVagas() {
+        return Arrays.stream(matriculas)
+                .filter(Objects::isNull)
+                .count();
+    }
 
     public LocalDate getDataInicio() { return dataInicio; }
 

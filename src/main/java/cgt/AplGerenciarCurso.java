@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static cgt.AplGerenciarPessoa.lstPessoas;
+import static cgt.AplGerenciarPessoas.lstPessoas;
 
 public class AplGerenciarCurso {
     public static final List<Curso> lstCursos;
@@ -72,7 +72,7 @@ public class AplGerenciarCurso {
      */
     public static List<Turma> getTurmasVagas() {
         return lstTurmas.stream()
-                .filter(turma -> turma.vagas() > 0)
+                .filter(turma -> turma.getVagas() > 0)
                 .collect(Collectors.toList());
     }
 }
