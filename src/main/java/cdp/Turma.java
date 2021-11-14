@@ -12,8 +12,6 @@ public class Turma {
     private int limiteAlunos;
     private boolean fechada;
 
-    private String estado;
-
     private Curso curso;
     private Professor responsavel;
     private final Matricula[] matriculas;
@@ -35,15 +33,14 @@ public class Turma {
      */
     public String obterEstado() {
         if (fechada)
-            estado = "Fechada";
+            return "Fechada";
         else if (dataFim.isBefore(LocalDate.now()))
-            estado = "Aulas Encerradas";
+            return  "Aulas Encerradas";
         else if (getVagas() == 0)
-            estado = "Matriculas Encerradas";
+            return  "Matriculas Encerradas";
         else if (dataInicio.isBefore(LocalDate.now()))
-            estado = "Em andamento";
-        else estado = "Matriculas Abertas";
-        return estado;
+            return  "Em andamento";
+        else return "Matriculas Abertas";
     }
 
     /**
@@ -88,10 +85,6 @@ public class Turma {
 
     public void setFechada(boolean fechada) { this.fechada = fechada; }
 
-    public String getEstado() { return estado; }
-
-    public void setEstado(String estado) { this.estado = estado; }
-
     public Curso getCurso() { return curso; }
 
     public void setCurso(Curso curso) { this.curso = curso; }
@@ -103,5 +96,5 @@ public class Turma {
     public Matricula[] getMatriculas() { return matriculas; }
 
     @Override
-    public String toString() { return "[" + dataInicio + " - " + dataFim + "] " + horario + " - " + curso + " - " + responsavel; }
+    public String toString() { return "[" + dataInicio + " - " + dataFim + "]" + " - " + curso + " - " + responsavel; }
 }
