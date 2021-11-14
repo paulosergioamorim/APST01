@@ -2,7 +2,7 @@ package cci;
 
 import cdp.*;
 import cgt.AplGerenciarCurso;
-import cgt.AplGerenciarPessoas;
+import cgt.AplGerenciarPessoa;
 import ciu.JanPrincipal;
 import ciu.cadastros.*;
 
@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 public class ControladorPrincipal {
     private final AplGerenciarCurso aplGerenciarCurso;
-    private final AplGerenciarPessoas aplGerenciarPessoa;
+    private final AplGerenciarPessoa aplGerenciarPessoa;
 
     private JanPrincipal janPrincipal;
     private JanCadCurso janCadCurso;
@@ -32,7 +32,7 @@ public class ControladorPrincipal {
     public ControladorPrincipal() {
         this.exibirJanPrincipal();
         this.aplGerenciarCurso = new AplGerenciarCurso();
-        this.aplGerenciarPessoa = new AplGerenciarPessoas();
+        this.aplGerenciarPessoa = new AplGerenciarPessoa();
     }
 
     /**

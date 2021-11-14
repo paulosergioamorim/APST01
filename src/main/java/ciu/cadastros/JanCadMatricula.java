@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import static cgt.AplGerenciarCurso.getTurmasVagas;
-import static cgt.AplGerenciarPessoas.getAlunos;
+import static cgt.AplGerenciarPessoa.getAlunos;
 
 public class JanCadMatricula extends JFrame {
     private final ControladorPrincipal controlador;

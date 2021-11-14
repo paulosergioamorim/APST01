@@ -13,7 +13,7 @@ import java.time.LocalTime;
 
 import static cdp.Formatters.*;
 import static cgt.AplGerenciarCurso.lstCursos;
-import static cgt.AplGerenciarPessoas.getProfessores;
+import static cgt.AplGerenciarPessoa.getProfessores;
 
 public class JanCadTurma extends JFrame {
     private final ControladorPrincipal controlador;

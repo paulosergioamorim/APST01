@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static cgt.AplGerenciarPessoas.lstPessoas;
+import static cgt.AplGerenciarPessoa.lstPessoas;
 
 public class AplGerenciarCurso {
     public static final List<Curso> lstCursos;
