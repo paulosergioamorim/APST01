@@ -39,7 +39,7 @@ public class Turma {
         else if (getVagas() == 0)
             return  "Matriculas Encerradas";
         else if (dataInicio.isBefore(LocalDate.now()))
-            return  "Em andamento";
+            return  "Em Andamento";
         else return "Matriculas Abertas";
     }
 
