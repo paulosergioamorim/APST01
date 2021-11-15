@@ -29,5 +29,5 @@ public class Curso {
 	public void addTurma(Turma turma)             {this.turmas.add(turma);}
 
 	@Override
-	public String toString()                      {return nome;}
+	public String toString() {return nome;}
 }
