@@ -3,16 +3,23 @@ package cgt;
 import cdp.Aluno;
 import cdp.Pessoa;
 import cdp.Professor;
+import cgd.dao.AlunoDAO;
+import cgd.dao.ProfessorDAO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AplGerenciarPessoa {
-    public static final List<Pessoa> lstPessoas;
+    private static final String URL_CFG = "hibernate.cfg.xml";
 
-    static { lstPessoas = new ArrayList<>(); }
+    public static final AlunoDAO alunoDAO;
+    public static final ProfessorDAO professorDAO;
+
+    static {
+        alunoDAO = new AlunoDAO(URL_CFG);
+        professorDAO = new ProfessorDAO(URL_CFG);
+    }
 
     /**
      * Cadastra um aluno.
@@ -22,13 +29,13 @@ public class AplGerenciarPessoa {
      * @return 0 se sucesso, 1 se cpf já cadastrado, 2 se nome já cadastrado, 3 se data de nascimento deve ser anterior a data atual, 4 se erro ao cadastrar aluno
      */
     public int cadastrarAluno(String nome, LocalDate dataNascimento, long cpf) {
-        if (lstPessoas.stream().anyMatch(p -> p.getCpf() == cpf))
+        if (getPessoas().stream().anyMatch(p -> p.getCpf() == cpf))
             return 1; // cpf já cadastrado
         else if (dataNascimento.isAfter(LocalDate.now()))
             return 2; // data de nascimento deve ser anterior a data atual
         else {
             Aluno aluno = new Aluno(nome, dataNascimento, cpf);
-            lstPessoas.add(aluno);
+            alunoDAO.save(aluno);
             return 0; // sucesso
         }
     }
@@ -42,13 +49,13 @@ public class AplGerenciarPessoa {
      * @return 0 se sucesso, 1 se cpf já cadastrado, 2 se nome já cadastrado, 3 se data de nascimento deve ser anterior a data atual, 4 se erro ao cadastrar professor
      */
     public int cadastrarProfessor(String nome, LocalDate dataNascimento, long cpf, String titulacao) {
-        if (lstPessoas.stream().anyMatch(p -> p.getCpf() == cpf))
+        if (getPessoas().stream().anyMatch(p -> p.getCpf() == cpf))
             return 1; // cpf já cadastrado
         else if (dataNascimento.isAfter(LocalDate.now()))
             return 2; // data de nascimento deve ser anterior a data atual
         else {
             Professor professor = new Professor(nome, dataNascimento, cpf, titulacao);
-            lstPessoas.add(professor);
+            professorDAO.save(professor);
             return 0; // sucesso
         }
     }
@@ -57,21 +64,18 @@ public class AplGerenciarPessoa {
      * Retorna uma lista com todos os alunos cadastrados.
      * @return lista de alunos
      */
-    public static List<Aluno> getAlunos() {
-        return lstPessoas.stream()
-                .filter(aluno -> aluno instanceof Aluno)
-                .map(p -> (Aluno) p)
-                .collect(Collectors.toList());
-    }
+    public static List<Aluno> getAlunos() { return alunoDAO.findAll(); }
 
     /**
      * Retorna uma lista com todos os professores cadastrados.
      * @return lista de professores
      */
-    public static List<Professor> getProfessores() {
-        return lstPessoas.stream()
-                .filter(professor -> professor instanceof Professor)
-                .map(professor -> (Professor) professor)
-                .collect(Collectors.toList());
+    public static List<Professor> getProfessores() { return professorDAO.findAll(); }
+
+    public static List<Pessoa> getPessoas() {
+        List<Pessoa> pessoas = new ArrayList<>();
+        pessoas.addAll(getAlunos());
+        pessoas.addAll(getProfessores());
+        return pessoas;
     }
 }

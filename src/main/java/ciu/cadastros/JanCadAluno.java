@@ -41,7 +41,9 @@ public class JanCadAluno extends JFrame {
                 long cpf = Long.parseLong(Cpf.getText().replaceAll("[.-]", ""));
                 LocalDate dataNascimento = LocalDate.parse(DataNascimento.getText(), dateFormatter);
                 controlador.cadastrarAluno(nome, dataNascimento, cpf);
-            } catch (Exception ignored) { JOptionPane.showMessageDialog(null, "Erro ao cadastrar aluno"); }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar aluno " + ex.getMessage());
+            }
         });
     }
 
@@ -73,31 +75,31 @@ public class JanCadAluno extends JFrame {
      */
     private void $$$setupUI$$$() {
         Panel = new JPanel();
-        Panel.setLayout(new GridLayoutManager(4, 2, new Insets(10, 10, 10, 10), -1, -1));
-        Panel.setBackground(new Color(-13158601));
+        Panel.setLayout(new GridLayoutManager(4, 2, new Insets(10, 10, 10, 10), - 1, - 1));
+        Panel.setBackground(new Color(- 13158601));
         Salvar = new JButton();
-        Salvar.setBackground(new Color(-11513776));
+        Salvar.setBackground(new Color(- 11513776));
         Salvar.setBorderPainted(false);
         Salvar.setFocusPainted(false);
-        Salvar.setForeground(new Color(-3289651));
+        Salvar.setForeground(new Color(- 3289651));
         Salvar.setText("Salvar");
-        Panel.add(Salvar, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 30), null, 0, false));
+        Panel.add(Salvar, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         DataNascimento = new JFormattedTextField();
-        Panel.add(DataNascimento, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 30), null, 0, false));
+        Panel.add(DataNascimento, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         Nome = new JTextField();
-        Panel.add(Nome, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 30), null, 0, false));
+        Panel.add(Nome, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         Cpf = new JFormattedTextField();
-        Panel.add(Cpf, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 30), null, 0, false));
+        Panel.add(Cpf, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label1 = new JLabel();
-        label1.setForeground(new Color(-3289651));
+        label1.setForeground(new Color(- 3289651));
         label1.setText("Nome");
         Panel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
-        label2.setForeground(new Color(-3289651));
+        label2.setForeground(new Color(- 3289651));
         label2.setText("Data de Nascimento");
         Panel.add(label2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
-        label3.setForeground(new Color(-3289651));
+        label3.setForeground(new Color(- 3289651));
         label3.setText("CPF");
         Panel.add(label3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }

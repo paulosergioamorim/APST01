@@ -3,22 +3,24 @@ package cgt;
 import cdp.Curso;
 import cdp.Professor;
 import cdp.Turma;
+import cgd.dao.CursoDAO;
+import cgd.dao.TurmaDAO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static cgt.AplGerenciarPessoa.lstPessoas;
+import static cgt.AplGerenciarPessoa.professorDAO;
 
 public class AplGerenciarCurso {
-    public static final List<Curso> lstCursos;
-    public static final List<Turma> lstTurmas;
+    private static final String URL_CFG = "hibernate.cfg.xml";
+    public static final CursoDAO cursoDAO;
+    public static final TurmaDAO turmaDAO;
 
     static {
-        lstCursos = new ArrayList<>();
-        lstTurmas = new ArrayList<>();
+        cursoDAO = new CursoDAO(URL_CFG);
+        turmaDAO = new TurmaDAO(URL_CFG);
     }
 
     /**
@@ -30,11 +32,13 @@ public class AplGerenciarCurso {
     public int cadastrarCurso(String nome, int ch) {
         if (nome.isEmpty() || ch <= 0)
             return 1; // nome e carga horária não podem ser vazios
-        else if (lstCursos.stream().anyMatch(c -> c.getNome().equals(nome)))
+        else if (cursoDAO.findAll()
+                .stream()
+                .anyMatch(c -> c.getNome().equals(nome)))
             return 2; // um curso com esse nome já existe
         else {
             Curso curso = new Curso(nome,ch);
-            lstCursos.add(curso);
+            cursoDAO.save(curso);
             return 0; // sucesso
         }
     }
@@ -54,14 +58,15 @@ public class AplGerenciarCurso {
             return 1; // data de fim deve ser depois da dataInicio
         else if (limiteAlunos < 0)
             return 2; // limite de alunos deve ser maior do que zero
-        else if (!lstCursos.contains(curso) || curso == null)
+        else if (!cursoDAO.exists(curso.getNome()))
             return 3; // curso não existe
-        else if (!lstPessoas.contains(responsavel) || responsavel == null)
+        else if (!professorDAO.exists(responsavel.getCpf()))
             return 4; // responsavel não existe
         else {
             Turma turma = new Turma(dataInicio, dataFim, horario, limiteAlunos, curso, responsavel);
-            lstTurmas.add(turma);
-            lstCursos.get(lstCursos.indexOf(curso)).addTurma(turma);
+            turmaDAO.save(turma);
+            curso.addTurma(turma);
+            cursoDAO.update(curso);
             return 0; // sucesso
         }
     }
@@ -71,8 +76,9 @@ public class AplGerenciarCurso {
      * @return Uma lista de turmas que vagas > 0
      */
     public static List<Turma> getTurmasVagas() {
-        return lstTurmas.stream()
-                .filter(turma -> turma.getVagas() > 0)
+        return turmaDAO.findAll()
+                .stream()
+                .filter(t -> t.getVagas() > 0)
                 .collect(Collectors.toList());
     }
 }

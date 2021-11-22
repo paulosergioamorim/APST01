@@ -3,6 +3,7 @@ package ciu.cadastros;
 import cci.ControladorPrincipal;
 import cdp.Curso;
 import cdp.Professor;
+import cgt.AplGerenciarCurso;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static cdp.Formatters.*;
-import static cgt.AplGerenciarCurso.lstCursos;
+import static cgt.AplGerenciarCurso.cursoDAO;
 import static cgt.AplGerenciarPessoa.getProfessores;
 
 public class JanCadTurma extends JFrame {
@@ -41,7 +42,7 @@ public class JanCadTurma extends JFrame {
         this.setIconImage(icon.getImage());
 
         DefaultComboBoxModel<Curso> modelCurso = new DefaultComboBoxModel<>();
-        modelCurso.addAll(lstCursos);
+        modelCurso.addAll(cursoDAO.findAll());
         Curso.setModel(modelCurso);
 
         DefaultComboBoxModel<Professor> modelProfessor = new DefaultComboBoxModel<>();
@@ -102,33 +103,33 @@ public class JanCadTurma extends JFrame {
      */
     private void $$$setupUI$$$() {
         Panel = new JPanel();
-        Panel.setLayout(new GridLayoutManager(7, 2, new Insets(10, 10, 10, 10), -1, -1));
-        Panel.setBackground(new Color(-13487566));
+        Panel.setLayout(new GridLayoutManager(7, 2, new Insets(10, 10, 10, 10), - 1, - 1));
+        Panel.setBackground(new Color(- 13487566));
         Salvar = new JButton();
-        Salvar.setBackground(new Color(-11513776));
+        Salvar.setBackground(new Color(- 11513776));
         Salvar.setBorderPainted(false);
         Salvar.setFocusPainted(false);
-        Salvar.setForeground(new Color(-3289651));
+        Salvar.setForeground(new Color(- 3289651));
         Salvar.setText("Salvar");
-        Panel.add(Salvar, new GridConstraints(6, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 30), null, 0, false));
+        Panel.add(Salvar, new GridConstraints(6, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label1 = new JLabel();
-        label1.setForeground(new Color(-3289651));
+        label1.setForeground(new Color(- 3289651));
         label1.setText("Data Final");
         Panel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
-        label2.setForeground(new Color(-3289651));
+        label2.setForeground(new Color(- 3289651));
         label2.setText("Limite de Alunos");
         Panel.add(label2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
-        label3.setForeground(new Color(-3289651));
+        label3.setForeground(new Color(- 3289651));
         label3.setText("Data de Início");
         Panel.add(label3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label4 = new JLabel();
-        label4.setForeground(new Color(-3289651));
+        label4.setForeground(new Color(- 3289651));
         label4.setText("Curso");
         Panel.add(label4, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_SOUTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label5 = new JLabel();
-        label5.setForeground(new Color(-3289651));
+        label5.setForeground(new Color(- 3289651));
         label5.setText("Professor");
         Panel.add(label5, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_SOUTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         LimiteAlunos = new JFormattedTextField();
@@ -139,15 +140,15 @@ public class JanCadTurma extends JFrame {
         DataInicio = new JFormattedTextField();
         Panel.add(DataInicio, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, 30), null, 0, false));
         final JLabel label6 = new JLabel();
-        label6.setForeground(new Color(-3289651));
+        label6.setForeground(new Color(- 3289651));
         label6.setText("Horário");
         Panel.add(label6, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Curso = new JComboBox();
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
         Curso.setModel(defaultComboBoxModel1);
-        Panel.add(Curso, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 30), null, 0, false));
+        Panel.add(Curso, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         Professor = new JComboBox();
-        Panel.add(Professor, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 30), null, 0, false));
+        Panel.add(Professor, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         Horario = new JFormattedTextField();
         Panel.add(Horario, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, 30), null, 0, false));
     }
