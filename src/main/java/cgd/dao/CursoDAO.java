@@ -3,6 +3,8 @@ package cgd.dao;
 import cdp.Curso;
 
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class CursoDAO extends DAO<Curso, String> {
     public CursoDAO(String url) { super(url); }
@@ -37,4 +39,5 @@ public class CursoDAO extends DAO<Curso, String> {
     @SuppressWarnings("unchecked")
     @Override
     public List<Curso> findAll() { return (List<Curso>) this.session.createQuery("from Curso").list(); }
+
 }
