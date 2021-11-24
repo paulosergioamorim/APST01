@@ -3,6 +3,7 @@ package cgd.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -68,4 +69,5 @@ public abstract class DAO<T, K> {
      * @return list of objects
      */
     public abstract List<T> findAll();
+
 }
