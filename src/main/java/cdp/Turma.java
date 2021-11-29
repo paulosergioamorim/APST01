@@ -3,9 +3,7 @@ package cdp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Turma {
@@ -18,7 +16,7 @@ public class Turma {
 
     private Curso curso;
     private Professor responsavel;
-    private Matricula[] matriculas;
+    private Set<Matricula> matriculas;
 
     public Turma(LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limiteAlunos, Curso curso, Professor responsavel) {
         this.dataInicio = dataInicio;
@@ -28,7 +26,7 @@ public class Turma {
         this.curso = curso;
         this.responsavel = responsavel;
         this.fechada = false;
-        this.matriculas = new Matricula[limiteAlunos];
+        this.matriculas = new HashSet<>(limiteAlunos);
     }
 
     public Turma() { }
@@ -55,9 +53,9 @@ public class Turma {
      */
     public void addMatricula(Matricula matricula) {
         if (getVagas() == 0) return;
-        for (int i = 0; i < matriculas.length; i++)
-            if (matriculas[i] == null) {
-                matriculas[i] = matricula;
+        for (int i = 0; i < matriculas.size(); i++)
+            if (matriculas.toArray()[i] == null) {
+                matriculas.toArray()[i] = matricula;
                 return;
             }
     }
@@ -67,7 +65,7 @@ public class Turma {
      */
     @Transient
     public long getVagas() {
-        return Arrays.stream(matriculas)
+        return Arrays.stream(matriculas.toArray())
                 .filter(Objects::isNull)
                 .count();
     }
@@ -114,8 +112,10 @@ public class Turma {
 
     public void setResponsavel(Professor responsavel) { this.responsavel = responsavel; }
 
-    @Transient
-    public Matricula[] getMatriculas() { return matriculas; }
+    @OneToMany(mappedBy = "turma")
+    public Set<Matricula> getMatriculas() { return matriculas; }
+
+    public void setMatriculas(Set<Matricula> matriculas) { this.matriculas = matriculas; }
 
     @Override
     public String toString() { return "[" + dataInicio + " - " + dataFim + "]" + " - " + curso + " - " + responsavel; }

@@ -9,7 +9,6 @@ import cgd.dao.TurmaDAO;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static cgt.AplGerenciarPessoa.professorDAO;

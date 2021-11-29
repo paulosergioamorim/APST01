@@ -8,9 +8,7 @@ import java.time.LocalDate;
 public class Matricula implements Serializable {
     private double nota;
     private LocalDate dataMatricula;
-    private long idAluno;
     private Aluno aluno;
-    private long idTurma;
     private Turma turma;
 
     public Matricula(Aluno aluno, Turma turma) {
@@ -33,24 +31,11 @@ public class Matricula implements Serializable {
     public void setDataMatricula(LocalDate dataMatricula) { this.dataMatricula = dataMatricula; }
 
     @Transient
-    public Aluno getAluno() { return aluno; }
-
-    public void setAluno(Aluno aluno) { this.aluno = aluno; }
-
-    @Transient
     public Turma getTurma() { return turma; }
 
     public void setTurma(Turma turma) { this.turma = turma; }
 
-    @Id
-    @Column(name = "id_aluno", nullable = false)
-    public long getIdAluno() { return idAluno; }
+    public Aluno getAluno() { return aluno; }
 
-    public void setIdAluno(long idAluno) { this.idAluno = idAluno; }
-
-    @Id
-    @Column(name = "id_turma", nullable = false)
-    public long getIdTurma() { return idTurma; }
-
-    public void setIdTurma(long idTurma) { this.idTurma = idTurma; }
+    public void setAluno(Aluno aluno) { this.aluno = aluno; }
 }

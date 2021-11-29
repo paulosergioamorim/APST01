@@ -207,7 +207,8 @@ public class ControladorPrincipal {
 				JOptionPane.showMessageDialog(janCadMatricula, "A matrícula não pode ser realizada pois a turma está fechada");
 				return;
 		}
-		if (Arrays.stream(turma.getMatriculas())
+		if (turma.getMatriculas()
+				.stream()
 				.filter(Objects::nonNull)
 				.anyMatch(matricula -> matricula.getAluno().equals(aluno))
 		) {
