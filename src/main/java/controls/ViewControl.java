@@ -3,10 +3,12 @@ package controls;
 import models.entitys.Aluno;
 import models.entitys.Curso;
 import org.jetbrains.annotations.NotNull;
-import views.*;
+import views.AlunoView;
+import views.CursoView;
+import views.MainView;
+import views.View;
 
 import javax.swing.*;
-
 import java.util.List;
 
 import static views.View.MAIN_VIEW;

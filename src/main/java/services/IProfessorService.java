@@ -1,7 +1,6 @@
 package services;
 
 import models.Sexo;
-import models.entitys.Aluno;
 import models.entitys.Professor;
 
 import java.time.LocalDate;

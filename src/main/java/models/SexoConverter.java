@@ -2,8 +2,8 @@ package models;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.Converter;
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 import java.util.Arrays;
 
 @Converter(autoApply = true)

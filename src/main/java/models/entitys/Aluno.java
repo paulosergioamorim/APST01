@@ -3,7 +3,7 @@ package models.entitys;
 import models.Pessoa;
 import models.Sexo;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity

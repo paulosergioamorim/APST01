@@ -1,9 +1,5 @@
 package models.entitys;
 
-import models.entitys.Curso;
-import models.entitys.Matricula;
-import models.entitys.Professor;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;

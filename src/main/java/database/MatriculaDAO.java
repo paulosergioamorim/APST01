@@ -1,7 +1,7 @@
 package database;
 
-import models.entitys.Matricula;
 import models.MatriculaID;
+import models.entitys.Matricula;
 
 public class MatriculaDAO extends DAO<Matricula, MatriculaID> {
     /**

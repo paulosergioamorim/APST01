@@ -1,6 +1,5 @@
 package services;
 
-import models.entitys.Aluno;
 import models.entitys.Curso;
 
 import java.util.List;

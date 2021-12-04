@@ -3,16 +3,12 @@ package views;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import controls.Control;
-import models.Format;
-import models.entitys.Aluno;
 import models.entitys.Curso;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultFormatterFactory;
-
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static models.Format.int4Mask;

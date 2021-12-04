@@ -1,7 +1,7 @@
 package models.entitys;
 
-import models.Sexo;
 import models.Pessoa;
+import models.Sexo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

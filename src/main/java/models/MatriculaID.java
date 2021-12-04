@@ -3,9 +3,7 @@ package models;
 import models.entitys.Aluno;
 import models.entitys.Turma;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,13 +21,11 @@ public class MatriculaID implements Serializable {
     public MatriculaID() { }
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "aluno_cpf")
     public Aluno getAluno() { return aluno; }
 
     public void setAluno(Aluno aluno) { this.aluno = aluno; }
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "turma_id")
     public Turma getTurma() { return turma; }
 
     public void setTurma(Turma turma) { this.turma = turma; }
