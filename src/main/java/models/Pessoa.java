@@ -46,5 +46,5 @@ public abstract class Pessoa {
     public void setDataNascimento(LocalDate birthday) { this.dataNascimento = birthday; }
 
     @Override
-    public String toString() { return nome;}
+    public String toString() { return nome; }
 }

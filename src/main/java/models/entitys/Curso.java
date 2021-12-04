@@ -16,9 +16,10 @@ public class Curso {
 
     /**
      * Construtor de Curso
-     * @param id Id do curso
-     * @param nome Nome do curso
-     * @param sigla Sigla do curso
+     *
+     * @param id           Id do curso
+     * @param nome         Nome do curso
+     * @param sigla        Sigla do curso
      * @param cargaHoraria Carga horária do curso
      */
     public Curso(int id, String nome, String sigla, int cargaHoraria) {

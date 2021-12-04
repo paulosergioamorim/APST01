@@ -20,23 +20,17 @@ public class Turma {
 
     /**
      * Construtor da Turma
-     * @param id Código da turma
+     *
+     * @param id         Código da turma
      * @param dataInicio Data de início da turma
-     * @param dataFim Data de término da turma
-     * @param horario Horário da turma
-     * @param limite Limite de alunos na turma
-     * @param fechada Se a turma está fechada ou não
-     * @param curso Curso da turma
-     * @param professor Professor da turma
+     * @param dataFim    Data de término da turma
+     * @param horario    Horário da turma
+     * @param limite     Limite de alunos na turma
+     * @param fechada    Se a turma está fechada ou não
+     * @param curso      Curso da turma
+     * @param professor  Professor da turma
      */
-    public Turma(String id,
-                 LocalDate dataInicio,
-                 LocalDate dataFim,
-                 LocalTime horario,
-                 int limite,
-                 boolean fechada,
-                 Curso curso,
-                 Professor professor) {
+    public Turma(String id, LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limite, boolean fechada, Curso curso, Professor professor) {
         this.id = id;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -51,18 +45,15 @@ public class Turma {
 
     /**
      * Define e retorna o estado da turma
+     *
      * @return estado da turma
      */
     @Transient
     public String getEstado() {
-        if (fechada)
-            return "Fechada";
-        else if (dataFim.isBefore(LocalDate.now()))
-            return  "Aulas Encerradas";
-        else if (this.getVagas() == 0)
-            return  "Matriculas Encerradas";
-        else if (dataInicio.isBefore(LocalDate.now()))
-            return  "Em Andamento";
+        if (fechada) return "Fechada";
+        else if (dataFim.isBefore(LocalDate.now())) return "Aulas Encerradas";
+        else if (this.getVagas() == 0) return "Matriculas Encerradas";
+        else if (dataInicio.isBefore(LocalDate.now())) return "Em Andamento";
         else return "Matriculas Abertas";
     }
 
@@ -71,9 +62,7 @@ public class Turma {
      */
     @Transient
     public long getVagas() {
-        return matriculas.stream()
-                .filter(Objects::isNull)
-                .count();
+        return matriculas.stream().filter(Objects::isNull).count();
     }
 
     @Id

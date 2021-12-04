@@ -13,9 +13,7 @@ public class CursoDAO extends DAO<Curso, Integer> {
         this.open();
         try {
             String sql = "from Curso where sigla = :sigla";
-            return session.createQuery(sql)
-                    .setParameter("sigla", sigla)
-                    .uniqueResult() != null;
+            return session.createQuery(sql).setParameter("sigla", sigla).uniqueResult() != null;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

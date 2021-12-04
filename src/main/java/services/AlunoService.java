@@ -41,10 +41,8 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
         if (dataNascimento != null && dataNascimento.isAfter(LocalDate.now()))
             return 3;
         Aluno aluno = dao.find(cpf);
-        if (nome != null)
-            aluno.setNome(nome);
-        if (sexo != null)
-            aluno.setSexo(sexo);
+        if (nome != null) aluno.setNome(nome);
+        if (sexo != null) aluno.setSexo(sexo);
         dao.update(aluno);
         return 0;
     }

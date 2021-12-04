@@ -10,10 +10,11 @@ import java.util.List;
 
 /**
  * Generic DAO Hibernate Class
- * @author Paulo Sergio
- * @version 1.0
+ *
  * @param <T> Entity Class
  * @param <K> Primary Key (don't accept primitives)
+ * @author Paulo Sergio
+ * @version 1.0
  */
 public abstract class DAO<T, K> {
     private final SessionFactory sessionFactory;
@@ -21,7 +22,7 @@ public abstract class DAO<T, K> {
     protected Session session;
 
     /**
-     * @param url Hibernate Configuration File URL
+     * @param url    Hibernate Configuration File URL
      * @param entity Entity Class
      */
     public DAO(String url, @NotNull Class<T> entity) {
@@ -34,8 +35,7 @@ public abstract class DAO<T, K> {
 
     private @NotNull String getEntityName() {
         String name = entity.getAnnotation(Entity.class).name();
-        if (name.isEmpty())
-            return entity.getSimpleName();
+        if (name.isEmpty()) return entity.getSimpleName();
         return name;
     }
 
@@ -45,6 +45,7 @@ public abstract class DAO<T, K> {
 
     /**
      * Save entity in database
+     *
      * @param t Entity to be saved
      */
     public void save(T t) {
@@ -62,6 +63,7 @@ public abstract class DAO<T, K> {
 
     /**
      * Update t in database
+     *
      * @param t Entity to be updated
      */
     public void update(T t) {
@@ -79,6 +81,7 @@ public abstract class DAO<T, K> {
 
     /**
      * Delete t from database
+     *
      * @param t Entity to be deleted
      */
     public void delete(T t) {
@@ -96,6 +99,7 @@ public abstract class DAO<T, K> {
 
     /**
      * Find entity by key
+     *
      * @param key Key to find entity
      * @return Entity found
      */
@@ -111,6 +115,7 @@ public abstract class DAO<T, K> {
 
     /**
      * Check if entity exists in database
+     *
      * @param key Key to find entity
      * @return True if entity exists, false otherwise
      */
@@ -118,6 +123,7 @@ public abstract class DAO<T, K> {
 
     /**
      * Count entities in database
+     *
      * @return Number of entities
      */
     public long count() {
@@ -135,6 +141,7 @@ public abstract class DAO<T, K> {
 
     /**
      * List all entities in database
+     *
      * @return List of entities
      */
     @SuppressWarnings("unchecked")

@@ -11,8 +11,7 @@ import java.util.List;
 
 public record TurmaService(TurmaDAO dao) implements ITurmaService {
     @Override
-    public int save(int id,
-                    LocalDate dataInicio,
+    public int save(int id, LocalDate dataInicio,
                     LocalDate dataFim,
                     LocalTime horario,
                     int limite,
@@ -29,7 +28,8 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
                       LocalTime horario,
                       int limite,
                       boolean fechada,
-                      Curso curso, Professor professor) {
+                      Curso curso,
+                      Professor professor) {
         return 0;
     }
 

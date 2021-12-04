@@ -18,15 +18,21 @@ public class Format {
     public static MaskFormatter int4Mask;
 
     static {
-        dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         pessoaNomePattern = Pattern.compile("([\\p{javaLetter}\\s]+)\\s([\\p{javaLetter}\\s]+)$");
         cursoNomePattern = Pattern.compile("[\\p{javaLetter}\\s]+");
         try {
-            int2Mask = new MaskFormatter("##"); int2Mask.setPlaceholderCharacter('0');
-            int4Mask = new MaskFormatter("####"); int4Mask.setPlaceholderCharacter('0');
-            cpfMask = new MaskFormatter("###.###.###-##"); cpfMask.setPlaceholderCharacter('0');
-            dateMask = new MaskFormatter("##/##/####"); dateMask.setPlaceholderCharacter('_');
-            timeMask = new MaskFormatter("##:##"); timeMask.setPlaceholderCharacter('_');
+            int2Mask = new MaskFormatter("##");
+            int2Mask.setPlaceholderCharacter('0');
+            int4Mask = new MaskFormatter("####");
+            int4Mask.setPlaceholderCharacter('0');
+            cpfMask = new MaskFormatter("###.###.###-##");
+            cpfMask.setPlaceholderCharacter('0');
+            dateMask = new MaskFormatter("##/##/####");
+            dateMask.setPlaceholderCharacter('_');
+            timeMask = new MaskFormatter("##:##");
+            timeMask.setPlaceholderCharacter('_');
         } catch (ParseException e) {
             e.printStackTrace();
         }

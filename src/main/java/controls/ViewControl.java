@@ -34,17 +34,15 @@ public class ViewControl {
 
     public void changeView(View view) {
         this.closeAllViews();
-        if (currentView != null && view != MAIN_VIEW)
-            currentView.dispose();
+        if (currentView != null && view != MAIN_VIEW) currentView.dispose();
         currentView = this.getView(view);
-        if (currentView != null)
-            currentView.setVisible(true);
+        if (currentView != null) currentView.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
     public <T extends JFrame> T getView(@NotNull View view) {
         switch (view) {
-            case MAIN_VIEW-> { return (T) mainView; }
+            case MAIN_VIEW -> { return (T) mainView; }
             case ALUNO_VIEW -> {
                 alunoView = (alunoView == null) ? new AlunoView(control) : alunoView;
                 return (T) alunoView;

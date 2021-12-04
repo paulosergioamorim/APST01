@@ -35,15 +35,12 @@ public record CursoService(CursoDAO dao) implements ICursoService {
             return 3;
         if (sigla != null && sigla.length() > 5)
             return 4;
-        if (cargaHoraria != -1 && cargaHoraria < 0)
+        if (cargaHoraria != - 1 && cargaHoraria < 0)
             return 5;
         Curso curso = dao.find(id);
-        if (nome != null)
-            curso.setNome(nome);
-        if (sigla != null)
-            curso.setSigla(sigla);
-        if (cargaHoraria != -1)
-            curso.setCargaHoraria(cargaHoraria);
+        if (nome != null) curso.setNome(nome);
+        if (sigla != null) curso.setSigla(sigla);
+        if (cargaHoraria != - 1) curso.setCargaHoraria(cargaHoraria);
         dao.update(curso);
         return 0;
     }
@@ -53,10 +50,8 @@ public record CursoService(CursoDAO dao) implements ICursoService {
         Curso curso = dao.find(id);
         if (curso == null)
             return 1;
-        if (curso.getTurmas()
-                .stream()
-                .anyMatch(t -> ! t.isFechada())
-        ) return 2;
+        if (curso.getTurmas().stream().anyMatch(t -> ! t.isFechada()))
+            return 2;
         dao.delete(curso);
         return 0;
     }
