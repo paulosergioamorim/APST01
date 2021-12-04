@@ -53,7 +53,8 @@ public class Turma {
      * Define e retorna o estado da turma
      * @return estado da turma
      */
-    public String obterEstado() {
+    @Transient
+    public String getEstado() {
         if (fechada)
             return "Fechada";
         else if (dataFim.isBefore(LocalDate.now()))

@@ -6,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import static database.DAOFactory.*;
 
 public class ServiceFactory {
-
     public static @NotNull AlunoService createAlunoService() {
         AlunoDAO alunoDAO = createAlunoDAO();
         return new AlunoService(alunoDAO);

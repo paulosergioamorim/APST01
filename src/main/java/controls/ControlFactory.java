@@ -8,7 +8,6 @@ import services.ProfessorService;
 import static services.ServiceFactory.*;
 
 public class ControlFactory {
-
     public static @NotNull AlunoControl createAlunoControl(Control control) {
         AlunoService alunoService = createAlunoService();
         return new AlunoControl(control, alunoService);

@@ -8,14 +8,14 @@ import java.time.LocalDate;
 @Entity
 public class Matricula {
     private MatriculaID matriculaID;
-    private LocalDate data_matricula;
+    private LocalDate dataMatricula;
     private Aluno aluno;
     private Turma turma;
     private double nota;
 
-    public Matricula(Aluno aluno, Turma turma, LocalDate data_matricula, double nota) {
+    public Matricula(Aluno aluno, Turma turma, LocalDate dataMatricula, double nota) {
         this.matriculaID = new MatriculaID(aluno, turma);
-        this.data_matricula = data_matricula;
+        this.dataMatricula = dataMatricula;
         this.nota = nota;
     }
 
@@ -28,9 +28,9 @@ public class Matricula {
     public void setMatriculaID(MatriculaID matriculaID) { this.matriculaID = matriculaID; }
 
     @Column(nullable = false)
-    public LocalDate getData_matricula() { return data_matricula; }
+    public LocalDate getDataMatricula() { return dataMatricula; }
 
-    public void setData_matricula(LocalDate date) { this.data_matricula = date; }
+    public void setDataMatricula(LocalDate date) { this.dataMatricula = date; }
 
     @Column(nullable = false)
     public double getNota() { return nota; }

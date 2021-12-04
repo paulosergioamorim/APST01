@@ -10,7 +10,6 @@ import java.util.List;
 import static models.Format.pessoaNomePattern;
 
 public record AlunoService(AlunoDAO dao) implements IAlunoService {
-
     @Override
     public int save(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
         if (dao.exists(cpf))

@@ -8,7 +8,6 @@ import java.util.List;
 import static models.Format.cursoNomePattern;
 
 public record CursoService(CursoDAO dao) implements ICursoService {
-
     @Override
     public int save(int id, String nome, String sigla, int cargaHoraria) {
         if (dao.exists(id))
