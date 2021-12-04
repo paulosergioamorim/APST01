@@ -1,19 +1,15 @@
 package controls;
 
-import database.AlunoDAO;
-import database.CursoDAO;
-import database.DAOFactory;
 import models.Sexo;
 import models.entitys.Aluno;
 import models.entitys.Curso;
-import services.AlunoService;
-import services.CursoService;
 import views.AlunoView;
 import views.CursoView;
 import views.View;
 
 import java.time.LocalDate;
 
+import static controls.ControlFactory.*;
 import static models.Format.dateFormatter;
 import static views.View.ALUNO_VIEW;
 import static views.View.CURSO_VIEW;
@@ -27,17 +23,15 @@ import static views.View.CURSO_VIEW;
  */
 public final class Control {
 	private final AlunoControl alunoControl;
+	private final ProfessorControl professorControl;
 	private final CursoControl cursoControl;
 	private final ViewControl viewControl;
 
 	public Control() {
-		AlunoDAO alunoDAO = DAOFactory.createAlunoDAO();
-		AlunoService alunoService = new AlunoService(alunoDAO);
-		alunoControl = new AlunoControl(this, alunoService);
-		CursoDAO cursoDAO = DAOFactory.createCursoDAO();
-		CursoService cursoService = new CursoService(cursoDAO);
-		cursoControl = new CursoControl(this, cursoService);
-		viewControl = new ViewControl(this);
+		alunoControl = createAlunoControl(this);
+		professorControl = createProfessorControl(this);
+		cursoControl = createCursoControl(this);
+		viewControl = createViewControl(this);
 	}
 
 	public void changeView(View view) { viewControl.changeView(view); }
@@ -185,6 +179,8 @@ public final class Control {
 	}
 
 	public AlunoControl getAlunoControl() { return alunoControl; }
+
+	public ProfessorControl getProfessorControl() { return professorControl; }
 
 	public CursoControl getCursoControl() { return cursoControl;}
 }
