@@ -1,0 +1,16 @@
+package models.entitys;
+
+import models.Pessoa;
+import models.Sexo;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+public class Aluno extends Pessoa {
+    public Aluno(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
+        super(cpf, nome, sexo, dataNascimento);
+    }
+
+    public Aluno() { super(); }
+}

@@ -4,17 +4,17 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/main</property>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/main</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+    <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">postgre</property>
-    <mapping class="cdp.Curso"/>
-    <mapping class="cdp.Aluno"/>
-    <mapping class="cdp.Professor"/>
-    <mapping class="cdp.Turma"/>
-    <mapping class="cdp.Matricula"/>
+    <property name="connection.username">postgres</property>
+    <property name="connection.password">postgre</property>
+    <mapping class="models.entitys.Curso"/>
+    <mapping class="models.entitys.Aluno"/>
+    <mapping class="models.entitys.Professor"/>
+    <mapping class="models.entitys.Turma"/>
+    <mapping class="models.entitys.Matricula"/>
+    <mapping class="models.SexoConverter"/>
   </session-factory>
 </hibernate-configuration>

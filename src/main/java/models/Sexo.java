@@ -1,35 +1,37 @@
 package models;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public enum Sexo {
-    MASCULINO(0, "Masculino"),
-    FEMININO(1, "Feminino");
+    MASCULINO('m'),
+    FEMININO('f');
 
-    private final int value;
-    private final String description;
+    private final char value;
 
-    public static final Map<Integer, Sexo> map;
+    public static final Map<Character, Sexo> map;
 
     static {
-        map = new java.util.HashMap<>();
-        for (Sexo sexo : Sexo.values()) {
-            map.put(sexo.getValue(), sexo);
-        }
+        map = new HashMap<>();
+        for (Sexo sexo : Sexo.values())
+            map.put(sexo.value, sexo);
     }
 
-    Sexo(int value, String description) {
-        this.value = value;
-        this.description = description;
+    Sexo(Character value) { this.value = value; }
+
+    public Character getValue() { return value; }
+
+    public static Sexo getSexo(Character value) { return map.get(value); }
+
+    public static Character valueOf(@NotNull Sexo sexo) { return sexo.getValue(); }
+
+    @Override
+    public @NotNull String toString() {
+        if (this == MASCULINO)
+            return "Masculino";
+        else
+            return "Feminino";
     }
-
-    public int getValue() { return value; }
-
-    public String getDescription() { return description; }
-
-    public static Sexo getSexo(int value) { return map.get(value); }
-
-    public static int valueOf(Sexo sexo) { return sexo.value; }
-
-    public static String descriptionOf(Sexo sexo) { return sexo.description; }
 }

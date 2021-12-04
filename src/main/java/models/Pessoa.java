@@ -1,29 +1,49 @@
 package models;
 
+import models.Sexo;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@MappedSuperclass
 public abstract class Pessoa {
-    private final long cpf;
-    private final String nome;
-    private final String email;
-    private final Sexo sexo;
-    private final LocalDate birthday;
+    private long cpf;
+    private String nome;
+    private Sexo sexo;
+    private LocalDate dataNascimento;
 
-    public Pessoa(long cpf, String nome, String email, Sexo sexo, LocalDate birthday) {
+    public Pessoa(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
         this.cpf = cpf;
         this.nome = nome;
-        this.email = email;
         this.sexo = sexo;
-        this.birthday = birthday;
+        this.dataNascimento = dataNascimento;
     }
 
+    public Pessoa() { }
+
+    @Transient
+    public int getIdade() { return LocalDate.now().getYear() - dataNascimento.getYear(); }
+
+    @Id
     public long getCpf() { return cpf; }
 
+    public void setCpf(long cpf) { this.cpf = cpf; }
+
+    @Column(length = 45, nullable = false)
     public String getNome() { return nome; }
 
-    public String getEmail() { return email; }
+    public void setNome(String nome) { this.nome = nome; }
 
+    @Column(nullable = false)
     public Sexo getSexo() { return sexo; }
 
-    public LocalDate getBirthday() { return birthday; }
+    public void setSexo(Sexo sexo) { this.sexo = sexo; }
+
+    @Column(columnDefinition = "date")
+    public LocalDate getDataNascimento() { return dataNascimento; }
+
+    public void setDataNascimento(LocalDate birthday) { this.dataNascimento = birthday; }
+
+    @Override
+    public String toString() { return nome;}
 }
