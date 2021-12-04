@@ -11,8 +11,7 @@ import java.time.LocalDate;
 
 import static controls.ControlFactory.*;
 import static models.Format.dateFormatter;
-import static views.View.ALUNO_VIEW;
-import static views.View.CURSO_VIEW;
+import static views.View.*;
 
 /**
  * Controller Class
