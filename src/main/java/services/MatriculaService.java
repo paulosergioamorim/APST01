@@ -1,6 +1,7 @@
 package services;
 
 import database.MatriculaDAO;
+import models.Estado;
 import models.MatriculaID;
 import models.entitys.Aluno;
 import models.entitys.Matricula;
@@ -8,6 +9,8 @@ import models.entitys.Turma;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import static models.Estado.FECHADA;
 
 public record MatriculaService(MatriculaDAO dao) implements IMatriculaService {
     //TODO: Possivelmente retirar a nota como parâmetro, já que a nota inicia em 0
@@ -50,7 +53,7 @@ public record MatriculaService(MatriculaDAO dao) implements IMatriculaService {
         Matricula matricula = dao.find(matriculaID);
         if (matricula == null)
             return 1;
-        if (!turma.isFechada())
+        if (turma.getEstado() != FECHADA)
             return 2;
         dao.delete(matricula);
         return 0;

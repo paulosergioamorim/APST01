@@ -1,5 +1,6 @@
-package models;
+package models.converters;
 
+import models.Sexo;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.AttributeConverter;
@@ -11,8 +12,6 @@ public class SexoConverter implements AttributeConverter<Sexo, Character> {
 
     @Override
     public Character convertToDatabaseColumn(@NotNull Sexo sexo) {
-        if (Arrays.stream(Sexo.values()).noneMatch(s -> s.equals(sexo)))
-            throw new IllegalArgumentException("Sexo inválido");
         return Sexo.valueOf(sexo);
     }
 

@@ -2,9 +2,11 @@ package services;
 
 import database.CursoDAO;
 import models.entitys.Curso;
+import org.hibernate.Hibernate;
 
 import java.util.List;
 
+import static models.Estado.FECHADA;
 import static models.Format.cursoNomePattern;
 
 public record CursoService(CursoDAO dao) implements ICursoService {
@@ -38,9 +40,12 @@ public record CursoService(CursoDAO dao) implements ICursoService {
         if (cargaHoraria != - 1 && cargaHoraria < 0)
             return 5;
         Curso curso = dao.find(id);
-        if (nome != null) curso.setNome(nome);
-        if (sigla != null) curso.setSigla(sigla);
-        if (cargaHoraria != - 1) curso.setCargaHoraria(cargaHoraria);
+        if (nome != null)
+            curso.setNome(nome);
+        if (sigla != null)
+            curso.setSigla(sigla);
+        if (cargaHoraria != - 1)
+            curso.setCargaHoraria(cargaHoraria);
         dao.update(curso);
         return 0;
     }
@@ -50,7 +55,8 @@ public record CursoService(CursoDAO dao) implements ICursoService {
         Curso curso = dao.find(id);
         if (curso == null)
             return 1;
-        if (curso.getTurmas().stream().anyMatch(t -> ! t.isFechada()))
+        Hibernate.initialize(curso.getTurmas());
+        if (curso.getTurmas().stream().anyMatch(t -> t.getEstado() != FECHADA))
             return 2;
         dao.delete(curso);
         return 0;

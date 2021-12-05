@@ -10,7 +10,6 @@ import java.util.List;
 import static views.View.ALUNO_VIEW;
 
 public record AlunoControl(Control control, AlunoService service) {
-
     public void save(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
         int code = service.save(cpf, nome, sexo, dataNascimento);
         switch (code) {

@@ -4,15 +4,16 @@ import models.Sexo;
 import models.entitys.Aluno;
 import models.entitys.Curso;
 import models.entitys.Professor;
-import views.AlunoView;
-import views.CursoView;
-import views.ProfessorView;
-import views.View;
+import models.entitys.Turma;
+import views.*;
 
+import javax.swing.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import static controls.ControlFactory.*;
 import static models.Format.dateFormatter;
+import static models.Format.timeFormatter;
 import static views.View.*;
 
 /**
@@ -26,12 +27,14 @@ public final class Control {
     private final AlunoControl alunoControl;
     private final ProfessorControl professorControl;
     private final CursoControl cursoControl;
+    private final TurmaControl turmaControl;
     private final ViewControl viewControl;
 
     public Control() {
         alunoControl = createAlunoControl(this);
         professorControl = createProfessorControl(this);
         cursoControl = createCursoControl(this);
+        turmaControl = createTurmaControl(this);
         viewControl = createViewControl(this);
     }
 
@@ -198,15 +201,65 @@ public final class Control {
     }
 
     public void saveTurma() {
-
+        String id;
+        LocalDate dataInicio;
+        LocalDate dataFim;
+        LocalTime horario;
+        int limite;
+        Curso curso;
+        Professor responsavel;
+        TurmaView turmaView = viewControl.getView(TURMA_VIEW);
+        try {
+            id = turmaView.getId().replaceAll("\\s","");
+            dataInicio = LocalDate.parse(turmaView.getDataInicio(), dateFormatter);
+            dataFim = LocalDate.parse(turmaView.getDataFim(), dateFormatter);
+            horario = LocalTime.parse(turmaView.getHorario(), timeFormatter);
+            limite = turmaView.getLimite();
+            curso = turmaView.getCurso();
+            responsavel = turmaView.getResponsavel();
+            turmaControl.save(id, dataInicio, dataFim, horario, limite, curso, responsavel);
+        } catch (Exception e) {
+            this.showMessage("Erro ao salvar turma");
+        }
     }
 
     public void updateTurma() {
-
+        String id;
+        LocalDate dataInicio;
+        LocalDate dataFim;
+        LocalTime horario;
+        int limite;
+        Curso curso;
+        Professor responsavel;
+        TurmaView turmaView = viewControl.getView(TURMA_VIEW);
+        try {
+            id = turmaView.getId().trim();
+            dataInicio = turmaView.getDataInicio().equals("__/__/____") ?
+                    null : LocalDate.parse(turmaView.getDataInicio(), dateFormatter);
+            dataFim = turmaView.getDataFim().equals("__/__/____") ?
+                    null : LocalDate.parse(turmaView.getDataFim(), dateFormatter);
+            horario = turmaView.getHorario().equals("__:__") ?
+                    null : LocalTime.parse(turmaView.getHorario(), timeFormatter);
+            limite = (turmaView.getLimite() == 0) ?
+                    -1 : turmaView.getLimite();
+            curso = turmaView.getCurso();
+            responsavel = turmaView.getResponsavel();
+            turmaControl.update(id, dataInicio, dataFim, horario, limite, curso, responsavel);
+        } catch (Exception e) {
+            this.showMessage("Erro ao atualizar turma");
+        }
     }
 
     public void deleteTurma() {
-
+        Turma turma;
+        TurmaView turmaView = viewControl.getView(TURMA_VIEW);
+        try {
+            turma = turmaView.getListView().getSelectedValue();
+            String id = turma.getId();
+            turmaControl.delete(id);
+        } catch (Exception e) {
+            this.showMessage("Erro ao deletar turma");
+        }
     }
 
     public void saveMatricula() {
@@ -226,4 +279,8 @@ public final class Control {
     public ProfessorControl getProfessorControl() { return professorControl; }
 
     public CursoControl getCursoControl() { return cursoControl; }
+
+    public TurmaControl getTurmaControl() { return turmaControl; }
+
+    public ViewControl getViewControl() { return viewControl; }
 }

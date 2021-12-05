@@ -1,12 +1,15 @@
 package controls;
 
+import models.Sexo;
 import models.entitys.Aluno;
 import models.entitys.Curso;
 import models.entitys.Professor;
+import models.entitys.Turma;
 import org.jetbrains.annotations.NotNull;
 import views.*;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.List;
 
 import static views.View.MAIN_VIEW;
@@ -19,6 +22,7 @@ public class ViewControl {
     private AlunoView alunoView;
     private CursoView cursoView;
     private ProfessorView professorView;
+    private TurmaView turmaView;
 
     public ViewControl(Control control) {
         this.control = control;
@@ -29,13 +33,17 @@ public class ViewControl {
     public void closeAllViews() {
         alunoView = null;
         cursoView = null;
+        professorView = null;
+        turmaView = null;
     }
 
     public void changeView(View view) {
         this.closeAllViews();
-        if (currentView != null && view != MAIN_VIEW) currentView.dispose();
+        if (currentView != null && view != MAIN_VIEW)
+            currentView.dispose();
         currentView = this.getView(view);
-        if (currentView != null) currentView.setVisible(true);
+        if (currentView != null)
+            currentView.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -54,6 +62,10 @@ public class ViewControl {
                 professorView = (professorView == null) ? new ProfessorView(control) : professorView;
                 return (T) professorView;
             }
+            case TURMA_VIEW -> {
+                turmaView = (turmaView == null) ? new TurmaView(control) : turmaView;
+                return (T) turmaView;
+            }
             default -> { return null; }
         }
     }
@@ -65,6 +77,7 @@ public class ViewControl {
             case ALUNO_VIEW -> alunoView.clearFields();
             case CURSO_VIEW -> cursoView.clearFields();
             case PROFESSOR_VIEW -> professorView.clearFields();
+            case TURMA_VIEW -> turmaView.clearFields();
         }
     }
 
@@ -81,6 +94,10 @@ public class ViewControl {
             case PROFESSOR_VIEW -> {
                 List<Professor> professores = control.getProfessorControl().getAll();
                 professorView.updateListViewer(professores);
+            }
+            case TURMA_VIEW -> {
+                List<Turma> turmas = control.getTurmaControl().getAll();
+                turmaView.updateListViewer(turmas);
             }
         }
     }

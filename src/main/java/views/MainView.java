@@ -3,16 +3,23 @@ package views;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
 import controls.Control;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static views.View.*;
+import static views.View.PROFESSOR_VIEW;
+import static views.View.TURMA_VIEW;
 
 public class MainView extends JFrame {
     private JPanel panel;
     private JButton alunoViewButton;
     private JButton cursoViewButton;
     private JButton professorViewButton;
+    private JButton turmaViewButton;
 
     public MainView(Control control) {
         super("Program");
@@ -22,9 +29,10 @@ public class MainView extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
 
-        alunoViewButton.addActionListener(e -> control.changeView(View.ALUNO_VIEW));
-        cursoViewButton.addActionListener(e -> control.changeView(View.CURSO_VIEW));
-        professorViewButton.addActionListener(e -> control.changeView(View.PROFESSOR_VIEW));
+        alunoViewButton.addActionListener(e -> control.changeView(ALUNO_VIEW));
+        cursoViewButton.addActionListener(e -> control.changeView(CURSO_VIEW));
+        professorViewButton.addActionListener(e -> control.changeView(PROFESSOR_VIEW));
+        turmaViewButton.addActionListener(e -> control.changeView(TURMA_VIEW));
     }
 
     {
@@ -43,8 +51,11 @@ public class MainView extends JFrame {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new GridLayoutManager(2, 3, new Insets(10, 10, 10, 10), - 1, - 1));
+        panel.setLayout(new GridLayoutManager(2, 4, new Insets(10, 10, 10, 10), - 1, - 1));
         panel.setBackground(new Color(- 13487566));
+        cursoViewButton = new JButton();
+        cursoViewButton.setText("Curso View");
+        panel.add(cursoViewButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         alunoViewButton = new JButton();
         alunoViewButton.setBorderPainted(true);
         alunoViewButton.setContentAreaFilled(true);
@@ -52,14 +63,14 @@ public class MainView extends JFrame {
         alunoViewButton.setOpaque(true);
         alunoViewButton.setText("Aluno View");
         panel.add(alunoViewButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer1 = new Spacer();
-        panel.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        cursoViewButton = new JButton();
-        cursoViewButton.setText("Curso View");
-        panel.add(cursoViewButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         professorViewButton = new JButton();
         professorViewButton.setText("Professor View");
         panel.add(professorViewButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        turmaViewButton = new JButton();
+        turmaViewButton.setText("Turma View");
+        panel.add(turmaViewButton, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        panel.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
     }
 
     /**

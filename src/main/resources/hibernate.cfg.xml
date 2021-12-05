@@ -10,11 +10,14 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">postgre</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
         <mapping class="models.entitys.Curso"/>
         <mapping class="models.entitys.Aluno"/>
         <mapping class="models.entitys.Professor"/>
         <mapping class="models.entitys.Turma"/>
         <mapping class="models.entitys.Matricula"/>
-        <mapping class="models.SexoConverter"/>
+        <mapping class="models.converters.SexoConverter"/>
+        <mapping class="models.converters.EstadoConverter"/>
     </session-factory>
 </hibernate-configuration>

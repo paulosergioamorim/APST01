@@ -18,6 +18,7 @@ import java.util.Locale;
 import static models.Format.cpfMask;
 import static models.Format.dateMask;
 import static views.View.MAIN_VIEW;
+import static views.View.PROFESSOR_VIEW;
 
 public class ProfessorView extends JFrame {
     private final Control control;
@@ -40,7 +41,6 @@ public class ProfessorView extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setContentPane(panel);
         this.setSize(600, 600);
-        this.setResizable(false);
         this.setLocationRelativeTo(null);
 
         saveButton.addActionListener(e -> control.saveProfessor());
@@ -54,9 +54,9 @@ public class ProfessorView extends JFrame {
     }
 
     public void clearFields() {
-        cpf.setText("");
+        cpf.setText("000.000.000-00");
         nome.setText("");
-        dataNascimento.setText("");
+        dataNascimento.setText("__/__/____");
         sexo.setSelectedItem(null);
         titulacao.setText("");
     }

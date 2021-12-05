@@ -40,7 +40,7 @@ public abstract class Pessoa {
 
     public void setSexo(Sexo sexo) { this.sexo = sexo; }
 
-    @Column(columnDefinition = "date")
+    @Column(nullable = false)
     public LocalDate getDataNascimento() { return dataNascimento; }
 
     public void setDataNascimento(LocalDate birthday) { this.dataNascimento = birthday; }

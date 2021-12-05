@@ -5,15 +5,13 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import controls.Control;
 import models.Sexo;
 import models.entitys.Aluno;
+import views.cells.AlunoCell;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.plaf.FontUIResource;
 import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.util.List;
-import java.util.Locale;
 
 import static models.Format.cpfMask;
 import static models.Format.dateMask;
@@ -39,7 +37,6 @@ public class AlunoView extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setContentPane(panel);
         this.setSize(600, 600);
-        this.setResizable(false);
         this.setLocationRelativeTo(null);
 
         saveButton.addActionListener(e -> control.saveAluno());
@@ -54,9 +51,9 @@ public class AlunoView extends JFrame {
     }
 
     public void clearFields() {
-        cpf.setText("");
-        nome.setText("");
-        dataNascimento.setText("");
+        cpf.setText(null);
+        nome.setText(null);
+        dataNascimento.setText(null);
         sexo.setSelectedItem(null);
     }
 
@@ -82,6 +79,8 @@ public class AlunoView extends JFrame {
         dataNascimento = new JFormattedTextField(new DefaultFormatterFactory(dateMask));
         sexo = new JComboBox<>(Sexo.values());
         listView = new JList<>();
+        AlunoCell alunoCell = new AlunoCell();
+        listView.setCellRenderer(alunoCell);
         List<Aluno> alunos = control.getAlunoControl().getAll();
         this.updateListViewer(alunos);
     }
@@ -137,28 +136,9 @@ public class AlunoView extends JFrame {
         panel.add(scrollPane1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         scrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         listView.setBackground(new Color(- 13487566));
-        Font listViewFont = this.$$$getFont$$$(null, - 1, 14, listView.getFont());
-        if (listViewFont != null) listView.setFont(listViewFont);
         listView.setForeground(new Color(- 3618616));
+        listView.setSelectionBackground(new Color(- 8553091));
         scrollPane1.setViewportView(listView);
-    }
-
-    /**
-     * @noinspection ALL
-     */
-    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
-        if (currentFont == null) return null;
-        String resultName;
-        if (fontName == null) { resultName = currentFont.getName(); } else {
-            Font testFont = new Font(fontName, Font.PLAIN, 10);
-            if (testFont.canDisplay('a') && testFont.canDisplay('1')) { resultName = fontName; } else {
-                resultName = currentFont.getName();
-            }
-        }
-        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
-        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
-        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
-        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
     /**

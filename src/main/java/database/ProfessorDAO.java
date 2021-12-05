@@ -16,8 +16,8 @@ public class ProfessorDAO extends DAO<Professor, Long> {
             String sql =
             """
             from Turma
-            where professor = :professor
-            and fechada = false
+            where responsavel = :professor
+            and estado != 'Fechada'
             and dataInicio < current_date
             and dataFim > current_date
             """;

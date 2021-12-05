@@ -1,71 +1,54 @@
 package models.entitys;
 
+import models.Estado;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
+import static javax.persistence.FetchType.EAGER;
+import static models.Estado.*;
+
 @Entity
 public class Turma {
-    private String code;
+    private String id;
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private LocalTime horario;
     private int limite;
-    private boolean fechada;
+    private Estado estado;
     private Curso curso;
-    private Professor professor;
+    private Professor responsavel;
     private List<Matricula> matriculas;
 
-    /**
-     * Construtor da Turma
-     *
-     * @param code       Código da turma
-     * @param dataInicio Data de início da turma
-     * @param dataFim    Data de término da turma
-     * @param horario    Horário da turma
-     * @param limite     Limite de alunos na turma
-     * @param fechada    Se a turma está fechada ou não
-     * @param curso      Curso da turma
-     * @param professor  Professor da turma
-     */
-    public Turma(String code, LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limite, boolean fechada, Curso curso, Professor professor) {
-        this.code = code;
+    public Turma(String id,
+                 LocalDate dataInicio,
+                 LocalDate dataFim,
+                 LocalTime horario,
+                 int limite,
+                 Curso curso,
+                 Professor responsavel) {
+        this.id = id;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.horario = horario;
         this.limite = limite;
-        this.fechada = fechada;
         this.curso = curso;
-        this.professor = professor;
+        this.responsavel = responsavel;
     }
 
     public Turma() { }
-
-    /**
-     * Define e retorna o estado da turma
-     *
-     * @return estado da turma
-     */
-    @Transient
-    public String getEstado() {
-        if (fechada)
-            return "Fechada";
-        else if (dataFim.isBefore(LocalDate.now()))
-            return "Aulas Encerradas";
-        else if (this.getVagas() == 0)
-            return "Matriculas Encerradas";
-        else if (dataInicio.isBefore(LocalDate.now()))
-            return "Em Andamento";
-        else return "Matriculas Abertas";
-    }
 
     /**
      * @return o número de vagas disponíveis na turma
      */
     @Transient
     public long getVagas() {
+        if (matriculas == null)
+            return limite;
         return matriculas
                 .stream()
                 .filter(Objects::isNull)
@@ -73,19 +56,19 @@ public class Turma {
     }
 
     @Id
-    public String getCode() { return code; }
+    public String getId() { return id; }
 
-    public void setCode(String code) { this.code = code; }
+    public void setId(String id) { this.id = id; }
 
-    @Column(nullable = false, columnDefinition = "date")
+    @Column(nullable = false)
     public LocalDate getDataInicio() { return dataInicio; }
 
-    public void setDataInicio(LocalDate dateInit) { this.dataInicio = dateInit; }
+    public void setDataInicio(LocalDate dataInicio) { this.dataInicio = dataInicio; }
 
-    @Column(nullable = false, columnDefinition = "date")
+    @Column(nullable = false)
     public LocalDate getDataFim() { return dataFim; }
 
-    public void setDataFim(LocalDate dateEnd) { this.dataFim = dateEnd; }
+    public void setDataFim(LocalDate dataFim) { this.dataFim = dataFim; }
 
     @Column(nullable = false)
     public LocalTime getHorario() { return horario; }
@@ -95,12 +78,12 @@ public class Turma {
     @Column(nullable = false)
     public int getLimite() { return limite; }
 
-    public void setLimite(int limit) { this.limite = limit; }
+    public void setLimite(int limite) { this.limite = limite; }
 
     @Column(nullable = false)
-    public boolean isFechada() { return fechada; }
+    public Estado getEstado() { return estado; }
 
-    public void setFechada(boolean fechada) { this.fechada = fechada; }
+    public void setEstado(Estado estado) { this.estado = estado; }
 
     @ManyToOne(optional = false)
     public Curso getCurso() { return curso; }
@@ -108,15 +91,28 @@ public class Turma {
     public void setCurso(Curso curso) { this.curso = curso; }
 
     @ManyToOne(optional = false)
-    public Professor getProfessor() { return professor; }
+    public Professor getResponsavel() { return responsavel; }
 
-    public void setProfessor(Professor professor) { this.professor = professor; }
+    public void setResponsavel(Professor professor) { this.responsavel = professor; }
 
-    @OneToMany(mappedBy = "turma")
+    @OneToMany(mappedBy = "turma", fetch = EAGER)
     public List<Matricula> getMatriculas() { return matriculas; }
 
     public void setMatriculas(List<Matricula> matriculas) { this.matriculas = matriculas; }
 
     @Override
-    public String toString() { return curso + " - " + professor; }
+    public String toString() { return curso + " - " + responsavel; }
+
+    @PostPersist
+    @PostUpdate
+    @PostLoad
+    public void updateState() {
+        if (dataFim.isBefore(LocalDate.now()))
+            estado = AULAS_ENCERRADAS;
+        else if (this.getVagas() == 0)
+            estado = MATRICULAS_ENCERRADAS;
+        else if (dataInicio.isBefore(LocalDate.now()))
+            estado = EM_ANDAMENTO;
+        else estado = EM_ANDAMENTO;
+    }
 }

@@ -1,6 +1,7 @@
 package models.entitys;
 
 import models.MatriculaID;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;

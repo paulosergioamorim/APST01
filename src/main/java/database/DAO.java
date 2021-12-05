@@ -110,6 +110,8 @@ public abstract class DAO<T, K> {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            this.close();
         }
     }
 

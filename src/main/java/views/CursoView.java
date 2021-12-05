@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import controls.Control;
 import models.entitys.Curso;
+import views.cells.CursoCell;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static models.Format.int4Mask;
+import static views.View.CURSO_VIEW;
 import static views.View.MAIN_VIEW;
 
 public class CursoView extends JFrame {
@@ -37,7 +39,6 @@ public class CursoView extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setContentPane(panel);
         this.setSize(600, 600);
-        this.setResizable(false);
         this.setLocationRelativeTo(null);
 
         saveButton.addActionListener(e -> control.saveCurso());
@@ -52,10 +53,10 @@ public class CursoView extends JFrame {
     }
 
     public void clearFields() {
-        id.setText("");
+        id.setText("0000");
         nome.setText("");
         sigla.setText("");
-        cargaHoraria.setText("");
+        cargaHoraria.setText("0000");
     }
 
     public void updateListViewer(List<Curso> cursos) {
@@ -126,28 +127,9 @@ public class CursoView extends JFrame {
         panel.add(scrollPane1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         scrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         listView.setBackground(new Color(- 13487566));
-        Font listViewFont = this.$$$getFont$$$(null, - 1, 14, listView.getFont());
-        if (listViewFont != null) listView.setFont(listViewFont);
         listView.setForeground(new Color(- 3618616));
+        listView.setSelectionBackground(new Color(- 8553091));
         scrollPane1.setViewportView(listView);
-    }
-
-    /**
-     * @noinspection ALL
-     */
-    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
-        if (currentFont == null) return null;
-        String resultName;
-        if (fontName == null) { resultName = currentFont.getName(); } else {
-            Font testFont = new Font(fontName, Font.PLAIN, 10);
-            if (testFont.canDisplay('a') && testFont.canDisplay('1')) { resultName = fontName; } else {
-                resultName = currentFont.getName();
-            }
-        }
-        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
-        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
-        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
-        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
     /**
@@ -160,7 +142,10 @@ public class CursoView extends JFrame {
         id = new JFormattedTextField(new DefaultFormatterFactory(int4Mask));
         cargaHoraria = new JFormattedTextField(new DefaultFormatterFactory(int4Mask));
         listView = new JList<>();
+        CursoCell cell = new CursoCell();
+        listView.setCellRenderer(cell);
         List<Curso> cursos = control.getCursoControl().getAll();
+        ;
         this.updateListViewer(cursos);
     }
 }

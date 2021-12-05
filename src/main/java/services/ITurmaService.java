@@ -9,23 +9,21 @@ import java.time.LocalTime;
 import java.util.List;
 
 public interface ITurmaService {
-    int save(String code,
+    int save(String id,
              LocalDate dataInicio,
              LocalDate dataFim,
              LocalTime horario,
              int limite,
-             boolean fechada,
              Curso curso,
              Professor responsavel);
-    int update(String code,
+    int update(String id,
                LocalDate dataInicio,
                LocalDate dataFim,
                LocalTime horario,
                int limite,
-               boolean fechada,
                Curso curso,
                Professor responsavel);
-    int delete(String code);
-    Turma get(String code);
+    int delete(String id);
+    Turma get(String id);
     List<Turma> getAll();
 }
