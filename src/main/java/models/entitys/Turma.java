@@ -38,6 +38,7 @@ public class Turma {
         this.limite = limite;
         this.curso = curso;
         this.responsavel = responsavel;
+        this.estado = MATRICULAS_ABERTAS;
     }
 
     public Turma() { }
