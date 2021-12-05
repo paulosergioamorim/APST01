@@ -37,8 +37,4 @@ public class Format {
             e.printStackTrace();
         }
     }
-
-    public static DefaultFormatterFactory getFormatterFactory(MaskFormatter mask) {
-        return new DefaultFormatterFactory(mask);
-    }
 }

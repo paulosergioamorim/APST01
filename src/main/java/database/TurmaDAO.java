@@ -2,7 +2,7 @@ package database;
 
 import models.entitys.Turma;
 
-public class TurmaDAO extends DAO<Turma, Integer> {
+public class TurmaDAO extends DAO<Turma, String> {
     /**
      * @param url Hibernate Configuration File URL
      */

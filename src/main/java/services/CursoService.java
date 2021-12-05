@@ -12,7 +12,7 @@ public record CursoService(CursoDAO dao) implements ICursoService {
     public int save(int id, String nome, String sigla, int cargaHoraria) {
         if (dao.exists(id))
             return 1;
-        if (! nome.matches(cursoNomePattern.pattern()))
+        if (!nome.matches(cursoNomePattern.pattern()))
             return 2;
         if (dao.existsBySigla(sigla))
             return 3;
@@ -27,7 +27,7 @@ public record CursoService(CursoDAO dao) implements ICursoService {
 
     @Override
     public int update(int id, String nome, String sigla, int cargaHoraria) {
-        if (! dao.exists(id))
+        if (!dao.exists(id))
             return 1;
         if (nome != null && ! nome.matches(cursoNomePattern.pattern()))
             return 2;

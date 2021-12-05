@@ -14,7 +14,7 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
     public int save(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
         if (dao.exists(cpf))
             return 1;
-        if (! nome.matches(pessoaNomePattern.pattern()))
+        if (!nome.matches(pessoaNomePattern.pattern()))
             return 2;
         if (dataNascimento.isAfter(LocalDate.now()))
             return 3;
@@ -34,7 +34,7 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
 
     @Override
     public int update(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
-        if (! dao.exists(cpf))
+        if (!dao.exists(cpf))
             return 1;
         if (nome != null && ! nome.matches(pessoaNomePattern.pattern()))
             return 2;

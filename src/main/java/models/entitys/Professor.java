@@ -9,17 +9,17 @@ import java.time.LocalDate;
 
 @Entity
 public class Professor extends Pessoa {
-    private String titulo;
+    private String titulacao;
 
-    public Professor(long cpf, String nome, Sexo sexo, LocalDate birthday, String titulo) {
+    public Professor(long cpf, String nome, Sexo sexo, LocalDate birthday, String titulacao) {
         super(cpf, nome, sexo, birthday);
-        this.titulo = titulo;
+        this.titulacao = titulacao;
     }
 
     public Professor() { super(); }
 
     @Column(length = 25, nullable = false)
-    public String getTitulo() { return titulo; }
+    public String getTitulacao() { return titulacao; }
 
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public void setTitulacao(String titulo) { this.titulacao = titulo; }
 }

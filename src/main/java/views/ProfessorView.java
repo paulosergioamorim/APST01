@@ -7,6 +7,7 @@ import models.Sexo;
 import models.entitys.Professor;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.StyleContext;
@@ -41,6 +42,10 @@ public class ProfessorView extends JFrame {
         this.setSize(600, 600);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+
+        saveButton.addActionListener(e -> control.saveProfessor());
+        updateButton.addActionListener(e -> control.updateProfessor());
+        deleteButton.addActionListener(e -> control.deleteProfessor());
     }
 
     public void dispose() {
@@ -132,15 +137,15 @@ public class ProfessorView extends JFrame {
         titulacao = new JTextField();
         panel1.add(titulacao, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, 30), null, 0, false));
         final JLabel label5 = new JLabel();
+        label5.setForeground(new Color(- 3618616));
         label5.setText("Sexo");
         panel1.add(label5, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panel1.add(sexo, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
         scrollPane1.setBackground(new Color(- 13487566));
         panel.add(scrollPane1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        scrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         listView.setBackground(new Color(- 13487566));
-        Font listViewFont = this.$$$getFont$$$(null, - 1, 14, listView.getFont());
-        if (listViewFont != null) listView.setFont(listViewFont);
         listView.setForeground(new Color(- 3618616));
         scrollPane1.setViewportView(listView);
     }
@@ -148,23 +153,6 @@ public class ProfessorView extends JFrame {
     /**
      * @noinspection ALL
      */
-    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
-        if (currentFont == null) return null;
-        String resultName;
-        if (fontName == null) { resultName = currentFont.getName(); } else {
-            Font testFont = new Font(fontName, Font.PLAIN, 10);
-            if (testFont.canDisplay('a') && testFont.canDisplay('1')) { resultName = fontName; } else {
-                resultName = currentFont.getName();
-            }
-        }
-        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
-        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
-        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
-        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
-    }
-
-    /**
-     * @noinspection ALL
-     */
     public JComponent $$$getRootComponent$$$() { return panel; }
+
 }

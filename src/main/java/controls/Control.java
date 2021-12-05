@@ -3,16 +3,17 @@ package controls;
 import models.Sexo;
 import models.entitys.Aluno;
 import models.entitys.Curso;
+import models.entitys.Professor;
 import views.AlunoView;
 import views.CursoView;
+import views.ProfessorView;
 import views.View;
 
 import java.time.LocalDate;
 
 import static controls.ControlFactory.*;
 import static models.Format.dateFormatter;
-import static views.View.ALUNO_VIEW;
-import static views.View.CURSO_VIEW;
+import static views.View.*;
 
 /**
  * Controller Class
@@ -69,9 +70,12 @@ public final class Control {
         AlunoView alunoView = viewControl.getView(ALUNO_VIEW);
         try {
             cpf = Long.parseLong(alunoView.getCpf().replaceAll("\\D", ""));
-            nome = (alunoView.getNome().isEmpty()) ? null : alunoView.getNome();
-            sexo = (alunoView.getSexo() == null) ? null : alunoView.getSexo();
-            dataNascimento = alunoView.getDataNascimento().equals("__/__/____") ? null : LocalDate.parse(alunoView.getDataNascimento(), dateFormatter);
+            nome = (alunoView.getNome().isEmpty())
+                    ? null : alunoView.getNome();
+            sexo = (alunoView.getSexo() == null)
+                    ? null : alunoView.getSexo();
+            dataNascimento = alunoView.getDataNascimento().equals("__/__/____")
+                    ? null : LocalDate.parse(alunoView.getDataNascimento(), dateFormatter);
             alunoControl.update(cpf, nome, sexo, dataNascimento);
         } catch (Exception e) {
             this.showMessage("Erro ao atualizar aluno");
@@ -115,9 +119,12 @@ public final class Control {
         CursoView cursoView = viewControl.getView(CURSO_VIEW);
         try {
             id = Integer.parseInt(cursoView.getId());
-            nome = (cursoView.getNome().isEmpty()) ? null : cursoView.getNome();
-            cargaHoraria = (cursoView.getCargaHoraria().isEmpty()) ? - 1 : Integer.parseInt(cursoView.getCargaHoraria());
-            sigla = (cursoView.getSigla().isEmpty()) ? null : cursoView.getSigla();
+            nome = (cursoView.getNome().isEmpty())
+                    ? null : cursoView.getNome();
+            cargaHoraria = (cursoView.getCargaHoraria().isEmpty()) ?
+                    - 1 : Integer.parseInt(cursoView.getCargaHoraria());
+            sigla = (cursoView.getSigla().isEmpty())
+                    ? null : cursoView.getSigla();
             cursoControl.update(id, nome, sigla, cargaHoraria);
         } catch (Exception e) {
             this.showMessage("Erro ao atualizar curso");
@@ -137,15 +144,57 @@ public final class Control {
     }
 
     public void saveProfessor() {
-
+        long cpf;
+        String nome;
+        Sexo sexo;
+        LocalDate dataNascimento;
+        String titulacao;
+        ProfessorView professorView = viewControl.getView(PROFESSOR_VIEW);
+        try {
+            cpf = Long.parseLong(professorView.getCpf().replaceAll("\\D", ""));
+            nome = professorView.getNome();
+            sexo = professorView.getSexo();
+            dataNascimento = LocalDate.parse(professorView.getDataNascimento(), dateFormatter);
+            titulacao = professorView.getTitulacao();
+            professorControl.save(cpf, nome, sexo, dataNascimento, titulacao);
+        } catch (Exception e) {
+            this.showMessage("Erro ao salvar professor");
+        }
     }
 
     public void updateProfessor() {
-
+        long cpf;
+        String nome;
+        Sexo sexo;
+        LocalDate dataNascimento;
+        String titulacao;
+        ProfessorView professorView = viewControl.getView(PROFESSOR_VIEW);
+        try {
+            cpf = Long.parseLong(professorView.getCpf().replaceAll("\\D", ""));
+            nome = (professorView.getNome().isEmpty()) ?
+                    null : professorView.getNome();
+            sexo = (professorView.getSexo() == null) ?
+                    null : professorView.getSexo();
+            dataNascimento = professorView.getDataNascimento().equals("__/__/____") ?
+                    null : LocalDate.parse(professorView.getDataNascimento(), dateFormatter);
+            titulacao = (professorView.getTitulacao().isEmpty()) ?
+                    null : professorView.getTitulacao();
+            professorControl.update(cpf, nome, sexo, dataNascimento, titulacao);
+        } catch (Exception e) {
+            this.showMessage("Erro ao atualizar professor");
+        }
     }
 
     public void deleteProfessor() {
-
+        Professor professor;
+        ProfessorView professorView = viewControl.getView(PROFESSOR_VIEW);
+        try {
+            professor = professorView.getListView().getSelectedValue();
+            long cpf = professor.getCpf();
+            professorControl.delete(cpf);
+        } catch (Exception e) {
+            this.showMessage("Erro ao deletar professor");
+        }
     }
 
     public void saveTurma() {

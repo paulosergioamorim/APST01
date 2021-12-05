@@ -9,4 +9,26 @@ public class ProfessorDAO extends DAO<Professor, Long> {
     public ProfessorDAO(String url) {
         super(url, Professor.class);
     }
+
+    public boolean isActive(Professor professor) {
+        this.open();
+        try {
+            String sql =
+            """
+            from Turma
+            where professor = :professor
+            and fechada = false
+            and dataInicio < current_date
+            and dataFim > current_date
+            """;
+            return !session.createQuery(sql)
+                    .setParameter("professor", professor)
+                    .list().isEmpty();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            this.close();
+        }
+    }
 }

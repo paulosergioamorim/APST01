@@ -2,11 +2,9 @@ package controls;
 
 import models.entitys.Aluno;
 import models.entitys.Curso;
+import models.entitys.Professor;
 import org.jetbrains.annotations.NotNull;
-import views.AlunoView;
-import views.CursoView;
-import views.MainView;
-import views.View;
+import views.*;
 
 import javax.swing.*;
 import java.util.List;
@@ -20,6 +18,7 @@ public class ViewControl {
     private JFrame currentView;
     private AlunoView alunoView;
     private CursoView cursoView;
+    private ProfessorView professorView;
 
     public ViewControl(Control control) {
         this.control = control;
@@ -51,6 +50,10 @@ public class ViewControl {
                 cursoView = (cursoView == null) ? new CursoView(control) : cursoView;
                 return (T) cursoView;
             }
+            case PROFESSOR_VIEW -> {
+                professorView = (professorView == null) ? new ProfessorView(control) : professorView;
+                return (T) professorView;
+            }
             default -> { return null; }
         }
     }
@@ -61,6 +64,7 @@ public class ViewControl {
         switch (view) {
             case ALUNO_VIEW -> alunoView.clearFields();
             case CURSO_VIEW -> cursoView.clearFields();
+            case PROFESSOR_VIEW -> professorView.clearFields();
         }
     }
 
@@ -73,6 +77,10 @@ public class ViewControl {
             case CURSO_VIEW -> {
                 List<Curso> cursos = control.getCursoControl().getAll();
                 cursoView.updateListViewer(cursos);
+            }
+            case PROFESSOR_VIEW -> {
+                List<Professor> professores = control.getProfessorControl().getAll();
+                professorView.updateListViewer(professores);
             }
         }
     }

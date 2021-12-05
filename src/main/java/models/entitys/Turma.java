@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 public class Turma {
-    private String id;
+    private String code;
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private LocalTime horario;
@@ -21,7 +21,7 @@ public class Turma {
     /**
      * Construtor da Turma
      *
-     * @param id         Código da turma
+     * @param code       Código da turma
      * @param dataInicio Data de início da turma
      * @param dataFim    Data de término da turma
      * @param horario    Horário da turma
@@ -30,8 +30,8 @@ public class Turma {
      * @param curso      Curso da turma
      * @param professor  Professor da turma
      */
-    public Turma(String id, LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limite, boolean fechada, Curso curso, Professor professor) {
-        this.id = id;
+    public Turma(String code, LocalDate dataInicio, LocalDate dataFim, LocalTime horario, int limite, boolean fechada, Curso curso, Professor professor) {
+        this.code = code;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.horario = horario;
@@ -50,10 +50,14 @@ public class Turma {
      */
     @Transient
     public String getEstado() {
-        if (fechada) return "Fechada";
-        else if (dataFim.isBefore(LocalDate.now())) return "Aulas Encerradas";
-        else if (this.getVagas() == 0) return "Matriculas Encerradas";
-        else if (dataInicio.isBefore(LocalDate.now())) return "Em Andamento";
+        if (fechada)
+            return "Fechada";
+        else if (dataFim.isBefore(LocalDate.now()))
+            return "Aulas Encerradas";
+        else if (this.getVagas() == 0)
+            return "Matriculas Encerradas";
+        else if (dataInicio.isBefore(LocalDate.now()))
+            return "Em Andamento";
         else return "Matriculas Abertas";
     }
 
@@ -62,13 +66,16 @@ public class Turma {
      */
     @Transient
     public long getVagas() {
-        return matriculas.stream().filter(Objects::isNull).count();
+        return matriculas
+                .stream()
+                .filter(Objects::isNull)
+                .count();
     }
 
     @Id
-    public String getId() { return id; }
+    public String getCode() { return code; }
 
-    public void setId(String code) { this.id = code; }
+    public void setCode(String code) { this.code = code; }
 
     @Column(nullable = false, columnDefinition = "date")
     public LocalDate getDataInicio() { return dataInicio; }
