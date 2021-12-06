@@ -6,7 +6,7 @@ import models.entitys.Curso;
 import java.util.List;
 
 import static models.Format.cursoNomePattern;
-import static models.State.FECHADA;
+import static models.Estado.FECHADA;
 
 public record CursoService(CursoDAO dao) implements ICursoService {
     @Override

@@ -16,6 +16,6 @@
         <mapping class="models.entitys.Turma"/>
         <mapping class="models.entitys.Matricula"/>
         <mapping class="models.converters.SexoConverter"/>
-        <mapping class="models.converters.StateConverter"/>
+        <mapping class="models.converters.EstadoConverter"/>
     </session-factory>
 </hibernate-configuration>

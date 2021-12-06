@@ -9,7 +9,7 @@ import models.entitys.Turma;
 import java.time.LocalDate;
 import java.util.List;
 
-import static models.State.FECHADA;
+import static models.Estado.FECHADA;
 
 public record MatriculaService(MatriculaDAO dao) implements IMatriculaService {
     //TODO: Possivelmente retirar a nota como parâmetro, já que a nota inicia em 0

@@ -5,24 +5,24 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum State {
+public enum Estado {
     FECHADA("Fechada"), AULAS_ENCERRADAS("Aulas Encerradas"), MATRICULAS_ENCERRADAS("Matriculas Encerradas"), EM_ANDAMENTO("Em Andamento"), MATRICULAS_ABERTAS("Matriculas Abertas");
 
     private final String value;
 
-    public static final Map<String, State> map;
+    public static final Map<String, Estado> map;
 
     static {
         map = new HashMap<>();
-        for (State state : State.values())
-            map.put(state.value, state);
+        for (Estado estado : Estado.values())
+            map.put(estado.value, estado);
     }
 
-    State(String value) { this.value = value; }
+    Estado(String value) { this.value = value; }
 
     public String getValue() { return value; }
 
-    public static State getState(String value) { return map.get(value); }
+    public static Estado getState(String value) { return map.get(value); }
 
-    public static String valueOf(@NotNull State value) { return value.getValue(); }
+    public static String valueOf(@NotNull Estado value) { return value.getValue(); }
 }

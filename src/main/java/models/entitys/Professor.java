@@ -1,6 +1,5 @@
 package models.entitys;
 
-import models.Pessoa;
 import models.Sexo;
 
 import javax.persistence.Column;

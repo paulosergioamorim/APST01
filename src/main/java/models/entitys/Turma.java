@@ -1,6 +1,6 @@
 package models.entitys;
 
-import models.State;
+import models.Estado;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static javax.persistence.FetchType.EAGER;
-import static models.State.*;
+import static models.Estado.*;
 
 @Entity
 public class Turma {
@@ -18,7 +18,7 @@ public class Turma {
     private LocalDate dataFim;
     private LocalTime horario;
     private int limite;
-    private State estado;
+    private Estado estado;
     private Curso curso;
     private Professor responsavel;
     private List<Matricula> matriculas;
@@ -81,9 +81,9 @@ public class Turma {
     public void setLimite(int limite) { this.limite = limite; }
 
     @Column(nullable = false)
-    public State getEstado() { return estado; }
+    public Estado getEstado() { return estado; }
 
-    public void setEstado(State state) { this.estado = state; }
+    public void setEstado(Estado estado) { this.estado = estado; }
 
     @ManyToOne(optional = false)
     public Curso getCurso() { return curso; }

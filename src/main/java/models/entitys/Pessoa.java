@@ -1,4 +1,6 @@
-package models;
+package models.entitys;
+
+import models.Sexo;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
