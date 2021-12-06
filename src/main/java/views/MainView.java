@@ -3,16 +3,12 @@ package views;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-import com.jgoodies.forms.layout.CellConstraints;
-import com.jgoodies.forms.layout.FormLayout;
 import controls.Control;
 
 import javax.swing.*;
 import java.awt.*;
 
 import static views.View.*;
-import static views.View.PROFESSOR_VIEW;
-import static views.View.TURMA_VIEW;
 
 public class MainView extends JFrame {
     private JPanel panel;

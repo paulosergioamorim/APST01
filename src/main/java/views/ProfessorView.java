@@ -8,17 +8,13 @@ import models.entitys.Professor;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.plaf.FontUIResource;
 import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.util.List;
-import java.util.Locale;
 
 import static models.Format.cpfMask;
 import static models.Format.dateMask;
 import static views.View.MAIN_VIEW;
-import static views.View.PROFESSOR_VIEW;
 
 public class ProfessorView extends JFrame {
     private final Control control;

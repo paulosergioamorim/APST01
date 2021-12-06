@@ -1,8 +1,6 @@
 package services;
 
-import database.DAO;
 import database.ProfessorDAO;
-import models.Format;
 import models.Sexo;
 import models.entitys.Professor;
 

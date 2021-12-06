@@ -1,6 +1,9 @@
 package models.entitys;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 import static javax.persistence.FetchType.EAGER;
@@ -48,7 +51,7 @@ public class Curso {
     @Column(nullable = false)
     public int getCargaHoraria() { return cargaHoraria; }
 
-    public void setCargaHoraria(int carga_horaria) { this.cargaHoraria = carga_horaria; }
+    public void setCargaHoraria(int cargaHoraria) { this.cargaHoraria = cargaHoraria; }
 
     @OneToMany(mappedBy = "curso", fetch = EAGER)
     public List<Turma> getTurmas() { return turmas; }

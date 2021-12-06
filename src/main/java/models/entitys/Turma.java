@@ -1,7 +1,6 @@
 package models.entitys;
 
-import models.Estado;
-import org.hibernate.annotations.DynamicUpdate;
+import models.State;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static javax.persistence.FetchType.EAGER;
-import static models.Estado.*;
+import static models.State.*;
 
 @Entity
 public class Turma {
@@ -19,7 +18,7 @@ public class Turma {
     private LocalDate dataFim;
     private LocalTime horario;
     private int limite;
-    private Estado estado;
+    private State estado;
     private Curso curso;
     private Professor responsavel;
     private List<Matricula> matriculas;
@@ -82,9 +81,9 @@ public class Turma {
     public void setLimite(int limite) { this.limite = limite; }
 
     @Column(nullable = false)
-    public Estado getEstado() { return estado; }
+    public State getEstado() { return estado; }
 
-    public void setEstado(Estado estado) { this.estado = estado; }
+    public void setEstado(State state) { this.estado = state; }
 
     @ManyToOne(optional = false)
     public Curso getCurso() { return curso; }

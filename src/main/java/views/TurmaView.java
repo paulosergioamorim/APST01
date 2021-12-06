@@ -3,7 +3,6 @@ package views;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import controls.Control;
-import models.Format;
 import models.entitys.Curso;
 import models.entitys.Professor;
 import models.entitys.Turma;
@@ -11,15 +10,12 @@ import models.entitys.Turma;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultFormatterFactory;
-
 import java.awt.*;
-import java.util.Arrays;
 import java.util.List;
 
 import static models.Format.dateMask;
 import static models.Format.timeMask;
 import static views.View.MAIN_VIEW;
-import static views.View.TURMA_VIEW;
 
 public class TurmaView extends JFrame {
     private final Control control;

@@ -2,12 +2,11 @@ package services;
 
 import database.CursoDAO;
 import models.entitys.Curso;
-import org.hibernate.Hibernate;
 
 import java.util.List;
 
-import static models.Estado.FECHADA;
 import static models.Format.cursoNomePattern;
+import static models.State.FECHADA;
 
 public record CursoService(CursoDAO dao) implements ICursoService {
     @Override
@@ -55,7 +54,6 @@ public record CursoService(CursoDAO dao) implements ICursoService {
         Curso curso = dao.find(id);
         if (curso == null)
             return 1;
-        Hibernate.initialize(curso.getTurmas());
         if (curso.getTurmas().stream().anyMatch(t -> t.getEstado() != FECHADA))
             return 2;
         dao.delete(curso);

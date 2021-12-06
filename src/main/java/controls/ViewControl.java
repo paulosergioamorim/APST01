@@ -1,6 +1,5 @@
 package controls;
 
-import models.Sexo;
 import models.entitys.Aluno;
 import models.entitys.Curso;
 import models.entitys.Professor;
@@ -9,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import views.*;
 
 import javax.swing.*;
-import java.time.LocalDate;
 import java.util.List;
 
 import static views.View.MAIN_VIEW;

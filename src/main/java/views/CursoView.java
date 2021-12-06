@@ -8,15 +8,11 @@ import views.cells.CursoCell;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.plaf.FontUIResource;
 import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.util.List;
-import java.util.Locale;
 
 import static models.Format.int4Mask;
-import static views.View.CURSO_VIEW;
 import static views.View.MAIN_VIEW;
 
 public class CursoView extends JFrame {
@@ -145,7 +141,6 @@ public class CursoView extends JFrame {
         CursoCell cell = new CursoCell();
         listView.setCellRenderer(cell);
         List<Curso> cursos = control.getCursoControl().getAll();
-        ;
         this.updateListViewer(cursos);
     }
 }

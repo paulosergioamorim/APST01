@@ -7,7 +7,6 @@ import models.entitys.Professor;
 import models.entitys.Turma;
 import views.*;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

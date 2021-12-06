@@ -15,12 +15,12 @@ public class ProfessorDAO extends DAO<Professor, Long> {
         try {
             String sql =
             """
-            from Turma
-            where responsavel = :professor
-            and estado != 'Fechada'
-            and dataInicio < current_date
-            and dataFim > current_date
-            """;
+                    from Turma
+                    where responsavel = :professor
+                    and estado != 'Fechada'
+                    and dataInicio < current_date
+                    and dataFim > current_date
+                    """;
             return !session.createQuery(sql)
                     .setParameter("professor", professor)
                     .list().isEmpty();

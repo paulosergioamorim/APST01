@@ -2,7 +2,6 @@ package views.cells;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import models.Format;
 import models.entitys.Aluno;
 
 import javax.swing.*;

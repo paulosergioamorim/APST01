@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import static models.Estado.*;
+import static models.State.FECHADA;
 
 public record TurmaService(TurmaDAO dao) implements ITurmaService {
     @Override

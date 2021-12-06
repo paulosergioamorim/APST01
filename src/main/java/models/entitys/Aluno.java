@@ -2,7 +2,6 @@ package models.entitys;
 
 import models.Pessoa;
 import models.Sexo;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import java.time.LocalDate;
