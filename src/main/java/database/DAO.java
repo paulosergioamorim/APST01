@@ -1,11 +1,13 @@
 package database;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.List;
 
 /**

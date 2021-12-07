@@ -26,7 +26,7 @@ public class CursoView extends JFrame {
     private JFormattedTextField id;
     private JTextField nome;
     private JTextField sigla;
-    private JTextField cargaHoraria;
+    private JFormattedTextField cargaHoraria;
 
     public CursoView(Control control) {
         super("Cursos");

@@ -95,13 +95,13 @@ public class Turma {
 
     public void setResponsavel(Professor professor) { this.responsavel = professor; }
 
-    @OneToMany(mappedBy = "turma", fetch = EAGER)
+    @OneToMany(mappedBy = "turma")
     public List<Matricula> getMatriculas() { return matriculas; }
 
     public void setMatriculas(List<Matricula> matriculas) { this.matriculas = matriculas; }
 
     @Override
-    public String toString() { return curso + " - " + responsavel; }
+    public String toString() { return id; }
 
     @PostPersist
     @PostUpdate

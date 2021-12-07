@@ -13,8 +13,7 @@ import javax.swing.text.DefaultFormatterFactory;
 import java.awt.*;
 import java.util.List;
 
-import static models.Format.dateMask;
-import static models.Format.timeMask;
+import static models.Format.*;
 import static views.View.MAIN_VIEW;
 
 public class TurmaView extends JFrame {
@@ -54,10 +53,10 @@ public class TurmaView extends JFrame {
     }
 
     public void clearFields() {
-        id.setText("");
-        dataInicio.setText("__/__/____");
-        dataFim.setText("__/__/____");
-        horario.setText("__:__");
+        id.setText(null);
+        dataInicio.setText(dateFormatter.toString());
+        dataFim.setText(dateFormatter.toString());
+        horario.setText(timeFormatter.toString());
         limite.setValue(0);
         curso.setSelectedItem(null);
         responsavel.setSelectedItem(null);
@@ -181,6 +180,7 @@ public class TurmaView extends JFrame {
         panel.add(scrollPane1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         scrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         listView.setBackground(new Color(- 13487566));
+        listView.setForeground(new Color(- 3618616));
         scrollPane1.setViewportView(listView);
     }
 

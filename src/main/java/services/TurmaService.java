@@ -44,43 +44,43 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
                       LocalTime horario,
                       int limite,
                       Curso curso,
-                      Professor professor) {
+                      Professor responsavel) {
         if (!dao.exists(id))
             return 1;
-        if (dataInicio != null && dataInicio.isAfter(dataFim))
+        Turma turma = dao.find(id);
+
+        dataInicio = dataInicio == null ? turma.getDataInicio() : dataInicio;
+        dataFim = dataFim == null ? turma.getDataFim() : dataFim;
+        horario = horario == null ? turma.getHorario() : horario;
+        limite = limite == 0 ? turma.getLimite() : limite;
+        curso = curso == null ? turma.getCurso() : curso;
+        responsavel = responsavel == null ? turma.getResponsavel() : responsavel;
+
+        if (dataInicio.isAfter(dataFim))
             return 2;
-        if (dataInicio != null && dataInicio.isBefore(LocalDate.now()))
+        if (dataInicio.isBefore(LocalDate.now()))
             return 3;
-        if (dataFim != null && dataFim.isBefore(LocalDate.now()))
+        if (dataFim.isBefore(LocalDate.now()))
             return 4;
-        if (dataInicio != null && dataInicio.isEqual(dataFim))
+        if (dataInicio.isEqual(dataFim))
             return 5;
         if (limite != -1 && limite <= 0)
             return 6;
-        Turma turma = dao.find(id);
-        if (dataInicio != null)
-            turma.setDataInicio(dataInicio);
-        if (dataFim != null)
-            turma.setDataFim(dataFim);
-        if (horario != null)
-            turma.setHorario(horario);
-        if (limite != -1)
-            turma.setLimite(limite);
-        if (curso != null)
-            turma.setCurso(curso);
-        if (professor != null)
-            turma.setResponsavel(professor);
+
+        turma = new Turma(id, dataInicio, dataFim, horario, limite, curso, responsavel);
         dao.update(turma);
         return 0;
     }
 
     @Override
     public int delete(String id) {
-        Turma turma = dao.find(id);
-        if (turma == null)
+        if (!dao.exists(id))
             return 1;
+        Turma turma = dao.load(id);
         if (turma.getEstado() != FECHADA)
             return 2;
+        if (!turma.getMatriculas().isEmpty())
+            return 3;
         dao.delete(turma);
         return 0;
     }

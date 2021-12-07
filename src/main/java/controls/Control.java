@@ -124,7 +124,7 @@ public final class Control {
             nome = (cursoView.getNome().isEmpty())
                     ? null : cursoView.getNome();
             cargaHoraria = (cursoView.getCargaHoraria().isEmpty()) ?
-                    - 1 : Integer.parseInt(cursoView.getCargaHoraria());
+                    0 : Integer.parseInt(cursoView.getCargaHoraria());
             sigla = (cursoView.getSigla().isEmpty())
                     ? null : cursoView.getSigla();
             cursoControl.update(id, nome, sigla, cargaHoraria);

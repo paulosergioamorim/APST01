@@ -36,15 +36,18 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
     public int update(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
         if (!dao.exists(cpf))
             return 1;
-        if (nome != null && ! nome.matches(pessoaNomePattern.pattern()))
-            return 2;
-        if (dataNascimento != null && dataNascimento.isAfter(LocalDate.now()))
-            return 3;
         Aluno aluno = dao.find(cpf);
-        if (nome != null)
-            aluno.setNome(nome);
-        if (sexo != null)
-            aluno.setSexo(sexo);
+
+        nome = nome == null ? aluno.getNome() : nome;
+        sexo = sexo == null ? aluno.getSexo() : sexo;
+        dataNascimento = dataNascimento == null ? aluno.getDataNascimento() : dataNascimento;
+
+        if (!nome.matches(pessoaNomePattern.pattern()))
+            return 2;
+        if (dataNascimento.isAfter(LocalDate.now()))
+            return 3;
+
+        aluno = new Aluno(cpf, nome, sexo, dataNascimento);
         dao.update(aluno);
         return 0;
     }

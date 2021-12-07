@@ -66,6 +66,7 @@ public record TurmaControl(Control control, TurmaService service) {
             }
             case 1 -> control.showMessage("Turma não encontrada!");
             case 2 -> control.showMessage("Turma não pode ser deletada pois não está fechada!");
+            case 3 -> control.showMessage("Turma não pode ser deletada pois ainda existem alunos matriculados!");
         }
     }
 

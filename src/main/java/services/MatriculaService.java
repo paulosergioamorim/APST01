@@ -33,15 +33,17 @@ public record MatriculaService(MatriculaDAO dao) implements IMatriculaService {
         MatriculaID matriculaID = new MatriculaID(aluno, turma);
         if (!dao.exists(matriculaID))
             return 1;
-        if (dataMatricula != null && dataMatricula.isAfter(LocalDate.now()))
+        Matricula matricula = dao.find(matriculaID);
+
+        dataMatricula = dataMatricula == null ? matricula.getDataMatricula() : dataMatricula;
+        nota = nota == 0 ? matricula.getNota() : nota;
+
+        if (dataMatricula.isAfter(LocalDate.now()))
             return 2;
-        if (nota != -1 && (nota < 0 || nota > 10))
+        if (nota < 0 || nota > 10)
             return 3;
-        Matricula matricula = new Matricula(aluno, turma, dataMatricula, nota);
-        if (dataMatricula != null)
-            matricula.setDataMatricula(dataMatricula);
-        if (nota != -1)
-            matricula.setNota(nota);
+
+        matricula = new Matricula(aluno, turma, dataMatricula, nota);
         dao.update(matricula);
         return 0;
     }
