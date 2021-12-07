@@ -25,6 +25,9 @@ public class MainView extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
 
+        ImageIcon icon = new ImageIcon("src/main/images/icon.png");
+        this.setIconImage(icon.getImage());
+
         alunoViewButton.addActionListener(e -> control.changeView(ALUNO_VIEW));
         cursoViewButton.addActionListener(e -> control.changeView(CURSO_VIEW));
         professorViewButton.addActionListener(e -> control.changeView(PROFESSOR_VIEW));
