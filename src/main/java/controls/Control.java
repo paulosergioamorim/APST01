@@ -1,10 +1,8 @@
 package controls;
 
 import models.Sexo;
-import models.entitys.Aluno;
-import models.entitys.Curso;
-import models.entitys.Professor;
-import models.entitys.Turma;
+import models.View;
+import models.entitys.*;
 import views.*;
 
 import java.time.LocalDate;
@@ -13,7 +11,7 @@ import java.time.LocalTime;
 import static controls.ControlFactory.*;
 import static models.Format.dateFormatter;
 import static models.Format.timeFormatter;
-import static views.View.*;
+import static models.View.*;
 
 /**
  * Controller Class
@@ -27,6 +25,7 @@ public final class Control {
     private final ProfessorControl professorControl;
     private final CursoControl cursoControl;
     private final TurmaControl turmaControl;
+    private final MatriculaControl matriculaControl;
     private final ViewControl viewControl;
 
     public Control() {
@@ -35,6 +34,7 @@ public final class Control {
         cursoControl = createCursoControl(this);
         turmaControl = createTurmaControl(this);
         viewControl = createViewControl(this);
+        matriculaControl = createMatriculaControl(this);
     }
 
     public static void main(String[] args) { new Control(); }
@@ -213,7 +213,7 @@ public final class Control {
             dataInicio = LocalDate.parse(turmaView.getDataInicio(), dateFormatter);
             dataFim = LocalDate.parse(turmaView.getDataFim(), dateFormatter);
             horario = LocalTime.parse(turmaView.getHorario(), timeFormatter);
-            limite = turmaView.getLimite();
+            limite = Integer.parseInt(turmaView.getLimite());
             curso = turmaView.getCurso();
             responsavel = turmaView.getResponsavel();
             turmaControl.save(id, dataInicio, dataFim, horario, limite, curso, responsavel);
@@ -239,8 +239,8 @@ public final class Control {
                     null : LocalDate.parse(turmaView.getDataFim(), dateFormatter);
             horario = turmaView.getHorario().equals("__:__") ?
                     null : LocalTime.parse(turmaView.getHorario(), timeFormatter);
-            limite = (turmaView.getLimite() == 0) ?
-                    -1 : turmaView.getLimite();
+            limite = turmaView.getLimite().equals("00") ?
+                    0 : Integer.parseInt(turmaView.getLimite());
             curso = turmaView.getCurso();
             responsavel = turmaView.getResponsavel();
             turmaControl.update(id, dataInicio, dataFim, horario, limite, curso, responsavel);
@@ -262,15 +262,35 @@ public final class Control {
     }
 
     public void saveMatricula() {
-
+        Aluno aluno;
+        Turma turma;
+        LocalDate dataMatricula;
+        MatriculaView matriculaView = viewControl.getView(MATRICULA_VIEW);
+        try {
+            aluno = matriculaView.getAluno();
+            turma = matriculaView.getTurma();
+            dataMatricula = matriculaView.getDataMatricula().equals("__/__/____") ?
+                    LocalDate.now() : LocalDate.parse(matriculaView.getDataMatricula(), dateFormatter);
+            matriculaControl.save(aluno, turma, dataMatricula);
+        } catch (Exception e) {
+            this.showMessage("Erro ao salvar matricula");
+        }
     }
 
     public void updateMatricula() {
-
     }
 
     public void deleteMatricula() {
-
+        Matricula matricula;
+        MatriculaView matriculaView = viewControl.getView(MATRICULA_VIEW);
+        try {
+            matricula = matriculaView.getListView().getSelectedValue();
+            Aluno aluno = matricula.getMatriculaID().getAluno();
+            Turma turma = matricula.getMatriculaID().getTurma();
+            matriculaControl.delete(aluno, turma);
+        } catch (Exception e) {
+            this.showMessage("Erro ao deletar matricula");
+        }
     }
 
     public AlunoControl getAlunoControl() { return alunoControl; }
@@ -281,5 +301,5 @@ public final class Control {
 
     public TurmaControl getTurmaControl() { return turmaControl; }
 
-    public ViewControl getViewControl() { return viewControl; }
+    public MatriculaControl getMatriculaControl() { return matriculaControl; }
 }

@@ -5,6 +5,7 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import controls.Control;
 import models.Sexo;
 import models.entitys.Professor;
+import views.cells.ProfessorCell;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -14,7 +15,7 @@ import java.util.List;
 
 import static models.Format.cpfMask;
 import static models.Format.dateMask;
-import static views.View.MAIN_VIEW;
+import static models.View.MAIN_VIEW;
 
 public class ProfessorView extends JFrame {
     private final Control control;
@@ -50,11 +51,11 @@ public class ProfessorView extends JFrame {
     }
 
     public void clearFields() {
-        cpf.setText("000.000.000-00");
-        nome.setText("");
-        dataNascimento.setText("__/__/____");
+        cpf.setValue(null);
+        nome.setText(null);
+        dataNascimento.setValue(null);
         sexo.setSelectedItem(null);
-        titulacao.setText("");
+        titulacao.setText(null);
     }
 
     public void updateListViewer(List<Professor> professores) {
@@ -81,6 +82,8 @@ public class ProfessorView extends JFrame {
         dataNascimento = new JFormattedTextField(new DefaultFormatterFactory(dateMask));
         sexo = new JComboBox<>(Sexo.values());
         listView = new JList<>();
+        ProfessorCell cell = new ProfessorCell();
+        listView.setCellRenderer(cell);
         List<Professor> professores = control.getProfessorControl().getAll();
         this.updateListViewer(professores);
     }
@@ -143,6 +146,7 @@ public class ProfessorView extends JFrame {
         scrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         listView.setBackground(new Color(- 13487566));
         listView.setForeground(new Color(- 3618616));
+        listView.setSelectionBackground(new Color(- 8553091));
         scrollPane1.setViewportView(listView);
     }
 

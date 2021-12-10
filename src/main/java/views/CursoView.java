@@ -13,7 +13,7 @@ import java.awt.*;
 import java.util.List;
 
 import static models.Format.int4Mask;
-import static views.View.MAIN_VIEW;
+import static models.View.MAIN_VIEW;
 
 public class CursoView extends JFrame {
     private final Control control;
@@ -49,10 +49,10 @@ public class CursoView extends JFrame {
     }
 
     public void clearFields() {
-        id.setText("0000");
-        nome.setText("");
-        sigla.setText("");
-        cargaHoraria.setText("0000");
+        id.setValue(null);
+        nome.setText(null);
+        sigla.setText(null);
+        cargaHoraria.setValue(null);
     }
 
     public void updateListViewer(List<Curso> cursos) {

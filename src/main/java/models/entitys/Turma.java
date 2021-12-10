@@ -47,7 +47,7 @@ public class Turma {
      */
     @Transient
     public long getVagas() {
-        if (matriculas == null)
+        if (matriculas == null || matriculas.size() == 0)
             return limite;
         return matriculas
                 .stream()
@@ -95,7 +95,7 @@ public class Turma {
 
     public void setResponsavel(Professor professor) { this.responsavel = professor; }
 
-    @OneToMany(mappedBy = "turma")
+    @OneToMany(mappedBy = "matriculaID.turma")
     public List<Matricula> getMatriculas() { return matriculas; }
 
     public void setMatriculas(List<Matricula> matriculas) { this.matriculas = matriculas; }
@@ -106,13 +106,13 @@ public class Turma {
     @PostPersist
     @PostUpdate
     @PostLoad
-    public void updateState() {
+    public void changedListener() {
         if (dataFim.isBefore(LocalDate.now()))
             estado = AULAS_ENCERRADAS;
         else if (this.getVagas() == 0)
             estado = MATRICULAS_ENCERRADAS;
         else if (dataInicio.isBefore(LocalDate.now()))
             estado = EM_ANDAMENTO;
-        else estado = EM_ANDAMENTO;
+        else estado = MATRICULAS_ABERTAS;
     }
 }

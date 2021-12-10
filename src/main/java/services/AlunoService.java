@@ -1,6 +1,6 @@
 package services;
 
-import database.AlunoDAO;
+import datasources.AlunoDAO;
 import models.Sexo;
 import models.entitys.Aluno;
 
@@ -25,7 +25,7 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
 
     @Override
     public int delete(long cpf) {
-        Aluno aluno = dao.find(cpf);
+        Aluno aluno = dao.get(cpf);
         if (aluno == null)
             return 1;
         dao.delete(aluno);
@@ -36,7 +36,7 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
     public int update(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
         if (!dao.exists(cpf))
             return 1;
-        Aluno aluno = dao.find(cpf);
+        Aluno aluno = dao.get(cpf);
 
         nome = nome == null ? aluno.getNome() : nome;
         sexo = sexo == null ? aluno.getSexo() : sexo;
@@ -53,9 +53,9 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
     }
 
     @Override
-    public Aluno get(long cpf) { return dao.find(cpf); }
+    public Aluno get(long cpf) { return dao.get(cpf); }
 
     @Override
-    public List<Aluno> getAll() { return dao.findAll(); }
+    public List<Aluno> getAll() { return dao.toList(); }
 
 }

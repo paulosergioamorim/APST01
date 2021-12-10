@@ -1,16 +1,14 @@
 package controls;
 
-import models.entitys.Aluno;
-import models.entitys.Curso;
-import models.entitys.Professor;
-import models.entitys.Turma;
+import models.View;
+import models.entitys.*;
 import org.jetbrains.annotations.NotNull;
 import views.*;
 
 import javax.swing.*;
 import java.util.List;
 
-import static views.View.MAIN_VIEW;
+import static models.View.MAIN_VIEW;
 
 public class ViewControl {
     private final Control control;
@@ -21,6 +19,7 @@ public class ViewControl {
     private CursoView cursoView;
     private ProfessorView professorView;
     private TurmaView turmaView;
+    private MatriculaView matriculaView;
 
     public ViewControl(Control control) {
         this.control = control;
@@ -33,6 +32,7 @@ public class ViewControl {
         cursoView = null;
         professorView = null;
         turmaView = null;
+        matriculaView = null;
     }
 
     public void changeView(View view) {
@@ -64,6 +64,10 @@ public class ViewControl {
                 turmaView = (turmaView == null) ? new TurmaView(control) : turmaView;
                 return (T) turmaView;
             }
+            case MATRICULA_VIEW -> {
+                matriculaView = (matriculaView == null) ? new MatriculaView(control) : matriculaView;
+                return (T) matriculaView;
+            }
             default -> { return null; }
         }
     }
@@ -76,6 +80,7 @@ public class ViewControl {
             case CURSO_VIEW -> cursoView.clearFields();
             case PROFESSOR_VIEW -> professorView.clearFields();
             case TURMA_VIEW -> turmaView.clearFields();
+            case MATRICULA_VIEW -> matriculaView.clearFields();
         }
     }
 
@@ -96,6 +101,10 @@ public class ViewControl {
             case TURMA_VIEW -> {
                 List<Turma> turmas = control.getTurmaControl().getAll();
                 turmaView.updateListViewer(turmas);
+            }
+            case MATRICULA_VIEW -> {
+                List<Matricula> matriculas = control.getMatriculaControl().getAll();
+                matriculaView.updateListViewer(matriculas);
             }
         }
     }

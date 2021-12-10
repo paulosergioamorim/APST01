@@ -6,6 +6,7 @@ import controls.Control;
 import models.entitys.Curso;
 import models.entitys.Professor;
 import models.entitys.Turma;
+import views.cells.TurmaCell;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -14,7 +15,7 @@ import java.awt.*;
 import java.util.List;
 
 import static models.Format.*;
-import static views.View.MAIN_VIEW;
+import static models.View.MAIN_VIEW;
 
 public class TurmaView extends JFrame {
     private final Control control;
@@ -28,7 +29,7 @@ public class TurmaView extends JFrame {
     private JFormattedTextField dataFim;
     private JList<Turma> listView;
     private JFormattedTextField horario;
-    private JSlider limite;
+    private JFormattedTextField limite;
     private JComboBox<Curso> curso;
     private JComboBox<Professor> responsavel;
 
@@ -54,10 +55,10 @@ public class TurmaView extends JFrame {
 
     public void clearFields() {
         id.setText(null);
-        dataInicio.setText(dateFormatter.toString());
-        dataFim.setText(dateFormatter.toString());
-        horario.setText(timeFormatter.toString());
-        limite.setValue(0);
+        dataInicio.setValue(null);
+        dataFim.setValue(null);
+        horario.setValue(null);
+        limite.setValue(null);
         curso.setSelectedItem(null);
         responsavel.setSelectedItem(null);
     }
@@ -76,7 +77,7 @@ public class TurmaView extends JFrame {
 
     public String getHorario() { return horario.getText(); }
 
-    public int getLimite() { return limite.getValue(); }
+    public String getLimite() { return limite.getText(); }
 
     public Curso getCurso() { return (Curso) curso.getSelectedItem(); }
 
@@ -88,6 +89,7 @@ public class TurmaView extends JFrame {
         // TODO: place custom component creation code here
         dataInicio = new JFormattedTextField(new DefaultFormatterFactory(dateMask));
         dataFim = new JFormattedTextField(new DefaultFormatterFactory(dateMask));
+        limite = new JFormattedTextField(new DefaultFormatterFactory(int2Mask));
         horario = new JFormattedTextField(new DefaultFormatterFactory(timeMask));
         List<Curso> cursos = control.getCursoControl().getAll();
         DefaultComboBoxModel<Curso> cursoModel = new DefaultComboBoxModel<>();
@@ -98,6 +100,8 @@ public class TurmaView extends JFrame {
         professorModel.addAll(professores);
         responsavel = new JComboBox<>(professorModel);
         listView = new JList<>();
+        TurmaCell cell = new TurmaCell();
+        listView.setCellRenderer(cell);
         List<Turma> turmas = control.getTurmaControl().getAll();
         this.updateListViewer(turmas);
     }
@@ -124,7 +128,7 @@ public class TurmaView extends JFrame {
         deleteButton.setText("Excluir");
         panel.add(deleteButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(7, 2, new Insets(10, 0, 10, 0), - 1, - 1));
+        panel1.setLayout(new GridLayoutManager(4, 4, new Insets(10, 0, 10, 0), - 1, - 1));
         panel1.setBackground(new Color(- 13487566));
         panel.add(panel1, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
@@ -132,13 +136,13 @@ public class TurmaView extends JFrame {
         label1.setText("ID");
         panel1.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         id = new JTextField();
-        panel1.add(id, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, 30), null, 0, false));
+        panel1.add(id, new GridConstraints(0, 1, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setForeground(new Color(- 3618616));
         label2.setText("Data de Início");
         panel1.add(label2, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(dataInicio, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, 30), null, 0, false));
-        panel1.add(dataFim, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, 30), null, 0, false));
+        panel1.add(dataInicio, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(dataFim, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label3 = new JLabel();
         label3.setForeground(new Color(- 3618616));
         label3.setText("Data Final");
@@ -147,40 +151,29 @@ public class TurmaView extends JFrame {
         label4.setForeground(new Color(- 3618616));
         label4.setText("Horário");
         panel1.add(label4, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(horario, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, 30), null, 0, false));
+        panel1.add(horario, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label5 = new JLabel();
         label5.setForeground(new Color(- 3618616));
-        label5.setText("Limite de Alunos");
-        panel1.add(label5, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        limite = new JSlider();
-        limite.setBackground(new Color(- 13487566));
-        limite.setForeground(new Color(- 3618616));
-        limite.setMajorTickSpacing(5);
-        limite.setMaximum(50);
-        limite.setMinimum(5);
-        limite.setPaintLabels(true);
-        limite.setPaintTicks(true);
-        limite.setPaintTrack(true);
-        limite.setSnapToTicks(true);
-        limite.setValue(5);
-        limite.setValueIsAdjusting(true);
-        panel1.add(limite, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        label5.setText("Responsável");
+        panel1.add(label5, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(responsavel, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(curso, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label6 = new JLabel();
         label6.setForeground(new Color(- 3618616));
         label6.setText("Curso");
-        panel1.add(label6, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(label6, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label7 = new JLabel();
         label7.setForeground(new Color(- 3618616));
-        label7.setText("Responsável");
-        panel1.add(label7, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(curso, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
-        panel1.add(responsavel, new GridConstraints(6, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        label7.setText("Limite de Alunos");
+        panel1.add(label7, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(limite, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
         scrollPane1.setBackground(new Color(- 13487566));
         panel.add(scrollPane1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         scrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         listView.setBackground(new Color(- 13487566));
         listView.setForeground(new Color(- 3618616));
+        listView.setSelectionBackground(new Color(- 8553091));
         scrollPane1.setViewportView(listView);
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 import static models.Format.cpfMask;
 import static models.Format.dateMask;
-import static views.View.MAIN_VIEW;
+import static models.View.MAIN_VIEW;
 
 public class AlunoView extends JFrame {
     private final Control control;
@@ -51,9 +51,9 @@ public class AlunoView extends JFrame {
     }
 
     public void clearFields() {
-        cpf.setText(null);
+        cpf.setValue(null);
         nome.setText(null);
-        dataNascimento.setText(null);
+        dataNascimento.setValue(null);
         sexo.setSelectedItem(null);
     }
 

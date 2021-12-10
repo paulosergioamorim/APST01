@@ -1,6 +1,6 @@
 package services;
 
-import database.ProfessorDAO;
+import datasources.ProfessorDAO;
 import models.Sexo;
 import models.entitys.Professor;
 
@@ -29,7 +29,7 @@ public record ProfessorService(ProfessorDAO dao) implements IProfessorService {
     public int update(long cpf, String nome, Sexo sexo, LocalDate dataNascimento, String titulacao) {
         if (!dao.exists(cpf))
             return 1;
-        Professor responsavel = dao.find(cpf);
+        Professor responsavel = dao.get(cpf);
 
         nome = nome == null ? responsavel.getNome() : nome;
         sexo = sexo == null ? responsavel.getSexo() : sexo;
@@ -50,7 +50,7 @@ public record ProfessorService(ProfessorDAO dao) implements IProfessorService {
 
     @Override
     public int delete(long cpf) {
-        Professor professor = dao.find(cpf);
+        Professor professor = dao.get(cpf);
         if (professor == null)
             return 1;
         if (dao.isActive(professor))
@@ -60,8 +60,8 @@ public record ProfessorService(ProfessorDAO dao) implements IProfessorService {
     }
 
     @Override
-    public Professor get(long cpf) { return dao.find(cpf); }
+    public Professor get(long cpf) { return dao.get(cpf); }
 
     @Override
-    public List<Professor> getAll() { return dao.findAll(); }
+    public List<Professor> getAll() { return dao.toList(); }
 }

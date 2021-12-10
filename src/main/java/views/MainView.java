@@ -8,7 +8,7 @@ import controls.Control;
 import javax.swing.*;
 import java.awt.*;
 
-import static views.View.*;
+import static models.View.*;
 
 public class MainView extends JFrame {
     private JPanel panel;
@@ -16,12 +16,13 @@ public class MainView extends JFrame {
     private JButton cursoViewButton;
     private JButton professorViewButton;
     private JButton turmaViewButton;
+    private JButton matriculaViewButton;
 
     public MainView(Control control) {
         super("Program");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(panel);
-        this.setSize(600, 600);
+        this.setSize(300, 600);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
 
@@ -32,6 +33,7 @@ public class MainView extends JFrame {
         cursoViewButton.addActionListener(e -> control.changeView(CURSO_VIEW));
         professorViewButton.addActionListener(e -> control.changeView(PROFESSOR_VIEW));
         turmaViewButton.addActionListener(e -> control.changeView(TURMA_VIEW));
+        matriculaViewButton.addActionListener(e -> control.changeView(MATRICULA_VIEW));
     }
 
     {
@@ -50,11 +52,8 @@ public class MainView extends JFrame {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new GridLayoutManager(2, 4, new Insets(10, 10, 10, 10), - 1, - 1));
+        panel.setLayout(new GridLayoutManager(5, 1, new Insets(10, 10, 10, 10), - 1, - 1));
         panel.setBackground(new Color(- 13487566));
-        cursoViewButton = new JButton();
-        cursoViewButton.setText("Curso View");
-        panel.add(cursoViewButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         alunoViewButton = new JButton();
         alunoViewButton.setBorderPainted(true);
         alunoViewButton.setContentAreaFilled(true);
@@ -62,14 +61,19 @@ public class MainView extends JFrame {
         alunoViewButton.setOpaque(true);
         alunoViewButton.setText("Aluno View");
         panel.add(alunoViewButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cursoViewButton = new JButton();
+        cursoViewButton.setText("Curso View");
+        panel.add(cursoViewButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         professorViewButton = new JButton();
         professorViewButton.setText("Professor View");
-        panel.add(professorViewButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel.add(professorViewButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        matriculaViewButton = new JButton();
+        matriculaViewButton.setFocusPainted(false);
+        matriculaViewButton.setText("Matricula View");
+        panel.add(matriculaViewButton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         turmaViewButton = new JButton();
         turmaViewButton.setText("Turma View");
-        panel.add(turmaViewButton, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer1 = new Spacer();
-        panel.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel.add(turmaViewButton, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

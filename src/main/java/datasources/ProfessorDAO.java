@@ -1,13 +1,12 @@
-package database;
+package datasources;
 
 import models.entitys.Professor;
+import org.hibernate.cfg.Configuration;
+import org.jetbrains.annotations.NotNull;
 
 public class ProfessorDAO extends DAO<Professor, Long> {
-    /**
-     * @param url Hibernate Configuration File URL
-     */
-    public ProfessorDAO(String url) {
-        super(url, Professor.class);
+    public ProfessorDAO(Configuration configuration, @NotNull Class<Professor> entity) {
+        super(configuration, entity);
     }
 
     public boolean isActive(Professor professor) {

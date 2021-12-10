@@ -7,7 +7,7 @@ import services.ProfessorService;
 import java.time.LocalDate;
 import java.util.List;
 
-import static views.View.PROFESSOR_VIEW;
+import static models.View.PROFESSOR_VIEW;
 
 public record ProfessorControl(Control control, ProfessorService service) {
     public void save(long cpf, String nome, Sexo sexo, LocalDate dataNascimento, String titulacao) {

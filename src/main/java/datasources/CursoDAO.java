@@ -1,14 +1,14 @@
-package database;
+package datasources;
 
 import models.entitys.Curso;
 import org.hibernate.Hibernate;
+import org.hibernate.cfg.Configuration;
+import org.jetbrains.annotations.NotNull;
 
 public class CursoDAO extends DAO<Curso, Integer> {
-
-    /**
-     * @param url Hibernate Configuration File URL
-     */
-    public CursoDAO(String url) { super(url, Curso.class); }
+    public CursoDAO(Configuration configuration, @NotNull Class<Curso> entity) {
+        super(configuration, entity);
+    }
 
     public Curso load(Integer key) {
         this.open();

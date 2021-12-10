@@ -3,32 +3,36 @@ package views.cells;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import models.entitys.Aluno;
+import models.entitys.Professor;
 
 import javax.swing.*;
 import java.awt.*;
 
 import static models.Format.dateFormatter;
 
-public class AlunoCell implements ListCellRenderer<Aluno> {
+public class ProfessorCell implements ListCellRenderer<Professor> {
     private JLabel cpf;
     private JLabel nome;
     private JLabel idade;
     private JLabel sexo;
     private JLabel dataNascimento;
     private JPanel panel;
+    private JLabel titulacao;
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Aluno> list, Aluno value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends Professor> list, Professor value, int index, boolean isSelected, boolean cellHasFocus) {
         String cpf = String.valueOf(value.getCpf());
         String nome = value.getNome();
         String idade = value.getIdade() + " anos";
-        String sexo = String.valueOf(value.getSexo());
+        String sexo = value.getSexo().toString();
         String dataNascimento = value.getDataNascimento().format(dateFormatter);
+        String titulacao = value.getTitulacao();
         this.cpf.setText(cpf);
         this.nome.setText(nome);
         this.idade.setText(idade);
         this.sexo.setText(sexo);
         this.dataNascimento.setText(dataNascimento);
+        this.titulacao.setText(titulacao);
         if (isSelected) {
             panel.setBackground(list.getSelectionBackground());
             panel.setForeground(list.getSelectionForeground());
@@ -55,7 +59,7 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new FormLayout("center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow", "center:d:grow"));
+        panel.setLayout(new FormLayout("center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,fill:d:grow", "center:d:grow"));
         panel.setBackground(new Color(- 13487566));
         panel.setPreferredSize(new Dimension(- 1, 30));
         idade = new JLabel();
@@ -80,6 +84,10 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
         nome.setForeground(new Color(- 3618616));
         nome.setText("Label");
         panel.add(nome, cc.xy(3, 1));
+        titulacao = new JLabel();
+        titulacao.setForeground(new Color(- 3618616));
+        titulacao.setText("Label");
+        panel.add(titulacao, cc.xy(11, 1));
     }
 
     /**

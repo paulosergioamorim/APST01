@@ -16,10 +16,14 @@ public class CursoCell implements ListCellRenderer<Curso> {
 
     @Override
     public Component getListCellRendererComponent(JList<? extends Curso> list, Curso value, int index, boolean isSelected, boolean cellHasFocus) {
-        id.setText(String.valueOf(value.getId()));
-        nome.setText(value.getNome());
-        sigla.setText(value.getSigla());
-        cargaHoraria.setText(String.valueOf(value.getCargaHoraria()));
+        String id = String.valueOf(value.getId());
+        String nome = value.getNome();
+        String sigla = value.getSigla();
+        String cargaHoraria = String.valueOf(value.getCargaHoraria());
+        this.id.setText(id);
+        this.nome.setText(nome);
+        this.sigla.setText(sigla);
+        this.cargaHoraria.setText(cargaHoraria);
         if (isSelected) {
             panel.setBackground(list.getSelectionBackground());
             panel.setForeground(list.getSelectionForeground());
@@ -46,7 +50,7 @@ public class CursoCell implements ListCellRenderer<Curso> {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new FormLayout("center:50pt:noGrow,left:4dlu:noGrow,center:150pt:noGrow,left:4dlu:noGrow,center:100pt:noGrow,left:4dlu:noGrow,center:50pt:noGrow", "fill:13px:grow"));
+        panel.setLayout(new FormLayout("center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow", "fill:13px:grow"));
         panel.setBackground(new Color(- 13487566));
         panel.setPreferredSize(new Dimension(- 1, 30));
         id = new JLabel();

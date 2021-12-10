@@ -1,6 +1,6 @@
 package services;
 
-import database.TurmaDAO;
+import datasources.TurmaDAO;
 import models.entitys.Curso;
 import models.entitys.Professor;
 import models.entitys.Turma;
@@ -47,7 +47,7 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
                       Professor responsavel) {
         if (!dao.exists(id))
             return 1;
-        Turma turma = dao.find(id);
+        Turma turma = dao.get(id);
 
         dataInicio = dataInicio == null ? turma.getDataInicio() : dataInicio;
         dataFim = dataFim == null ? turma.getDataFim() : dataFim;
@@ -64,7 +64,7 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
             return 4;
         if (dataInicio.isEqual(dataFim))
             return 5;
-        if (limite != -1 && limite <= 0)
+        if (limite <= 0)
             return 6;
 
         turma = new Turma(id, dataInicio, dataFim, horario, limite, curso, responsavel);
@@ -86,8 +86,8 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
     }
 
     @Override
-    public Turma get(String id) { return dao.find(id); }
+    public Turma get(String id) { return dao.get(id); }
 
     @Override
-    public List<Turma> getAll() { return dao.findAll(); }
+    public List<Turma> getAll() { return dao.toList(); }
 }

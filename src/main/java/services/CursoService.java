@@ -1,6 +1,6 @@
 package services;
 
-import database.CursoDAO;
+import datasources.CursoDAO;
 import models.entitys.Curso;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public record CursoService(CursoDAO dao) implements ICursoService {
     public int update(int id, String nome, String sigla, int cargaHoraria) {
         if (!dao.exists(id))
             return 1;
-        Curso curso = dao.find(id);
+        Curso curso = dao.get(id);
 
         nome = nome == null ? curso.getNome() : nome;
         sigla = sigla == null ? curso.getSigla() : sigla;
@@ -62,8 +62,8 @@ public record CursoService(CursoDAO dao) implements ICursoService {
     }
 
     @Override
-    public Curso get(int id) { return dao.find(id); }
+    public Curso get(int id) { return dao.get(id); }
 
     @Override
-    public List<Curso> getAll() { return dao.findAll(); }
+    public List<Curso> getAll() { return dao.toList(); }
 }

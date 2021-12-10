@@ -5,7 +5,7 @@ import services.CursoService;
 
 import java.util.List;
 
-import static views.View.CURSO_VIEW;
+import static models.View.CURSO_VIEW;
 
 public record CursoControl(Control control, CursoService service) {
 

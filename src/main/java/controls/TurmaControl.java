@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import static views.View.TURMA_VIEW;
+import static models.View.TURMA_VIEW;
 
 public record TurmaControl(Control control, TurmaService service) {
     public void save(String id,

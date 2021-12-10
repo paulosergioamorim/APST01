@@ -1,14 +1,13 @@
-package database;
+package datasources;
 
 import models.entitys.Turma;
 import org.hibernate.Hibernate;
+import org.hibernate.cfg.Configuration;
+import org.jetbrains.annotations.NotNull;
 
 public class TurmaDAO extends DAO<Turma, String> {
-    /**
-     * @param url Hibernate Configuration File URL
-     */
-    public TurmaDAO(String url) {
-        super(url, Turma.class);
+    public TurmaDAO(Configuration configuration, @NotNull Class<Turma> entity) {
+        super(configuration, entity);
     }
 
     public Turma load(String key) {

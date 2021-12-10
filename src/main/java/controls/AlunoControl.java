@@ -7,7 +7,7 @@ import services.AlunoService;
 import java.time.LocalDate;
 import java.util.List;
 
-import static views.View.ALUNO_VIEW;
+import static models.View.ALUNO_VIEW;
 
 public record AlunoControl(Control control, AlunoService service) {
     public void save(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {

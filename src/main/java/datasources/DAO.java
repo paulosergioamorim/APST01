@@ -1,6 +1,5 @@
-package database;
+package datasources;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -8,7 +7,9 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Generic DAO Hibernate Class
@@ -24,11 +25,10 @@ public abstract class DAO<T, K> {
     protected Session session;
 
     /**
-     * @param url    Hibernate Configuration File URL
+     * @param configuration Configuration to be used
      * @param entity Entity Class
      */
-    public DAO(String url, @NotNull Class<T> entity) {
-        Configuration configuration = new Configuration().configure(url);
+    public DAO(@NotNull Configuration configuration, @NotNull Class<T> entity) {
         sessionFactory = configuration.buildSessionFactory();
         if (entity.getAnnotation(Entity.class) == null)
             throw new IllegalArgumentException("Class must be annotated with @Entity");
@@ -105,10 +105,10 @@ public abstract class DAO<T, K> {
      * @param key Key to find entity
      * @return Entity found
      */
-    public T find(K key) {
+    public T get(K key) {
         this.open();
         try {
-            return session.find(entity, key);
+            return session.get(entity, (Serializable) key);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -123,7 +123,7 @@ public abstract class DAO<T, K> {
      * @param key Key to find entity
      * @return True if entity exists, false otherwise
      */
-    public boolean exists(K key) { return this.find(key) != null; }
+    public boolean exists(K key) { return this.get(key) != null; }
 
     /**
      * Count entities in database
@@ -134,7 +134,7 @@ public abstract class DAO<T, K> {
         this.open();
         try {
             String sql = "select count(*) from " + this.getEntityName();
-            return (Long) session.createQuery(sql).uniqueResult();
+            return (long) session.createQuery(sql).uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
@@ -149,14 +149,14 @@ public abstract class DAO<T, K> {
      * @return List of entities
      */
     @SuppressWarnings("unchecked")
-    public List<T> findAll() {
+    public List<T> toList() {
         this.open();
         try {
             String sql = "from " + this.getEntityName();
             return session.createQuery(sql).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         } finally {
             this.close();
         }
