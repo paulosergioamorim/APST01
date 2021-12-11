@@ -16,6 +16,7 @@ public interface ITurmaService {
              int limite,
              Curso curso,
              Professor responsavel);
+
     int update(int id,
                LocalDate dataInicio,
                LocalDate dataFim,
@@ -23,8 +24,12 @@ public interface ITurmaService {
                int limite,
                Curso curso,
                Professor responsavel);
+
     int close(int id);
+
     int delete(int id);
+
     Turma get(int id);
+
     List<Turma> getAll();
 }

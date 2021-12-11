@@ -20,18 +20,12 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
                     final int limite,
                     final Curso curso,
                     final Professor professor) {
-        if (this.dao.exists(id))
-            return 1;
-        if (dataInicio.isAfter(dataFim))
-            return 2;
-        if (dataInicio.isBefore(LocalDate.now()))
-            return 3;
-        if (dataFim.isBefore(LocalDate.now()))
-            return 4;
-        if (dataInicio.isEqual(dataFim))
-            return 5;
-        if (limite <= 0)
-            return 6;
+        if (this.dao.exists(id)) return 1;
+        if (dataInicio.isAfter(dataFim)) return 2;
+        if (dataInicio.isBefore(LocalDate.now())) return 3;
+        if (dataFim.isBefore(LocalDate.now())) return 4;
+        if (dataInicio.isEqual(dataFim)) return 5;
+        if (limite <= 0) return 6;
         final Turma turma = new Turma(id, dataInicio, dataFim, horario, limite, curso, professor);
         this.dao.save(turma);
         return 0;
@@ -45,8 +39,7 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
                       int limite,
                       Curso curso,
                       Professor responsavel) {
-        if (! this.dao.exists(id))
-            return 1;
+        if (!this.dao.exists(id)) return 1;
         Turma turma = this.dao.load(id);
 
         dataInicio = dataInicio == null ? turma.getDataInicio() : dataInicio;
@@ -56,14 +49,10 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
         curso = curso == null ? turma.getCurso() : curso;
         responsavel = responsavel == null ? turma.getResponsavel() : responsavel;
 
-        if (dataInicio.isAfter(dataFim))
-            return 2;
-        if (dataFim.isBefore(LocalDate.now()))
-            return 3;
-        if (dataInicio.isEqual(dataFim))
-            return 4;
-        if (limite <= 0 || limite < turma.getMatriculas().size())
-            return 5;
+        if (dataInicio.isAfter(dataFim)) return 2;
+        if (dataFim.isBefore(LocalDate.now())) return 3;
+        if (dataInicio.isEqual(dataFim)) return 4;
+        if (limite <= 0 || limite < turma.getMatriculas().size()) return 5;
 
         turma = new Turma(id, dataInicio, dataFim, horario, limite, curso, responsavel);
         this.dao.update(turma);
@@ -72,11 +61,9 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
 
     @Override
     public int close(final int id) {
-        if (! this.dao.exists(id))
-            return 1;
+        if (!this.dao.exists(id)) return 1;
         final Turma turma = this.dao.load(id);
-        if (turma.getEstado() == FECHADA)
-            return 2;
+        if (turma.getEstado() == FECHADA) return 2;
         turma.setEstado(FECHADA);
         this.dao.update(turma);
         return 0;
@@ -84,13 +71,10 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
 
     @Override
     public int delete(final int id) {
-        if (! this.dao.exists(id))
-            return 1;
+        if (!this.dao.exists(id)) return 1;
         final Turma turma = this.dao.get(id);
-        if (turma.getEstado() != FECHADA)
-            return 2;
-        if (!turma.getMatriculas().isEmpty())
-            return 3;
+        if (turma.getEstado() != FECHADA) return 2;
+        if (!turma.getMatriculas().isEmpty()) return 3;
         this.dao.delete(turma);
         return 0;
     }
