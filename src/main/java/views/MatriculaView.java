@@ -30,65 +30,65 @@ public class MatriculaView extends JFrame {
     private JList<Matricula> listView;
     private JButton updateButton;
 
-    public MatriculaView(Control control) {
+    public MatriculaView(final Control control) {
         super("Matriculas");
         this.control = control;
-        $$$setupUI$$$();
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setContentPane(panel);
+        this.$$$setupUI$$$();
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setContentPane(this.panel);
         this.setSize(600, 600);
         this.setLocationRelativeTo(null);
 
-        saveButton.addActionListener(e -> control.saveMatricula());
-        updateButton.addActionListener(e -> control.updateMatricula());
-        deleteButton.addActionListener(e -> control.deleteMatricula());
+        this.saveButton.addActionListener(e -> control.saveMatricula());
+        this.updateButton.addActionListener(e -> control.updateMatricula());
+        this.deleteButton.addActionListener(e -> control.deleteMatricula());
     }
 
     @Override
     public void dispose() {
-        control.changeView(MAIN_VIEW);
+        this.control.changeView(MAIN_VIEW);
         super.dispose();
     }
 
     public void clearFields() {
-        turmaBox.setSelectedItem(null);
-        alunoBox.setSelectedItem(null);
-        dataMatriculaField.setValue(null);
+        this.turmaBox.setSelectedItem(null);
+        this.alunoBox.setSelectedItem(null);
+        this.dataMatriculaField.setValue(null);
     }
 
-    public void updateListViewer(List<Matricula> matriculas) {
-        DefaultListModel<Matricula> model = new DefaultListModel<>();
+    public void updateListViewer(final List<Matricula> matriculas) {
+        final DefaultListModel<Matricula> model = new DefaultListModel<>();
         model.addAll(matriculas);
-        listView.setModel(model);
+        this.listView.setModel(model);
     }
 
-    public Turma getTurma() { return (Turma) turmaBox.getSelectedItem(); }
+    public Turma getTurma() { return (Turma) this.turmaBox.getSelectedItem(); }
 
-    public Aluno getAluno() { return (Aluno) alunoBox.getSelectedItem(); }
+    public Aluno getAluno() { return (Aluno) this.alunoBox.getSelectedItem(); }
 
-    public String getDataMatricula() { return dataMatriculaField.getText(); }
+    public String getDataMatricula() { return this.dataMatriculaField.getText(); }
 
-    public JList<Matricula> getListView() { return listView; }
+    public JList<Matricula> getListView() { return this.listView; }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        dataMatriculaField = new JFormattedTextField(dateMask);
+        this.dataMatriculaField = new JFormattedTextField(dateMask);
 
-        List<Turma> turmas = control.getTurmaControl().getAll();
+        List<Turma> turmas = this.control.getTurmaControl().getAll();
         turmas = turmas.stream().filter(t -> t.getEstado() == MATRICULAS_ABERTAS).collect(Collectors.toList());
-        DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
+        final DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
         turmaModel.addAll(turmas);
-        turmaBox = new JComboBox<>(turmaModel);
+        this.turmaBox = new JComboBox<>(turmaModel);
 
-        List<Aluno> alunos = control.getAlunoControl().getAll();
-        DefaultComboBoxModel<Aluno> alunoModel = new DefaultComboBoxModel<>();
+        final List<Aluno> alunos = this.control.getAlunoControl().getAll();
+        final DefaultComboBoxModel<Aluno> alunoModel = new DefaultComboBoxModel<>();
         alunoModel.addAll(alunos);
-        alunoBox = new JComboBox<>(alunoModel);
+        this.alunoBox = new JComboBox<>(alunoModel);
 
-        listView = new JList<>();
-        MatriculaCell cell = new MatriculaCell();
-        listView.setCellRenderer(cell);
-        List<Matricula> matriculas = control.getMatriculaControl().getAll();
+        this.listView = new JList<>();
+        final MatriculaCell cell = new MatriculaCell();
+        this.listView.setCellRenderer(cell);
+        final List<Matricula> matriculas = this.control.getMatriculaControl().getAll();
         this.updateListViewer(matriculas);
     }
 

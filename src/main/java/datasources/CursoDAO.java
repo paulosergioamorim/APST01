@@ -6,32 +6,27 @@ import org.hibernate.cfg.Configuration;
 import org.jetbrains.annotations.NotNull;
 
 public class CursoDAO extends DAO<Curso, Integer> {
-    public CursoDAO(Configuration configuration, @NotNull Class<Curso> entity) {
+    public CursoDAO(final Configuration configuration, @NotNull final Class<Curso> entity) {
         super(configuration, entity);
     }
 
-    public Curso load(Integer key) {
+    public Curso load(final Integer id) {
         this.open();
         try {
-            Curso curso = session.load(Curso.class, key);
-            Hibernate.initialize(curso.getTurmas());
-            return curso;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            final String hql = "from Curso fetch all properties where id = :id";
+            return (Curso) this.session.createQuery(hql)
+                    .setParameter("id", id)
+                    .uniqueResult();
         } finally {
             this.close();
         }
     }
 
-    public boolean existsBySigla(String sigla) {
+    public boolean existsBySigla(final String sigla) {
         this.open();
         try {
-            String sql = "from Curso where sigla = :sigla";
-            return session.createQuery(sql).setParameter("sigla", sigla).uniqueResult() != null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            final String sql = "from Curso where sigla = :sigla";
+            return this.session.createQuery(sql).setParameter("sigla", sigla).uniqueResult() != null;
         } finally {
             this.close();
         }

@@ -13,19 +13,19 @@ public enum Sexo {
 
     static {
         map = new HashMap<>();
-        for (Sexo sexo : Sexo.values())
+        for (final Sexo sexo : values())
             map.put(sexo.value, sexo);
     }
 
     private final char value;
 
-    Sexo(Character value) { this.value = value; }
+    Sexo(final Character character) { this.value = character; }
 
-    public static Sexo getSexo(Character value) { return map.get(value); }
+    public static Sexo getSexo(final Character value) { return map.get(value); }
 
-    public static Character valueOf(@NotNull Sexo sexo) { return sexo.getValue(); }
+    public static Character valueOf(@NotNull final Sexo sexo) { return sexo.getValue(); }
 
-    public Character getValue() { return value; }
+    public Character getValue() { return this.value; }
 
     @Override
     public @NotNull String toString() {

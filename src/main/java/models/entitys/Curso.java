@@ -3,8 +3,6 @@ package models.entitys;
 import javax.persistence.*;
 import java.util.List;
 
-import static javax.persistence.FetchType.EAGER;
-
 @Entity
 public class Curso {
     private int id;
@@ -21,7 +19,7 @@ public class Curso {
      * @param sigla        Sigla do curso
      * @param cargaHoraria Carga horária do curso
      */
-    public Curso(int id, String nome, String sigla, int cargaHoraria) {
+    public Curso(final int id, final String nome, final String sigla, final int cargaHoraria) {
         this.id = id;
         this.nome = nome;
         this.sigla = sigla;
@@ -31,30 +29,30 @@ public class Curso {
     public Curso() { }
 
     @Id
-    public int getId() { return id; }
+    public int getId() { return this.id; }
 
-    public void setId(int id) { this.id = id; }
+    public void setId(final int id) { this.id = id; }
 
     @Column(length = 45, nullable = false)
-    public String getNome() { return nome; }
+    public String getNome() { return this.nome; }
 
-    public void setNome(String nome) { this.nome = nome; }
+    public void setNome(final String nome) { this.nome = nome; }
 
     @Column(length = 5, nullable = false, unique = true)
-    public String getSigla() { return sigla; }
+    public String getSigla() { return this.sigla; }
 
-    public void setSigla(String sigla) { this.sigla = sigla; }
+    public void setSigla(final String sigla) { this.sigla = sigla; }
 
     @Column(nullable = false)
-    public int getCargaHoraria() { return cargaHoraria; }
+    public int getCargaHoraria() { return this.cargaHoraria; }
 
-    public void setCargaHoraria(int cargaHoraria) { this.cargaHoraria = cargaHoraria; }
+    public void setCargaHoraria(final int cargaHoraria) { this.cargaHoraria = cargaHoraria; }
 
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
-    public List<Turma> getTurmas() { return turmas; }
+    public List<Turma> getTurmas() { return this.turmas; }
 
-    public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }
+    public void setTurmas(final List<Turma> turmas) { this.turmas = turmas; }
 
     @Override
-    public String toString() { return nome; }
+    public String toString() { return this.nome; }
 }

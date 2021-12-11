@@ -13,14 +13,14 @@ import static models.Estado.FECHADA;
 
 public record TurmaService(TurmaDAO dao) implements ITurmaService {
     @Override
-    public int save(int id,
-                    LocalDate dataInicio,
-                    LocalDate dataFim,
-                    LocalTime horario,
-                    int limite,
-                    Curso curso,
-                    Professor professor) {
-        if (dao.exists(id))
+    public int save(final int id,
+                    final LocalDate dataInicio,
+                    final LocalDate dataFim,
+                    final LocalTime horario,
+                    final int limite,
+                    final Curso curso,
+                    final Professor professor) {
+        if (this.dao.exists(id))
             return 1;
         if (dataInicio.isAfter(dataFim))
             return 2;
@@ -32,22 +32,22 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
             return 5;
         if (limite <= 0)
             return 6;
-        Turma turma = new Turma(id, dataInicio, dataFim, horario, limite, curso, professor);
-        dao.save(turma);
+        final Turma turma = new Turma(id, dataInicio, dataFim, horario, limite, curso, professor);
+        this.dao.save(turma);
         return 0;
     }
 
     @Override
-    public int update(int id,
+    public int update(final int id,
                       LocalDate dataInicio,
                       LocalDate dataFim,
                       LocalTime horario,
                       int limite,
                       Curso curso,
                       Professor responsavel) {
-        if (!dao.exists(id))
+        if (! this.dao.exists(id))
             return 1;
-        Turma turma = dao.get(id);
+        Turma turma = this.dao.load(id);
 
         dataInicio = dataInicio == null ? turma.getDataInicio() : dataInicio;
         dataFim = dataFim == null ? turma.getDataFim() : dataFim;
@@ -66,39 +66,38 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
             return 5;
 
         turma = new Turma(id, dataInicio, dataFim, horario, limite, curso, responsavel);
-        dao.update(turma);
+        this.dao.update(turma);
         return 0;
     }
 
     @Override
-    public int close(int id) {
-        if (!dao.exists(id))
+    public int close(final int id) {
+        if (! this.dao.exists(id))
             return 1;
-        Turma turma = dao.load(id);
+        final Turma turma = this.dao.load(id);
         if (turma.getEstado() == FECHADA)
             return 2;
-        dao.closeTurma(id);
+        turma.setEstado(FECHADA);
+        this.dao.update(turma);
         return 0;
     }
 
     @Override
-    public int delete(int id) {
-        if (!dao.exists(id))
+    public int delete(final int id) {
+        if (! this.dao.exists(id))
             return 1;
-        Turma turma = dao.load(id);
+        final Turma turma = this.dao.get(id);
         if (turma.getEstado() != FECHADA)
             return 2;
         if (!turma.getMatriculas().isEmpty())
             return 3;
-        dao.delete(turma);
+        this.dao.delete(turma);
         return 0;
     }
 
     @Override
-    public Turma get(int id) { return dao.get(id); }
+    public Turma get(final int id) { return this.dao.get(id); }
 
     @Override
-    public List<Turma> getAll() { return dao.toList(); }
-
-    public Turma load(int id) { return dao.load(id); }
+    public List<Turma> getAll() { return this.dao.toList(); }
 }

@@ -22,96 +22,94 @@ public class ViewControl {
     private MatriculaView matriculaView;
     private NotasView notasView;
 
-    public ViewControl(Control control) {
+    public ViewControl(final Control control) {
         this.control = control;
         this.mainView = new MainView(control);
         this.changeView(MAIN_VIEW);
     }
 
     public void closeAllViews() {
-        alunoView = null;
-        cursoView = null;
-        professorView = null;
-        turmaView = null;
-        matriculaView = null;
-        notasView = null;
+        this.alunoView = null;
+        this.cursoView = null;
+        this.professorView = null;
+        this.turmaView = null;
+        this.matriculaView = null;
+        this.notasView = null;
     }
 
-    public void changeView(View view) {
+    public void changeView(final View view) {
         this.closeAllViews();
-        if (currentView != null && view != MAIN_VIEW)
-            currentView.dispose();
-        currentView = this.getView(view);
-        if (currentView != null)
-            currentView.setVisible(true);
+        if (this.currentView != null && view != MAIN_VIEW) this.currentView.dispose();
+        this.currentView = this.getView(view);
+        if (this.currentView != null) this.currentView.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends JFrame> T getView(@NotNull View view) {
+    public <T extends JFrame> T getView(@NotNull final View view) {
         switch (view) {
-            case MAIN_VIEW -> { return (T) mainView; }
+            case MAIN_VIEW -> { return (T) this.mainView; }
             case ALUNO_VIEW -> {
-                alunoView = (alunoView == null) ? new AlunoView(control) : alunoView;
-                return (T) alunoView;
+                this.alunoView = (this.alunoView == null) ? new AlunoView(this.control) : this.alunoView;
+                return (T) this.alunoView;
             }
             case CURSO_VIEW -> {
-                cursoView = (cursoView == null) ? new CursoView(control) : cursoView;
-                return (T) cursoView;
+                this.cursoView = (this.cursoView == null) ? new CursoView(this.control) : this.cursoView;
+                return (T) this.cursoView;
             }
             case PROFESSOR_VIEW -> {
-                professorView = (professorView == null) ? new ProfessorView(control) : professorView;
-                return (T) professorView;
+                this.professorView = (this.professorView == null) ? new ProfessorView(this.control) : this.professorView;
+                return (T) this.professorView;
             }
             case TURMA_VIEW -> {
-                turmaView = (turmaView == null) ? new TurmaView(control) : turmaView;
-                return (T) turmaView;
+                this.turmaView = (this.turmaView == null) ? new TurmaView(this.control) : this.turmaView;
+                return (T) this.turmaView;
             }
             case MATRICULA_VIEW -> {
-                matriculaView = (matriculaView == null) ? new MatriculaView(control) : matriculaView;
-                return (T) matriculaView;
+                this.matriculaView = (this.matriculaView == null) ? new MatriculaView(this.control) : this.matriculaView;
+                return (T) this.matriculaView;
             }
             case NOTAS_VIEW -> {
-                notasView = (notasView == null) ? new NotasView(control) : notasView;
-                return (T) notasView;
+                this.notasView = (this.notasView == null) ? new NotasView(this.control) : this.notasView;
+                return (T) this.notasView;
             }
             default -> { return null; }
         }
     }
 
-    public void showMessage(String message) { JOptionPane.showMessageDialog(currentView, message); }
+    public void showMessage(final String message) { JOptionPane.showMessageDialog(this.currentView, message); }
 
-    public void clearFields(@NotNull View view) {
+    public void clearFields(@NotNull final View view) {
         switch (view) {
-            case ALUNO_VIEW -> alunoView.clearFields();
-            case CURSO_VIEW -> cursoView.clearFields();
-            case PROFESSOR_VIEW -> professorView.clearFields();
-            case TURMA_VIEW -> turmaView.clearFields();
-            case MATRICULA_VIEW -> matriculaView.clearFields();
-            case NOTAS_VIEW -> notasView.clearFields();
+            case ALUNO_VIEW -> this.alunoView.clearFields();
+            case CURSO_VIEW -> this.cursoView.clearFields();
+            case PROFESSOR_VIEW -> this.professorView.clearFields();
+            case TURMA_VIEW -> this.turmaView.clearFields();
+            case MATRICULA_VIEW -> this.matriculaView.clearFields();
+            case NOTAS_VIEW -> this.notasView.clearFields();
         }
     }
 
-    public void updateListViewer(@NotNull View view) {
+    public void updateListViewer(@NotNull final View view) {
         switch (view) {
             case ALUNO_VIEW -> {
-                List<Aluno> alunos = control.getAlunoControl().getAll();
-                alunoView.updateListViewer(alunos);
+                final List<Aluno> alunos = this.control.getAlunoControl().getAll();
+                this.alunoView.updateListViewer(alunos);
             }
             case CURSO_VIEW -> {
-                List<Curso> cursos = control.getCursoControl().getAll();
-                cursoView.updateListViewer(cursos);
+                final List<Curso> cursos = this.control.getCursoControl().getAll();
+                this.cursoView.updateListViewer(cursos);
             }
             case PROFESSOR_VIEW -> {
-                List<Professor> professores = control.getProfessorControl().getAll();
-                professorView.updateListViewer(professores);
+                final List<Professor> professores = this.control.getProfessorControl().getAll();
+                this.professorView.updateListViewer(professores);
             }
             case TURMA_VIEW -> {
-                List<Turma> turmas = control.getTurmaControl().getAll();
-                turmaView.updateListViewer(turmas);
+                final List<Turma> turmas = this.control.getTurmaControl().getAll();
+                this.turmaView.updateListViewer(turmas);
             }
             case MATRICULA_VIEW -> {
-                List<Matricula> matriculas = control.getMatriculaControl().getAll();
-                matriculaView.updateListViewer(matriculas);
+                final List<Matricula> matriculas = this.control.getMatriculaControl().getAll();
+                this.matriculaView.updateListViewer(matriculas);
             }
         }
     }

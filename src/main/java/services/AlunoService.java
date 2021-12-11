@@ -11,32 +11,23 @@ import static models.Format.pessoaNomePattern;
 
 public record AlunoService(AlunoDAO dao) implements IAlunoService {
     @Override
-    public int save(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
-        if (dao.exists(cpf))
+    public int save(final long cpf, final String nome, final Sexo sexo, final LocalDate dataNascimento) {
+        if (this.dao.exists(cpf))
             return 1;
         if (!nome.matches(pessoaNomePattern.pattern()))
             return 2;
         if (dataNascimento.isAfter(LocalDate.now()))
             return 3;
-        Aluno aluno = new Aluno(cpf, nome, sexo, dataNascimento);
-        dao.save(aluno);
+        final Aluno aluno = new Aluno(cpf, nome, sexo, dataNascimento);
+        this.dao.save(aluno);
         return 0;
     }
 
     @Override
-    public int delete(long cpf) {
-        Aluno aluno = dao.get(cpf);
-        if (aluno == null)
+    public int update(final long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
+        if (! this.dao.exists(cpf))
             return 1;
-        dao.delete(aluno);
-        return 0;
-    }
-
-    @Override
-    public int update(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
-        if (!dao.exists(cpf))
-            return 1;
-        Aluno aluno = dao.get(cpf);
+        Aluno aluno = this.dao.get(cpf);
 
         nome = nome == null ? aluno.getNome() : nome;
         sexo = sexo == null ? aluno.getSexo() : sexo;
@@ -48,13 +39,22 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
             return 3;
 
         aluno = new Aluno(cpf, nome, sexo, dataNascimento);
-        dao.update(aluno);
+        this.dao.update(aluno);
         return 0;
     }
 
     @Override
-    public Aluno get(long cpf) { return dao.get(cpf); }
+    public int delete(final long cpf) {
+        if (! this.dao.exists(cpf))
+            return 1;
+        final Aluno aluno = this.dao.get(cpf);
+        this.dao.delete(aluno);
+        return 0;
+    }
 
     @Override
-    public List<Aluno> getAll() { return dao.toList(); }
+    public Aluno get(final long cpf) { return this.dao.get(cpf); }
+
+    @Override
+    public List<Aluno> getAll() { return this.dao.toList(); }
 }

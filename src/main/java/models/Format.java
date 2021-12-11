@@ -1,7 +1,6 @@
 package models;
 
 import javax.swing.text.MaskFormatter;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
@@ -36,7 +35,7 @@ public class Format {
             dateMask.setPlaceholderCharacter('_');
             timeMask = new MaskFormatter("##:##");
             timeMask.setPlaceholderCharacter('_');
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             e.printStackTrace();
         }
     }

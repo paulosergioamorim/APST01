@@ -22,30 +22,30 @@ public class ControlFactory {
     }
 
     @Contract("_ -> new")
-    public static @NotNull AlunoControl createAlunoControl(Control control) {
+    public static @NotNull AlunoControl createAlunoControl(final Control control) {
         return new AlunoControl(control, alunoService);
     }
 
     @Contract("_ -> new")
-    public static @NotNull ProfessorControl createProfessorControl(Control control) {
+    public static @NotNull ProfessorControl createProfessorControl(final Control control) {
         return new ProfessorControl(control, professorService);
     }
 
     @Contract("_ -> new")
-    public static @NotNull CursoControl createCursoControl(Control control) {
+    public static @NotNull CursoControl createCursoControl(final Control control) {
         return new CursoControl(control, cursoService);
     }
 
     @Contract("_ -> new")
-    public static @NotNull TurmaControl createTurmaControl(Control control) {
+    public static @NotNull TurmaControl createTurmaControl(final Control control) {
         return new TurmaControl(control, turmaService);
     }
 
     @Contract("_ -> new")
-    public static @NotNull MatriculaControl createMatriculaControl(Control control) {
+    public static @NotNull MatriculaControl createMatriculaControl(final Control control) {
         return new MatriculaControl(control, matriculaService);
     }
 
     @Contract("_ -> new")
-    public static @NotNull ViewControl createViewControl(Control control) { return new ViewControl(control); }
+    public static @NotNull ViewControl createViewControl(final Control control) { return new ViewControl(control); }
 }

@@ -24,64 +24,64 @@ public class NotasView extends JFrame {
     private JButton fecharTurmaButton;
     private JButton salvarNotaButton;
 
-    public NotasView(Control control) {
+    public NotasView(final Control control) {
         super("Notas");
         this.control = control;
-        $$$setupUI$$$();
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setContentPane(panel);
+        this.$$$setupUI$$$();
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setContentPane(this.panel);
         this.setSize(500, 300);
         this.setLocationRelativeTo(null);
 
-        turmaBox.addActionListener(e -> populateAlunos());
-        salvarNotaButton.addActionListener(e -> control.setNota());
-        fecharTurmaButton.addActionListener(e -> control.closeTurma());
+        this.turmaBox.addActionListener(e -> this.populateAlunos());
+        this.salvarNotaButton.addActionListener(e -> control.setNota());
+        this.fecharTurmaButton.addActionListener(e -> control.closeTurma());
     }
 
     @Override
     public void dispose() {
-        control.changeView(MAIN_VIEW);
+        this.control.changeView(MAIN_VIEW);
         super.dispose();
     }
 
     private void populateAlunos() {
-        Turma turma = (Turma) this.turmaBox.getSelectedItem();
+        final Turma turma = (Turma) this.turmaBox.getSelectedItem();
         if (turma != null) {
-            List<Aluno> alunos = control.getTurmaControl().getAlunos(turma.getId());
-            DefaultComboBoxModel<Aluno> alunoModel = new DefaultComboBoxModel<>();
+            final List<Aluno> alunos = this.control.getTurmaControl().getAlunos(turma.getId());
+            final DefaultComboBoxModel<Aluno> alunoModel = new DefaultComboBoxModel<>();
             alunoModel.addAll(alunos);
             this.alunoBox.setModel(alunoModel);
 
-            boolean bool = control.getTurmaControl().allContainsNotas(turma.getId()) || turma.getMatriculas().isEmpty();
-            fecharTurmaButton.setEnabled(bool);
+            final boolean bool = this.control.getTurmaControl().allContainsNotas(turma.getId()) || turma.getMatriculas().isEmpty();
+            this.fecharTurmaButton.setEnabled(bool);
         }
     }
 
-    public Turma getTurma() { return (Turma) turmaBox.getSelectedItem(); }
+    public Turma getTurma() { return (Turma) this.turmaBox.getSelectedItem(); }
 
-    public Aluno getAluno() { return (Aluno) alunoBox.getSelectedItem(); }
+    public Aluno getAluno() { return (Aluno) this.alunoBox.getSelectedItem(); }
 
-    public String getNota() { return notaField.getText(); }
+    public String getNota() { return this.notaField.getText(); }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        notaField = new JFormattedTextField(decimalMask);
+        this.notaField = new JFormattedTextField(decimalMask);
 
-        turmaBox = new JComboBox<>();
-        List<Turma> turmas = control.getTurmaControl().getAll().stream().filter(t -> t.getEstado() != FECHADA).collect(Collectors.toList());
-        DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
+        this.turmaBox = new JComboBox<>();
+        final List<Turma> turmas = this.control.getTurmaControl().getAll().stream().filter(t -> t.getEstado() != FECHADA).collect(Collectors.toList());
+        final DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
         turmaModel.addAll(turmas);
-        turmaBox.setModel(turmaModel);
-        turmaBox.setSelectedItem(null);
+        this.turmaBox.setModel(turmaModel);
+        this.turmaBox.setSelectedItem(null);
 
-        alunoBox = new JComboBox<>();
+        this.alunoBox = new JComboBox<>();
         this.populateAlunos();
     }
 
     public void clearFields() {
-        turmaBox.setSelectedItem(null);
-        alunoBox.setSelectedItem(null);
-        notaField.setValue(null);
+        this.turmaBox.setSelectedItem(null);
+        this.alunoBox.setSelectedItem(null);
+        this.notaField.setValue(null);
     }
 
     /**

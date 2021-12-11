@@ -2,7 +2,10 @@ package models.entitys;
 
 import models.Sexo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import java.time.LocalDate;
 
 @MappedSuperclass
@@ -12,7 +15,7 @@ public abstract class Pessoa {
     private Sexo sexo;
     private LocalDate dataNascimento;
 
-    public Pessoa(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
+    public Pessoa(final long cpf, final String nome, final Sexo sexo, final LocalDate dataNascimento) {
         this.cpf = cpf;
         this.nome = nome;
         this.sexo = sexo;
@@ -22,28 +25,28 @@ public abstract class Pessoa {
     public Pessoa() { }
 
     @Transient
-    public int getIdade() { return LocalDate.now().getYear() - dataNascimento.getYear(); }
+    public int getIdade() { return LocalDate.now().getYear() - this.dataNascimento.getYear(); }
 
     @Id
-    public long getCpf() { return cpf; }
+    public long getCpf() { return this.cpf; }
 
-    public void setCpf(long cpf) { this.cpf = cpf; }
+    public void setCpf(final long cpf) { this.cpf = cpf; }
 
     @Column(length = 45, nullable = false)
-    public String getNome() { return nome; }
+    public String getNome() { return this.nome; }
 
-    public void setNome(String nome) { this.nome = nome; }
-
-    @Column(nullable = false)
-    public Sexo getSexo() { return sexo; }
-
-    public void setSexo(Sexo sexo) { this.sexo = sexo; }
+    public void setNome(final String nome) { this.nome = nome; }
 
     @Column(nullable = false)
-    public LocalDate getDataNascimento() { return dataNascimento; }
+    public Sexo getSexo() { return this.sexo; }
 
-    public void setDataNascimento(LocalDate birthday) { this.dataNascimento = birthday; }
+    public void setSexo(final Sexo sexo) { this.sexo = sexo; }
+
+    @Column(nullable = false)
+    public LocalDate getDataNascimento() { return this.dataNascimento; }
+
+    public void setDataNascimento(final LocalDate birthday) { this.dataNascimento = birthday; }
 
     @Override
-    public String toString() { return nome; }
+    public String toString() { return this.nome; }
 }

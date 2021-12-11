@@ -10,15 +10,19 @@ import java.time.LocalDate;
 public class Professor extends Pessoa {
     private String titulacao;
 
-    public Professor(long cpf, String nome, Sexo sexo, LocalDate birthday, String titulacao) {
+    public Professor(final long cpf,
+                     final String nome,
+                     final Sexo sexo,
+                     final LocalDate birthday,
+                     final String titulacao) {
         super(cpf, nome, sexo, birthday);
         this.titulacao = titulacao;
     }
 
-    public Professor() { super(); }
+    public Professor() { }
 
     @Column(length = 25, nullable = false)
-    public String getTitulacao() { return titulacao; }
+    public String getTitulacao() { return this.titulacao; }
 
-    public void setTitulacao(String titulo) { this.titulacao = titulo; }
+    public void setTitulacao(final String titulo) { this.titulacao = titulo; }
 }

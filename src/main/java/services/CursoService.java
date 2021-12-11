@@ -10,27 +10,27 @@ import static models.Estado.FECHADA;
 
 public record CursoService(CursoDAO dao) implements ICursoService {
     @Override
-    public int save(int id, String nome, String sigla, int cargaHoraria) {
-        if (dao.exists(id))
+    public int save(final int id, final String nome, final String sigla, final int cargaHoraria) {
+        if (this.dao.exists(id))
             return 1;
         if (!nome.matches(cursoNomePattern.pattern()))
             return 2;
-        if (dao.existsBySigla(sigla))
+        if (this.dao.existsBySigla(sigla))
             return 3;
         if (sigla.length() > 5)
             return 4;
         if (cargaHoraria < 0)
             return 5;
-        Curso curso = new Curso(id, nome, sigla, cargaHoraria);
-        dao.save(curso);
+        final Curso curso = new Curso(id, nome, sigla, cargaHoraria);
+        this.dao.save(curso);
         return 0;
     }
 
     @Override
-    public int update(int id, String nome, String sigla, int cargaHoraria) {
-        if (!dao.exists(id))
+    public int update(final int id, String nome, String sigla, int cargaHoraria) {
+        if (! this.dao.exists(id))
             return 1;
-        Curso curso = dao.get(id);
+        Curso curso = this.dao.get(id);
 
         nome = nome == null ? curso.getNome() : nome;
         sigla = sigla == null ? curso.getSigla() : sigla;
@@ -38,7 +38,7 @@ public record CursoService(CursoDAO dao) implements ICursoService {
 
         if (!nome.matches(cursoNomePattern.pattern()))
             return 2;
-        if (dao.existsBySigla(sigla))
+        if (this.dao.existsBySigla(sigla))
             return 3;
         if (sigla.length() > 5)
             return 4;
@@ -46,24 +46,24 @@ public record CursoService(CursoDAO dao) implements ICursoService {
             return 5;
 
         curso = new Curso(id, nome, sigla, cargaHoraria);
-        dao.update(curso);
+        this.dao.update(curso);
         return 0;
     }
 
     @Override
-    public int delete(int id) {
-        if (!dao.exists(id))
+    public int delete(final int id) {
+        if (! this.dao.exists(id))
             return 1;
-        Curso curso = dao.load(id);
+        final Curso curso = this.dao.load(id);
         if (curso.getTurmas().stream().anyMatch(t -> t.getEstado() != FECHADA))
             return 2;
-        dao.delete(curso);
+        this.dao.delete(curso);
         return 0;
     }
 
     @Override
-    public Curso get(int id) { return dao.get(id); }
+    public Curso get(final int id) { return this.dao.get(id); }
 
     @Override
-    public List<Curso> getAll() { return dao.toList(); }
+    public List<Curso> getAll() { return this.dao.toList(); }
 }

@@ -9,51 +9,51 @@ import static models.View.CURSO_VIEW;
 
 public record CursoControl(Control control, CursoService service) {
 
-    public void save(int id, String nome, String sigla, int cargaHoraria) {
-        int code = service.save(id, nome, sigla, cargaHoraria);
+    public void save(final int id, final String nome, final String sigla, final int cargaHoraria) {
+        final int code = this.service.save(id, nome, sigla, cargaHoraria);
         switch (code) {
             case 0 -> {
-                control.showMessage("Curso salvo com sucesso!");
-                control.clearFields(CURSO_VIEW);
-                control.updateListViewer(CURSO_VIEW);
+                this.control.showMessage("Curso salvo com sucesso!");
+                this.control.clearFields(CURSO_VIEW);
+                this.control.updateListViewer(CURSO_VIEW);
             }
-            case 1 -> control.showMessage("Curso já cadastrado!");
-            case 2 -> control.showMessage("Esse nome não é válido!");
-            case 3 -> control.showMessage("Já existe um curso com essa sigla!");
-            case 4 -> control.showMessage("A sigla pode conter no máximo 5 caracteres!");
-            case 5 -> control.showMessage("Essa carga horária não é válida!");
+            case 1 -> this.control.showMessage("Curso já cadastrado!");
+            case 2 -> this.control.showMessage("Esse nome não é válido!");
+            case 3 -> this.control.showMessage("Já existe um curso com essa sigla!");
+            case 4 -> this.control.showMessage("A sigla pode conter no máximo 5 caracteres!");
+            case 5 -> this.control.showMessage("Essa carga horária não é válida!");
         }
     }
 
-    public void delete(int id) {
-        int code = service.delete(id);
+    public void delete(final int id) {
+        final int code = this.service.delete(id);
         switch (code) {
             case 0 -> {
-                control.showMessage("Curso excluído com sucesso!");
-                control.updateListViewer(CURSO_VIEW);
+                this.control.showMessage("Curso excluído com sucesso!");
+                this.control.updateListViewer(CURSO_VIEW);
             }
-            case 1 -> control.showMessage("Curso não encontrado!");
-            case 2 -> control.showMessage("Curso não pode ser excluído pois possuí turmas ativas!");
+            case 1 -> this.control.showMessage("Curso não encontrado!");
+            case 2 -> this.control.showMessage("Curso não pode ser excluído pois possuí turmas ativas!");
         }
     }
 
-    public void update(int id, String nome, String sigla, int cargaHoraria) {
-        int code = service.update(id, nome, sigla, cargaHoraria);
+    public void update(final int id, final String nome, final String sigla, final int cargaHoraria) {
+        final int code = this.service.update(id, nome, sigla, cargaHoraria);
         switch (code) {
             case 0 -> {
-                control.showMessage("Curso atualizado com sucesso!");
-                control.clearFields(CURSO_VIEW);
-                control.updateListViewer(CURSO_VIEW);
+                this.control.showMessage("Curso atualizado com sucesso!");
+                this.control.clearFields(CURSO_VIEW);
+                this.control.updateListViewer(CURSO_VIEW);
             }
-            case 1 -> control.showMessage("Curso não encontrado!");
-            case 2 -> control.showMessage("Esse nome não é válido!");
-            case 3 -> control.showMessage("Já existe um curso com essa sigla!");
-            case 4 -> control.showMessage("A sigla pode conter no máximo 5 caracteres!");
-            case 5 -> control.showMessage("Essa carga horária não é válida!");
+            case 1 -> this.control.showMessage("Curso não encontrado!");
+            case 2 -> this.control.showMessage("Esse nome não é válido!");
+            case 3 -> this.control.showMessage("Já existe um curso com essa sigla!");
+            case 4 -> this.control.showMessage("A sigla pode conter no máximo 5 caracteres!");
+            case 5 -> this.control.showMessage("Essa carga horária não é válida!");
         }
     }
 
-    public Curso get(int id) { return service.get(id); }
+    public Curso get(final int id) { return this.service.get(id); }
 
-    public List<Curso> getAll() { return service.getAll(); }
+    public List<Curso> getAll() { return this.service.getAll(); }
 }
