@@ -261,6 +261,18 @@ public final class Control {
         }
     }
 
+    public void closeTurma() {
+        Turma turma;
+        NotasView notasView = viewControl.getView(NOTAS_VIEW);
+        try {
+            turma = notasView.getTurma();
+            int id = turma.getId();
+            turmaControl.close(id);
+        } catch (Exception e) {
+            this.showMessage("Erro ao fechar turma");
+        }
+    }
+
     public void saveMatricula() {
         Aluno aluno;
         Turma turma;
@@ -274,6 +286,37 @@ public final class Control {
             matriculaControl.save(aluno, turma, dataMatricula);
         } catch (Exception e) {
             this.showMessage("Erro ao salvar matricula");
+        }
+    }
+
+    public void updateMatricula() {
+        Aluno aluno;
+        Turma turma;
+        LocalDate dataMatricula;
+        MatriculaView matriculaView = viewControl.getView(MATRICULA_VIEW);
+        try {
+            aluno = matriculaView.getAluno();
+            turma = matriculaView.getTurma();
+            dataMatricula = matriculaView.getDataMatricula().equals("__/__/____") ?
+                    null : LocalDate.parse(matriculaView.getDataMatricula(), dateFormatter);
+            matriculaControl.update(aluno, turma, dataMatricula);
+        } catch (Exception e) {
+            this.showMessage("Erro ao atualizar matricula");
+        }
+    }
+
+    public void setNota() {
+        Aluno aluno;
+        Turma turma;
+        double nota;
+        NotasView notasView = viewControl.getView(NOTAS_VIEW);
+        try {
+            aluno = notasView.getAluno();
+            turma = notasView.getTurma();
+            nota = Double.parseDouble(notasView.getNota());
+            matriculaControl.update(aluno, turma, nota);
+        } catch (Exception e) {
+            this.showMessage("Erro ao atualizar nota");
         }
     }
 

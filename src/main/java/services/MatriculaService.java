@@ -11,9 +11,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static models.Estado.FECHADA;
+import static models.Estado.MATRICULAS_ABERTAS;
 
 public record MatriculaService(MatriculaDAO dao) implements IMatriculaService {
-    //TODO: Possivelmente retirar a nota como parâmetro, já que a nota inicia em 0
     @Override
     public int save(@NotNull Aluno aluno, @NotNull Turma turma, LocalDate dataMatricula, Double nota) {
         MatriculaID matriculaID = new MatriculaID(aluno.getCpf(), turma.getId());
@@ -23,12 +23,13 @@ public record MatriculaService(MatriculaDAO dao) implements IMatriculaService {
             return 2;
         if (dataMatricula.isAfter(turma.getDataInicio()))
             return 3;
+        if (turma.getEstado() != MATRICULAS_ABERTAS)
+            return 4;
         Matricula matricula = new Matricula(matriculaID, dataMatricula, nota);
         dao.save(matricula);
         return 0;
     }
 
-    //TODO: Colocar a data de matricula em função da data de início da turma
     @Override
     public int update(@NotNull Aluno aluno, @NotNull Turma turma, LocalDate dataMatricula, Double nota) {
         MatriculaID matriculaID = new MatriculaID(aluno.getCpf(), turma.getId());

@@ -1,14 +1,13 @@
 package controls;
 
-import models.entitys.Curso;
-import models.entitys.Professor;
-import models.entitys.Turma;
+import models.entitys.*;
 import services.TurmaService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import static models.View.NOTAS_VIEW;
 import static models.View.TURMA_VIEW;
 
 public record TurmaControl(Control control, TurmaService service) {
@@ -50,9 +49,21 @@ public record TurmaControl(Control control, TurmaService service) {
             }
             case 1 -> control.showMessage("Turma não encontrada!");
             case 2 -> control.showMessage("Data de início não pode ser maior que a data de fim!");
-            case 3 -> control.showMessage("Data de início não pode ser menor que a data de início!");
-            case 4 -> control.showMessage("Data de fim não pode ser menor que a data atual!");
-            case 5 -> control.showMessage("Limite de alunos não pode ser menor que 1!");
+            case 3 -> control.showMessage("Data de fim não pode ser menor que a data atual!");
+            case 4 -> control.showMessage("Data de início não pode ser igual à data de fim!");
+            case 5 -> control.showMessage("Limite de alunos deve ser maior que 0 e obedecer o número de matriculas já cadastradas!");
+        }
+    }
+
+    public void close(int id) {
+        int code = service.close(id);
+        switch (code) {
+            case 0 -> {
+                control.showMessage("Turma fechada com sucesso!");
+                control.clearFields(NOTAS_VIEW);
+            }
+            case 1 -> control.showMessage("Turma não encontrada!");
+            case 2 -> control.showMessage("Turma já está fechada!");
         }
     }
 
@@ -73,4 +84,19 @@ public record TurmaControl(Control control, TurmaService service) {
     public Turma get(int id) { return service.get(id); }
 
     public List<Turma> getAll() { return service.getAll(); }
+
+    public List<Aluno> getAlunos(int id) {
+        return service.load(id)
+                .getMatriculas()
+                .stream()
+                .map(Matricula::getAluno)
+                .toList();
+    }
+
+    public boolean containsNullNotas(int id) {
+        return service.load(id)
+                .getMatriculas()
+                .stream()
+                .anyMatch(m -> m.getNota() == null);
+    }
 }

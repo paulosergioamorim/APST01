@@ -1,10 +1,8 @@
 package models.entitys;
 
 import models.Estado;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -20,7 +18,6 @@ public class Turma {
     private LocalDate dataFim;
     private LocalTime horario;
     private int limite;
-    private Boolean fechada;
     private Estado estado;
     private Curso curso;
     private Professor responsavel;
@@ -85,11 +82,6 @@ public class Turma {
 
     public void setLimite(int limite) { this.limite = limite; }
 
-    @Column(updatable = false)
-    public Boolean getFechada() { return fechada; }
-
-    public void setFechada(Boolean fechada) { this.fechada = fechada; }
-
     @Column(nullable = false)
     public Estado getEstado() { return estado; }
 
@@ -117,14 +109,14 @@ public class Turma {
     @PostUpdate
     @PostLoad
     public void changedListener() {
-        if (fechada != null && fechada)
-            estado = FECHADA;
-        else if (dataFim.isBefore(LocalDate.now()))
-            estado = AULAS_ENCERRADAS;
-        else if (this.getVagas() == 0)
-            estado = MATRICULAS_ENCERRADAS;
-        else if (dataInicio.isBefore(LocalDate.now()))
-            estado = EM_ANDAMENTO;
-        else estado = MATRICULAS_ABERTAS;
+        if (estado != FECHADA) {
+            if (dataFim.isBefore(LocalDate.now()))
+                estado = AULAS_ENCERRADAS;
+            else if (this.getVagas() == 0)
+                estado = MATRICULAS_ENCERRADAS;
+            else if (dataInicio.isBefore(LocalDate.now()))
+                estado = EM_ANDAMENTO;
+            else estado = MATRICULAS_ABERTAS;
+        }
     }
 }

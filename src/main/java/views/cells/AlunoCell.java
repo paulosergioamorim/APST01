@@ -55,30 +55,30 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new FormLayout("center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow", "center:d:grow"));
+        panel.setLayout(new FormLayout("center:50px:grow,left:4dlu:noGrow,center:200px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:grow", "center:d:grow"));
         panel.setBackground(new Color(- 13487566));
         panel.setPreferredSize(new Dimension(- 1, 30));
         idade = new JLabel();
         idade.setForeground(new Color(- 3618616));
-        idade.setText("Label");
+        idade.setText("Idade");
         CellConstraints cc = new CellConstraints();
         panel.add(idade, cc.xy(5, 1));
         dataNascimento = new JLabel();
         dataNascimento.setForeground(new Color(- 3618616));
-        dataNascimento.setText("Label");
+        dataNascimento.setText("Data de Nascimento");
         panel.add(dataNascimento, cc.xy(9, 1));
         sexo = new JLabel();
         sexo.setForeground(new Color(- 3618616));
-        sexo.setText("Label");
+        sexo.setText("Sexo");
         panel.add(sexo, cc.xy(7, 1));
         cpf = new JLabel();
         cpf.setForeground(new Color(- 3618616));
         cpf.setHorizontalAlignment(2);
-        cpf.setText("Label");
+        cpf.setText("CPF");
         panel.add(cpf, cc.xy(1, 1));
         nome = new JLabel();
         nome.setForeground(new Color(- 3618616));
-        nome.setText("Label");
+        nome.setText("Nome");
         panel.add(nome, cc.xy(3, 1));
     }
 

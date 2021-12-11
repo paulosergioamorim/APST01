@@ -135,8 +135,8 @@ public class CursoView extends JFrame {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        id = new JFormattedTextField(new DefaultFormatterFactory(int4Mask));
-        cargaHoraria = new JFormattedTextField(new DefaultFormatterFactory(int4Mask));
+        id = new JFormattedTextField(int4Mask);
+        cargaHoraria = new JFormattedTextField(int4Mask);
         listView = new JList<>();
         CursoCell cell = new CursoCell();
         listView.setCellRenderer(cell);

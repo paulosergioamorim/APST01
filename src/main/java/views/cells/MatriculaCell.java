@@ -2,8 +2,8 @@ package views.cells;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import models.Format;
 import models.entitys.Matricula;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,17 +16,20 @@ public class MatriculaCell implements ListCellRenderer<Matricula> {
     private JLabel turma;
     private JLabel dataMatricula;
     private JLabel nota;
+    private JLabel situacao;
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Matricula> list, Matricula value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends Matricula> list, @NotNull Matricula value, int index, boolean isSelected, boolean cellHasFocus) {
         String aluno = value.getAluno().getNome();
         String turma = String.valueOf(value.getTurma().getId());
         String dataMatricula = value.getDataMatricula().format(dateFormatter);
-        String nota = String.valueOf(value.getNota());
+        String nota = value.getNota() == null ? "--" : String.valueOf(value.getNota());
+        String situacao = value.getSituacao();
         this.aluno.setText(aluno);
         this.turma.setText(turma);
         this.dataMatricula.setText(dataMatricula);
         this.nota.setText(nota);
+        this.situacao.setText(situacao);
         if (isSelected) {
             panel.setBackground(list.getSelectionBackground());
             panel.setForeground(list.getSelectionForeground());
@@ -53,25 +56,30 @@ public class MatriculaCell implements ListCellRenderer<Matricula> {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new FormLayout("center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow", "center:d:grow"));
+        panel.setLayout(new FormLayout("center:200px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:100px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:100px:grow", "center:d:grow"));
+        panel.setBackground(new Color(- 13487566));
         panel.setPreferredSize(new Dimension(- 1, 30));
         aluno = new JLabel();
         aluno.setForeground(new Color(- 3618616));
-        aluno.setText("Label");
+        aluno.setText("Aluno");
         CellConstraints cc = new CellConstraints();
         panel.add(aluno, cc.xy(1, 1));
         turma = new JLabel();
         turma.setForeground(new Color(- 3618616));
-        turma.setText("Label");
+        turma.setText("Turma");
         panel.add(turma, cc.xy(3, 1));
         dataMatricula = new JLabel();
         dataMatricula.setForeground(new Color(- 3618616));
-        dataMatricula.setText("Label");
+        dataMatricula.setText("Data deMatrícula");
         panel.add(dataMatricula, cc.xy(5, 1));
         nota = new JLabel();
         nota.setForeground(new Color(- 3618616));
-        nota.setText("Label");
+        nota.setText("Nota");
         panel.add(nota, cc.xy(7, 1));
+        situacao = new JLabel();
+        situacao.setForeground(new Color(- 3618616));
+        situacao.setText("Situação");
+        panel.add(situacao, cc.xy(9, 1));
     }
 
     /**

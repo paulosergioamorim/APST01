@@ -66,40 +66,41 @@ public class TurmaCell implements ListCellRenderer<Turma> {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new FormLayout("center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow,left:4dlu:noGrow,center:d:grow", "center:d:grow"));
+        panel.setLayout(new FormLayout("center:50px:grow,left:4dlu:noGrow,center:75px:grow,left:4dlu:noGrow,center:75px:grow,left:4dlu:noGrow,center:75px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:100px:grow,left:4dlu:noGrow,center:100px:grow", "center:d:grow"));
+        panel.setBackground(new Color(- 13487566));
         panel.setPreferredSize(new Dimension(- 1, 30));
         id = new JLabel();
         id.setForeground(new Color(- 3618616));
-        id.setText("Label");
+        id.setText("ID");
         CellConstraints cc = new CellConstraints();
         panel.add(id, cc.xy(1, 1));
         dataInicio = new JLabel();
         dataInicio.setForeground(new Color(- 3618616));
-        dataInicio.setText("Label");
+        dataInicio.setText("Data de Início");
         panel.add(dataInicio, cc.xy(3, 1));
         dataFim = new JLabel();
         dataFim.setForeground(new Color(- 3618616));
-        dataFim.setText("Label");
+        dataFim.setText("Data Final");
         panel.add(dataFim, cc.xy(5, 1));
         horario = new JLabel();
         horario.setForeground(new Color(- 3618616));
-        horario.setText("Label");
+        horario.setText("Horário");
         panel.add(horario, cc.xy(7, 1));
         vagas = new JLabel();
         vagas.setForeground(new Color(- 3618616));
-        vagas.setText("Label");
+        vagas.setText("Vagas");
         panel.add(vagas, cc.xy(9, 1));
         curso = new JLabel();
         curso.setForeground(new Color(- 3618616));
-        curso.setText("Label");
+        curso.setText("Curso");
         panel.add(curso, cc.xy(11, 1));
         responsavel = new JLabel();
         responsavel.setForeground(new Color(- 3618616));
-        responsavel.setText("Label");
+        responsavel.setText("Responsável");
         panel.add(responsavel, cc.xy(13, 1));
         estado = new JLabel();
         estado.setForeground(new Color(- 3618616));
-        estado.setText("Label");
+        estado.setText("Estado");
         panel.add(estado, cc.xy(15, 1));
     }
 

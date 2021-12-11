@@ -10,11 +10,11 @@ import views.cells.MatriculaCell;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.DefaultFormatterFactory;
-
 import java.awt.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static models.Estado.MATRICULAS_ABERTAS;
 import static models.Format.dateMask;
 import static models.View.MAIN_VIEW;
 
@@ -28,6 +28,7 @@ public class MatriculaView extends JFrame {
     private JButton saveButton;
     private JButton deleteButton;
     private JList<Matricula> listView;
+    private JButton updateButton;
 
     public MatriculaView(Control control) {
         super("Matriculas");
@@ -39,6 +40,7 @@ public class MatriculaView extends JFrame {
         this.setLocationRelativeTo(null);
 
         saveButton.addActionListener(e -> control.saveMatricula());
+        updateButton.addActionListener(e -> control.updateMatricula());
         deleteButton.addActionListener(e -> control.deleteMatricula());
     }
 
@@ -70,15 +72,19 @@ public class MatriculaView extends JFrame {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        dataMatricula = new JFormattedTextField(dateMask);
+
         List<Turma> turmas = control.getTurmaControl().getAll();
+        turmas = turmas.stream().filter(t -> t.getEstado() == MATRICULAS_ABERTAS).collect(Collectors.toList());
         DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
         turmaModel.addAll(turmas);
         turma = new JComboBox<>(turmaModel);
+
         List<Aluno> alunos = control.getAlunoControl().getAll();
         DefaultComboBoxModel<Aluno> alunoModel = new DefaultComboBoxModel<>();
         alunoModel.addAll(alunos);
         aluno = new JComboBox<>(alunoModel);
-        dataMatricula = new JFormattedTextField(new DefaultFormatterFactory(dateMask));
+
         listView = new JList<>();
         MatriculaCell cell = new MatriculaCell();
         listView.setCellRenderer(cell);
@@ -96,17 +102,20 @@ public class MatriculaView extends JFrame {
     private void $$$setupUI$$$() {
         createUIComponents();
         panel = new JPanel();
-        panel.setLayout(new GridLayoutManager(3, 2, new Insets(10, 10, 10, 10), - 1, - 1));
+        panel.setLayout(new GridLayoutManager(3, 3, new Insets(10, 10, 10, 10), - 1, - 1));
         panel.setBackground(new Color(- 13487566));
         saveButton = new JButton();
+        saveButton.setDefaultCapable(true);
+        saveButton.setFocusPainted(false);
         saveButton.setText("Cadastrar");
-        panel.add(saveButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel.add(saveButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         deleteButton = new JButton();
+        deleteButton.setFocusPainted(false);
         deleteButton.setText("Excluir");
-        panel.add(deleteButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel.add(deleteButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
         scrollPane1.setBackground(new Color(- 13487566));
-        panel.add(scrollPane1, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel.add(scrollPane1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         scrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         listView.setBackground(new Color(- 13487566));
         listView.setForeground(new Color(- 3618616));
@@ -115,7 +124,7 @@ public class MatriculaView extends JFrame {
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new GridLayoutManager(3, 2, new Insets(10, 0, 10, 0), - 1, - 1));
         panel1.setBackground(new Color(- 13487566));
-        panel.add(panel1, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panel.add(panel1, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(- 3618616));
         label1.setText("Turma");
@@ -131,6 +140,10 @@ public class MatriculaView extends JFrame {
         label3.setText("Data de Matricula");
         panel1.add(label3, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panel1.add(dataMatricula, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        updateButton = new JButton();
+        updateButton.setFocusPainted(false);
+        updateButton.setText("Atualizar");
+        panel.add(updateButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
     }
 
     /**

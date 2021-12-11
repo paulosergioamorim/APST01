@@ -34,6 +34,7 @@ public class ViewControl {
         professorView = null;
         turmaView = null;
         matriculaView = null;
+        notasView = null;
     }
 
     public void changeView(View view) {
@@ -70,8 +71,7 @@ public class ViewControl {
                 return (T) matriculaView;
             }
             case NOTAS_VIEW -> {
-                Turma turma = turmaView.getListView().getSelectedValue();
-                notasView = (notasView == null) ? new NotasView(control, turma) : notasView;
+                notasView = (notasView == null) ? new NotasView(control) : notasView;
                 return (T) notasView;
             }
             default -> { return null; }
@@ -87,6 +87,7 @@ public class ViewControl {
             case PROFESSOR_VIEW -> professorView.clearFields();
             case TURMA_VIEW -> turmaView.clearFields();
             case MATRICULA_VIEW -> matriculaView.clearFields();
+            case NOTAS_VIEW -> notasView.clearFields();
         }
     }
 

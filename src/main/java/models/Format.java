@@ -1,7 +1,7 @@
 package models;
 
-import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
@@ -16,6 +16,7 @@ public class Format {
     public static MaskFormatter timeMask;
     public static MaskFormatter int2Mask;
     public static MaskFormatter int4Mask;
+    public static MaskFormatter decimalMask;
 
     static {
         dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -27,6 +28,8 @@ public class Format {
             int2Mask.setPlaceholderCharacter('0');
             int4Mask = new MaskFormatter("####");
             int4Mask.setPlaceholderCharacter('0');
+            decimalMask = new MaskFormatter("#.##");
+            decimalMask.setPlaceholderCharacter('0');
             cpfMask = new MaskFormatter("###.###.###-##");
             cpfMask.setPlaceholderCharacter('0');
             dateMask = new MaskFormatter("##/##/####");

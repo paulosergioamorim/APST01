@@ -37,7 +37,7 @@ public class ProfessorView extends JFrame {
         $$$setupUI$$$();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setContentPane(panel);
-        this.setSize(600, 600);
+        this.setSize(800, 600);
         this.setLocationRelativeTo(null);
 
         saveButton.addActionListener(e -> control.saveProfessor());
@@ -78,8 +78,8 @@ public class ProfessorView extends JFrame {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        cpf = new JFormattedTextField(new DefaultFormatterFactory(cpfMask));
-        dataNascimento = new JFormattedTextField(new DefaultFormatterFactory(dateMask));
+        cpf = new JFormattedTextField(cpfMask);
+        dataNascimento = new JFormattedTextField(dateMask);
         sexo = new JComboBox<>(Sexo.values());
         listView = new JList<>();
         ProfessorCell cell = new ProfessorCell();

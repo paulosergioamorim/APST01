@@ -27,6 +27,16 @@ public class Matricula {
     public MatriculaID getMatriculaID() { return matriculaID; }
 
     public void setMatriculaID(MatriculaID matriculaID) { this.matriculaID = matriculaID; }
+    
+    @Transient
+    public String getSituacao() {
+        if (nota == null)
+            return "Cursando";
+        else if (nota >= 6)
+            return "Aprovado";
+        else
+            return "Reprovado";
+    }
 
     @ManyToOne
     @JoinColumn(name = "aluno_cpf", insertable = false, updatable = false)
@@ -35,7 +45,7 @@ public class Matricula {
     public void setAluno(Aluno aluno) { this.aluno = aluno; }
 
     @ManyToOne
-    @JoinColumn(name = "turma_id", insertable = false, updatable = false)
+    @JoinColumn(name = "turma_id", insertable = false)
     public Turma getTurma() { return turma; }
 
     public void setTurma(Turma turma) { this.turma = turma; }

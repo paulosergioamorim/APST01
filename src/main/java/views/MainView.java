@@ -2,7 +2,6 @@ package views;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 import controls.Control;
 
 import javax.swing.*;
@@ -17,6 +16,7 @@ public class MainView extends JFrame {
     private JButton professorViewButton;
     private JButton turmaViewButton;
     private JButton matriculaViewButton;
+    private JButton notasButton;
 
     public MainView(Control control) {
         super("Program");
@@ -34,6 +34,7 @@ public class MainView extends JFrame {
         professorViewButton.addActionListener(e -> control.changeView(PROFESSOR_VIEW));
         turmaViewButton.addActionListener(e -> control.changeView(TURMA_VIEW));
         matriculaViewButton.addActionListener(e -> control.changeView(MATRICULA_VIEW));
+        notasButton.addActionListener(e -> control.changeView(NOTAS_VIEW));
     }
 
     {
@@ -52,28 +53,32 @@ public class MainView extends JFrame {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new GridLayoutManager(5, 1, new Insets(10, 10, 10, 10), - 1, - 1));
+        panel.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), - 1, - 1));
         panel.setBackground(new Color(- 13487566));
         alunoViewButton = new JButton();
         alunoViewButton.setBorderPainted(true);
         alunoViewButton.setContentAreaFilled(true);
         alunoViewButton.setFocusPainted(false);
         alunoViewButton.setOpaque(true);
-        alunoViewButton.setText("Aluno View");
+        alunoViewButton.setText("Alunos");
         panel.add(alunoViewButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         cursoViewButton = new JButton();
-        cursoViewButton.setText("Curso View");
+        cursoViewButton.setText("Cursos");
         panel.add(cursoViewButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         professorViewButton = new JButton();
-        professorViewButton.setText("Professor View");
+        professorViewButton.setText("Professores");
         panel.add(professorViewButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         matriculaViewButton = new JButton();
         matriculaViewButton.setFocusPainted(false);
-        matriculaViewButton.setText("Matricula View");
+        matriculaViewButton.setText("Matriculas");
         panel.add(matriculaViewButton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         turmaViewButton = new JButton();
-        turmaViewButton.setText("Turma View");
+        turmaViewButton.setText("Turmas");
         panel.add(turmaViewButton, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        notasButton = new JButton();
+        notasButton.setFocusPainted(false);
+        notasButton.setText("Notas");
+        panel.add(notasButton, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

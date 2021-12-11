@@ -2,10 +2,14 @@ package controls;
 
 import models.Sexo;
 import models.entitys.Aluno;
+import models.entitys.Matricula;
+import models.entitys.Turma;
+import org.jetbrains.annotations.NotNull;
 import services.AlunoService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static models.View.ALUNO_VIEW;
 

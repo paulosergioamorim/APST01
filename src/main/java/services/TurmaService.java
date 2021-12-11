@@ -58,17 +58,26 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
 
         if (dataInicio.isAfter(dataFim))
             return 2;
-        if (dataInicio.isBefore(LocalDate.now()))
-            return 3;
         if (dataFim.isBefore(LocalDate.now()))
-            return 4;
+            return 3;
         if (dataInicio.isEqual(dataFim))
+            return 4;
+        if (limite <= 0 || limite < turma.getMatriculas().size())
             return 5;
-        if (limite <= 0)
-            return 6;
 
         turma = new Turma(id, dataInicio, dataFim, horario, limite, curso, responsavel);
         dao.update(turma);
+        return 0;
+    }
+
+    @Override
+    public int close(int id) {
+        if (!dao.exists(id))
+            return 1;
+        Turma turma = dao.load(id);
+        if (turma.getEstado() == FECHADA)
+            return 2;
+        dao.closeTurma(id);
         return 0;
     }
 
@@ -90,4 +99,6 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
 
     @Override
     public List<Turma> getAll() { return dao.toList(); }
+
+    public Turma load(int id) { return dao.load(id); }
 }

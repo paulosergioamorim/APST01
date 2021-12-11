@@ -75,8 +75,8 @@ public class AlunoView extends JFrame {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        cpf = new JFormattedTextField(new DefaultFormatterFactory(cpfMask));
-        dataNascimento = new JFormattedTextField(new DefaultFormatterFactory(dateMask));
+        cpf = new JFormattedTextField(cpfMask);
+        dataNascimento = new JFormattedTextField(dateMask);
         sexo = new JComboBox<>(Sexo.values());
         listView = new JList<>();
         AlunoCell alunoCell = new AlunoCell();
