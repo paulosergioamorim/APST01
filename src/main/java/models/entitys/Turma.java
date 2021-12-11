@@ -5,7 +5,6 @@ import models.Estado;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,15 +45,10 @@ public class Turma {
      * @return o número de vagas disponíveis na turma
      */
     @Transient
-    public long getVagas() {
-        if (matriculas == null || matriculas.size() == 0)
+    public int getVagas() {
+        if (matriculas == null || matriculas.isEmpty())
             return limite;
-        Matricula[] array = new Matricula[limite];
-        for (int i = 0; i < matriculas.size(); i++)
-            array[i] = matriculas.get(i);
-        return Arrays.stream(array)
-                .filter(Objects::isNull)
-                .count();
+        return limite - matriculas.size();
     }
 
     @Id
@@ -97,15 +91,14 @@ public class Turma {
 
     public void setResponsavel(Professor professor) { this.responsavel = professor; }
 
-    @OneToMany(mappedBy = "turma")
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<Matricula> getMatriculas() { return matriculas; }
 
     public void setMatriculas(List<Matricula> matriculas) { this.matriculas = matriculas; }
 
     @Override
-    public String toString() { return id + " - " + responsavel + " - " + curso; }
+    public String toString() { return id + " - " + curso; }
 
-    @PostPersist
     @PostUpdate
     @PostLoad
     public void changedListener() {

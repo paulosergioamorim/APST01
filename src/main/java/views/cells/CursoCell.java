@@ -76,5 +76,4 @@ public class CursoCell implements ListCellRenderer<Curso> {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
-
 }

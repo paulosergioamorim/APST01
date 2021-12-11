@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Sexo {
-    MASCULINO('m'), FEMININO('f');
+    MASCULINO('m'),
+    FEMININO('f');
 
     public static final Map<Character, Sexo> map;
 
@@ -28,7 +29,10 @@ public enum Sexo {
 
     @Override
     public @NotNull String toString() {
-        if (this == MASCULINO) return "Masculino";
-        else return "Feminino";
+        if (this == MASCULINO)
+            return "Masculino";
+        if (this == FEMININO)
+            return "Feminino";
+        return "";
     }
 }

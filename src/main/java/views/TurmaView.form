@@ -56,7 +56,7 @@
               <text value="Curso"/>
             </properties>
           </component>
-          <component id="2ccbf" class="javax.swing.JComboBox" binding="curso" custom-create="true">
+          <component id="2ccbf" class="javax.swing.JComboBox" binding="cursoBox" custom-create="true">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>
@@ -73,7 +73,7 @@
               <text value="Responsável"/>
             </properties>
           </component>
-          <component id="13dae" class="javax.swing.JComboBox" binding="responsavel" custom-create="true">
+          <component id="13dae" class="javax.swing.JComboBox" binding="responsavelBox" custom-create="true">
             <constraints>
               <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>
@@ -90,7 +90,7 @@
               <text value="Limite de Alunos"/>
             </properties>
           </component>
-          <component id="18b6a" class="javax.swing.JFormattedTextField" binding="limite" custom-create="true">
+          <component id="18b6a" class="javax.swing.JFormattedTextField" binding="limiteField" custom-create="true">
             <constraints>
               <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>
@@ -107,7 +107,7 @@
               <text value="Horário"/>
             </properties>
           </component>
-          <component id="a11f3" class="javax.swing.JFormattedTextField" binding="horario" custom-create="true">
+          <component id="a11f3" class="javax.swing.JFormattedTextField" binding="horarioField" custom-create="true">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>
@@ -124,7 +124,7 @@
               <text value="Data Final"/>
             </properties>
           </component>
-          <component id="689f9" class="javax.swing.JFormattedTextField" binding="dataFim" custom-create="true">
+          <component id="689f9" class="javax.swing.JFormattedTextField" binding="dataFimField" custom-create="true">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>
@@ -141,7 +141,7 @@
               <text value="Data de Início"/>
             </properties>
           </component>
-          <component id="1575e" class="javax.swing.JFormattedTextField" binding="dataInicio" custom-create="true">
+          <component id="1575e" class="javax.swing.JFormattedTextField" binding="dataInicioField" custom-create="true">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>
@@ -149,7 +149,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="3e00f" class="javax.swing.JFormattedTextField" binding="id" custom-create="true">
+          <component id="3e00f" class="javax.swing.JFormattedTextField" binding="idField" custom-create="true">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>

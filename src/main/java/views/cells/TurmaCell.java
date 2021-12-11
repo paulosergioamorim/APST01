@@ -108,5 +108,4 @@ public class TurmaCell implements ListCellRenderer<Turma> {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
-
 }

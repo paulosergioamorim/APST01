@@ -86,5 +86,4 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
-
 }

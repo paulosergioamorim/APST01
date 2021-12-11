@@ -66,7 +66,7 @@ public record MatriculaControl(Control control, MatriculaService service) {
                 control.updateListViewer(MATRICULA_VIEW);
             }
             case 1 -> control.showMessage("Matrícula não existe!");
-            case 2 -> control.showMessage("A matrícula não pode ser excluída pois não possui nota!");
+            case 2 -> control.showMessage("A matrícula não pode ser excluída pois já possui notas!");
         }
     }
 

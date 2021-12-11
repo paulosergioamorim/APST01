@@ -57,7 +57,7 @@ public record MatriculaService(MatriculaDAO dao) implements IMatriculaService {
         Matricula matricula = dao.get(matriculaID);
         if (matricula == null)
             return 1;
-        if (matricula.getNota() == null)
+        if (matricula.getNota() != null || matricula.getNota() != 0)
             return 2;
         dao.delete(matricula);
         return 0;

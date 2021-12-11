@@ -1,5 +1,6 @@
 package models.converters;
 
+import models.Estado;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.AttributeConverter;
@@ -7,16 +8,16 @@ import javax.persistence.Converter;
 import java.util.Arrays;
 
 @Converter(autoApply = true)
-public class EstadoConverter implements AttributeConverter<models.Estado, String> {
+public class EstadoConverter implements AttributeConverter<Estado, String> {
 
     @Override
-    public String convertToDatabaseColumn(@NotNull models.Estado estado) { return models.Estado.valueOf(estado); }
+    public String convertToDatabaseColumn(@NotNull Estado estado) { return Estado.valueOf(estado); }
 
     @Override
-    public models.Estado convertToEntityAttribute(String string) {
-        if (Arrays.stream(models.Estado.values()).noneMatch(e -> e.getValue().equals(string))) {
+    public Estado convertToEntityAttribute(String string) {
+        if (Arrays.stream(Estado.values()).noneMatch(e -> e.getValue().equals(string))) {
             throw new IllegalArgumentException("String inválida");
         }
-        return models.Estado.getState(string);
+        return Estado.getState(string);
     }
 }

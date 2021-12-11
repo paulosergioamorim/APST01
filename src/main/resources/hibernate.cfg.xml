@@ -15,5 +15,8 @@
         <mapping class="models.entitys.Professor"/>
         <mapping class="models.entitys.Turma"/>
         <mapping class="models.entitys.Matricula"/>
+        <mapping class="models.MatriculaID"/>
+        <mapping class="models.converters.EstadoConverter"/>
+        <mapping class="models.converters.SexoConverter"/>
     </session-factory>
 </hibernate-configuration>

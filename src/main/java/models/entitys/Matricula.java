@@ -38,14 +38,14 @@ public class Matricula {
             return "Reprovado";
     }
 
-    @ManyToOne
-    @JoinColumn(name = "aluno_cpf", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "aluno_cpf", nullable = false, insertable = false, updatable = false)
     public Aluno getAluno() { return aluno; }
 
     public void setAluno(Aluno aluno) { this.aluno = aluno; }
 
-    @ManyToOne
-    @JoinColumn(name = "turma_id", insertable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "turma_id", nullable = false, insertable = false, updatable = false)
     public Turma getTurma() { return turma; }
 
     public void setTurma(Turma turma) { this.turma = turma; }
@@ -56,9 +56,9 @@ public class Matricula {
     public void setDataMatricula(LocalDate date) { this.dataMatricula = date; }
 
     @Column
-    public @Nullable Double getNota() { return nota; }
+    public Double getNota() { return nota; }
 
-    public void setNota(@Nullable Double nota) { this.nota = nota; }
+    public void setNota(Double nota) { this.nota = nota; }
 
     @Override
     public String toString() { return this.getAluno() + " - " + this.getTurma().getId(); }

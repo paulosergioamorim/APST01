@@ -53,7 +53,7 @@
               <text value="CPF"/>
             </properties>
           </component>
-          <component id="373a" class="javax.swing.JFormattedTextField" binding="cpf" custom-create="true">
+          <component id="373a" class="javax.swing.JFormattedTextField" binding="cpfField" custom-create="true">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="30"/>
@@ -79,7 +79,7 @@
               <text value="Data de Nascimento"/>
             </properties>
           </component>
-          <component id="72d06" class="javax.swing.JFormattedTextField" binding="dataNascimento" custom-create="true">
+          <component id="72d06" class="javax.swing.JFormattedTextField" binding="dataNascimentoField" custom-create="true">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="30"/>
@@ -87,7 +87,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="4e463" class="javax.swing.JTextField" binding="nome">
+          <component id="4e463" class="javax.swing.JTextField" binding="nomeField">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="30"/>
@@ -104,7 +104,7 @@
               <text value="Sexo"/>
             </properties>
           </component>
-          <component id="507d6" class="javax.swing.JComboBox" binding="sexo" custom-create="true">
+          <component id="507d6" class="javax.swing.JComboBox" binding="sexoBox" custom-create="true">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>

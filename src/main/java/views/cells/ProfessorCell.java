@@ -94,5 +94,4 @@ public class ProfessorCell implements ListCellRenderer<Professor> {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
-
 }

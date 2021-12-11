@@ -28,7 +28,7 @@ public class Format {
             int2Mask.setPlaceholderCharacter('0');
             int4Mask = new MaskFormatter("####");
             int4Mask.setPlaceholderCharacter('0');
-            decimalMask = new MaskFormatter("#.##");
+            decimalMask = new MaskFormatter("##.##");
             decimalMask.setPlaceholderCharacter('0');
             cpfMask = new MaskFormatter("###.###.###-##");
             cpfMask.setPlaceholderCharacter('0');

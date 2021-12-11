@@ -85,5 +85,4 @@ public class MainView extends JFrame {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
-
 }

@@ -1,9 +1,6 @@
 package models.entitys;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 import static javax.persistence.FetchType.EAGER;
@@ -53,7 +50,7 @@ public class Curso {
 
     public void setCargaHoraria(int cargaHoraria) { this.cargaHoraria = cargaHoraria; }
 
-    @OneToMany(mappedBy = "curso")
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     public List<Turma> getTurmas() { return turmas; }
 
     public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }

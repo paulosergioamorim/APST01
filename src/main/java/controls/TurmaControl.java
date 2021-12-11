@@ -93,10 +93,10 @@ public record TurmaControl(Control control, TurmaService service) {
                 .toList();
     }
 
-    public boolean containsNullNotas(int id) {
+    public boolean allContainsNotas(int id) {
         return service.load(id)
                 .getMatriculas()
                 .stream()
-                .anyMatch(m -> m.getNota() == null);
+                .allMatch(m -> m.getNota() != null);
     }
 }

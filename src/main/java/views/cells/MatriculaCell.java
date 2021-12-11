@@ -17,16 +17,19 @@ public class MatriculaCell implements ListCellRenderer<Matricula> {
     private JLabel dataMatricula;
     private JLabel nota;
     private JLabel situacao;
+    private JLabel curso;
 
     @Override
     public Component getListCellRendererComponent(JList<? extends Matricula> list, @NotNull Matricula value, int index, boolean isSelected, boolean cellHasFocus) {
         String aluno = value.getAluno().getNome();
         String turma = String.valueOf(value.getTurma().getId());
+        String curso = value.getTurma().getCurso().getSigla();
         String dataMatricula = value.getDataMatricula().format(dateFormatter);
         String nota = value.getNota() == null ? "--" : String.valueOf(value.getNota());
         String situacao = value.getSituacao();
         this.aluno.setText(aluno);
         this.turma.setText(turma);
+        this.curso.setText(curso);
         this.dataMatricula.setText(dataMatricula);
         this.nota.setText(nota);
         this.situacao.setText(situacao);
@@ -56,7 +59,7 @@ public class MatriculaCell implements ListCellRenderer<Matricula> {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new FormLayout("center:200px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:100px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:100px:grow", "center:d:grow"));
+        panel.setLayout(new FormLayout("center:200px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:noGrow,left:4dlu:noGrow,center:100px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:100px:grow", "center:d:grow"));
         panel.setBackground(new Color(- 13487566));
         panel.setPreferredSize(new Dimension(- 1, 30));
         aluno = new JLabel();
@@ -71,20 +74,23 @@ public class MatriculaCell implements ListCellRenderer<Matricula> {
         dataMatricula = new JLabel();
         dataMatricula.setForeground(new Color(- 3618616));
         dataMatricula.setText("Data deMatrícula");
-        panel.add(dataMatricula, cc.xy(5, 1));
+        panel.add(dataMatricula, cc.xy(7, 1));
         nota = new JLabel();
         nota.setForeground(new Color(- 3618616));
         nota.setText("Nota");
-        panel.add(nota, cc.xy(7, 1));
+        panel.add(nota, cc.xy(9, 1));
         situacao = new JLabel();
         situacao.setForeground(new Color(- 3618616));
         situacao.setText("Situação");
-        panel.add(situacao, cc.xy(9, 1));
+        panel.add(situacao, cc.xy(11, 1));
+        curso = new JLabel();
+        curso.setForeground(new Color(- 3618616));
+        curso.setText("Curso");
+        panel.add(curso, cc.xy(5, 1));
     }
 
     /**
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
-
 }

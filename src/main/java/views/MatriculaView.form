@@ -71,7 +71,7 @@
               <text value="Turma"/>
             </properties>
           </component>
-          <component id="84a56" class="javax.swing.JComboBox" binding="turma" custom-create="true">
+          <component id="84a56" class="javax.swing.JComboBox" binding="turmaBox" custom-create="true">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>
@@ -88,7 +88,7 @@
               <text value="Aluno"/>
             </properties>
           </component>
-          <component id="94a00" class="javax.swing.JComboBox" binding="aluno" custom-create="true">
+          <component id="94a00" class="javax.swing.JComboBox" binding="alunoBox" custom-create="true">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>
@@ -105,7 +105,7 @@
               <text value="Data de Matricula"/>
             </properties>
           </component>
-          <component id="fe8c8" class="javax.swing.JFormattedTextField" binding="dataMatricula" custom-create="true">
+          <component id="fe8c8" class="javax.swing.JFormattedTextField" binding="dataMatriculaField" custom-create="true">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="30"/>

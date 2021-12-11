@@ -22,9 +22,9 @@ public class MatriculaView extends JFrame {
     private final Control control;
 
     private JPanel panel;
-    private JComboBox<Turma> turma;
-    private JComboBox<Aluno> aluno;
-    private JFormattedTextField dataMatricula;
+    private JComboBox<Turma> turmaBox;
+    private JComboBox<Aluno> alunoBox;
+    private JFormattedTextField dataMatriculaField;
     private JButton saveButton;
     private JButton deleteButton;
     private JList<Matricula> listView;
@@ -51,9 +51,9 @@ public class MatriculaView extends JFrame {
     }
 
     public void clearFields() {
-        turma.setSelectedItem(null);
-        aluno.setSelectedItem(null);
-        dataMatricula.setValue(null);
+        turmaBox.setSelectedItem(null);
+        alunoBox.setSelectedItem(null);
+        dataMatriculaField.setValue(null);
     }
 
     public void updateListViewer(List<Matricula> matriculas) {
@@ -62,28 +62,28 @@ public class MatriculaView extends JFrame {
         listView.setModel(model);
     }
 
-    public Turma getTurma() { return (Turma) turma.getSelectedItem(); }
+    public Turma getTurma() { return (Turma) turmaBox.getSelectedItem(); }
 
-    public Aluno getAluno() { return (Aluno) aluno.getSelectedItem(); }
+    public Aluno getAluno() { return (Aluno) alunoBox.getSelectedItem(); }
 
-    public String getDataMatricula() { return dataMatricula.getText(); }
+    public String getDataMatricula() { return dataMatriculaField.getText(); }
 
     public JList<Matricula> getListView() { return listView; }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        dataMatricula = new JFormattedTextField(dateMask);
+        dataMatriculaField = new JFormattedTextField(dateMask);
 
         List<Turma> turmas = control.getTurmaControl().getAll();
         turmas = turmas.stream().filter(t -> t.getEstado() == MATRICULAS_ABERTAS).collect(Collectors.toList());
         DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
         turmaModel.addAll(turmas);
-        turma = new JComboBox<>(turmaModel);
+        turmaBox = new JComboBox<>(turmaModel);
 
         List<Aluno> alunos = control.getAlunoControl().getAll();
         DefaultComboBoxModel<Aluno> alunoModel = new DefaultComboBoxModel<>();
         alunoModel.addAll(alunos);
-        aluno = new JComboBox<>(alunoModel);
+        alunoBox = new JComboBox<>(alunoModel);
 
         listView = new JList<>();
         MatriculaCell cell = new MatriculaCell();
@@ -129,17 +129,17 @@ public class MatriculaView extends JFrame {
         label1.setForeground(new Color(- 3618616));
         label1.setText("Turma");
         panel1.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(turma, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(turmaBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setForeground(new Color(- 3618616));
         label2.setText("Aluno");
         panel1.add(label2, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(aluno, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(alunoBox, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label3 = new JLabel();
         label3.setForeground(new Color(- 3618616));
         label3.setText("Data de Matricula");
         panel1.add(label3, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(dataMatricula, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(dataMatriculaField, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         updateButton = new JButton();
         updateButton.setFocusPainted(false);
         updateButton.setText("Atualizar");
@@ -150,5 +150,4 @@ public class MatriculaView extends JFrame {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
-
 }

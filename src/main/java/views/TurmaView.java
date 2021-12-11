@@ -10,13 +10,11 @@ import views.cells.TurmaCell;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.DefaultFormatterFactory;
 import java.awt.*;
 import java.util.List;
 
 import static models.Format.*;
 import static models.View.MAIN_VIEW;
-import static models.View.NOTAS_VIEW;
 
 public class TurmaView extends JFrame {
     private final Control control;
@@ -25,14 +23,14 @@ public class TurmaView extends JFrame {
     private JButton saveButton;
     private JButton updateButton;
     private JButton deleteButton;
-    private JFormattedTextField id;
-    private JFormattedTextField dataInicio;
-    private JFormattedTextField dataFim;
+    private JFormattedTextField idField;
+    private JFormattedTextField dataInicioField;
+    private JFormattedTextField dataFimField;
     private JList<Turma> listView;
-    private JFormattedTextField horario;
-    private JFormattedTextField limite;
-    private JComboBox<Curso> curso;
-    private JComboBox<Professor> responsavel;
+    private JFormattedTextField horarioField;
+    private JFormattedTextField limiteField;
+    private JComboBox<Curso> cursoBox;
+    private JComboBox<Professor> responsavelBox;
 
     public TurmaView(Control control) {
         super("Turmas");
@@ -55,13 +53,13 @@ public class TurmaView extends JFrame {
     }
 
     public void clearFields() {
-        id.setValue(null);
-        dataInicio.setValue(null);
-        dataFim.setValue(null);
-        horario.setValue(null);
-        limite.setValue(null);
-        curso.setSelectedItem(null);
-        responsavel.setSelectedItem(null);
+        idField.setValue(null);
+        dataInicioField.setValue(null);
+        dataFimField.setValue(null);
+        horarioField.setValue(null);
+        limiteField.setValue(null);
+        cursoBox.setSelectedItem(null);
+        responsavelBox.setSelectedItem(null);
     }
 
     public void updateListViewer(List<Turma> turmas) {
@@ -70,37 +68,37 @@ public class TurmaView extends JFrame {
         listView.setModel(model);
     }
 
-    public String getId() { return id.getText(); }
+    public String getId() { return idField.getText(); }
 
-    public String getDataInicio() { return dataInicio.getText(); }
+    public String getDataInicio() { return dataInicioField.getText(); }
 
-    public String getDataFim() { return dataFim.getText(); }
+    public String getDataFim() { return dataFimField.getText(); }
 
-    public String getHorario() { return horario.getText(); }
+    public String getHorario() { return horarioField.getText(); }
 
-    public String getLimite() { return limite.getText(); }
+    public String getLimite() { return limiteField.getText(); }
 
-    public Curso getCurso() { return (Curso) curso.getSelectedItem(); }
+    public Curso getCurso() { return (Curso) cursoBox.getSelectedItem(); }
 
-    public Professor getResponsavel() { return (Professor) responsavel.getSelectedItem(); }
+    public Professor getResponsavel() { return (Professor) responsavelBox.getSelectedItem(); }
 
     public JList<Turma> getListView() { return listView; }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        id = new JFormattedTextField(int4Mask);
-        dataInicio = new JFormattedTextField(dateMask);
-        dataFim = new JFormattedTextField(dateMask);
-        limite = new JFormattedTextField(int2Mask);
-        horario = new JFormattedTextField(timeMask);
+        idField = new JFormattedTextField(int4Mask);
+        dataInicioField = new JFormattedTextField(dateMask);
+        dataFimField = new JFormattedTextField(dateMask);
+        limiteField = new JFormattedTextField(int2Mask);
+        horarioField = new JFormattedTextField(timeMask);
         List<Curso> cursos = control.getCursoControl().getAll();
         DefaultComboBoxModel<Curso> cursoModel = new DefaultComboBoxModel<>();
         cursoModel.addAll(cursos);
-        curso = new JComboBox<>(cursoModel);
+        cursoBox = new JComboBox<>(cursoModel);
         List<Professor> professores = control.getProfessorControl().getAll();
         DefaultComboBoxModel<Professor> professorModel = new DefaultComboBoxModel<>();
         professorModel.addAll(professores);
-        responsavel = new JComboBox<>(professorModel);
+        responsavelBox = new JComboBox<>(professorModel);
         listView = new JList<>();
         TurmaCell cell = new TurmaCell();
         listView.setCellRenderer(cell);
@@ -140,33 +138,33 @@ public class TurmaView extends JFrame {
         label1.setForeground(new Color(- 3618616));
         label1.setText("Curso");
         panel1.add(label1, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(curso, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(cursoBox, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setForeground(new Color(- 3618616));
         label2.setText("Responsável");
         panel1.add(label2, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(responsavel, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(responsavelBox, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label3 = new JLabel();
         label3.setForeground(new Color(- 3618616));
         label3.setText("Limite de Alunos");
         panel1.add(label3, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(limite, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(limiteField, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label4 = new JLabel();
         label4.setForeground(new Color(- 3618616));
         label4.setText("Horário");
         panel1.add(label4, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(horario, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(horarioField, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label5 = new JLabel();
         label5.setForeground(new Color(- 3618616));
         label5.setText("Data Final");
         panel1.add(label5, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(dataFim, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(dataFimField, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label6 = new JLabel();
         label6.setForeground(new Color(- 3618616));
         label6.setText("Data de Início");
         panel1.add(label6, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel1.add(dataInicio, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
-        panel1.add(id, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(dataInicioField, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel1.add(idField, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
         final JLabel label7 = new JLabel();
         label7.setForeground(new Color(- 3618616));
         label7.setText("ID");
@@ -185,5 +183,4 @@ public class TurmaView extends JFrame {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
-
 }

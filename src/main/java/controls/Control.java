@@ -54,7 +54,7 @@ public final class Control {
         LocalDate dataNascimento;
         AlunoView alunoView = viewControl.getView(ALUNO_VIEW);
         try {
-            cpf = Long.parseLong(alunoView.getCpf().replaceAll("\\D", ""));
+            cpf = Integer.parseInt(alunoView.getCpf().replaceAll("\\D", ""));
             nome = alunoView.getNome();
             sexo = alunoView.getSexo();
             dataNascimento = LocalDate.parse(alunoView.getDataNascimento(), dateFormatter);
@@ -85,11 +85,10 @@ public final class Control {
     }
 
     public void deleteAluno() {
-        Aluno aluno;
+        long cpf;
         AlunoView alunoView = viewControl.getView(ALUNO_VIEW);
         try {
-            aluno = alunoView.getListView().getSelectedValue();
-            long cpf = aluno.getCpf();
+            cpf = alunoView.getListView().getSelectedValue().getCpf();
             alunoControl.delete(cpf);
         } catch (Exception e) {
             this.showMessage("Erro ao deletar aluno");
