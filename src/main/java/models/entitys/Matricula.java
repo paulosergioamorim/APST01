@@ -1,6 +1,7 @@
 package models.entitys;
 
 import models.MatriculaID;
+import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,9 +10,11 @@ import java.time.LocalDate;
 public class Matricula {
     private MatriculaID matriculaID;
     private LocalDate dataMatricula;
-    private double nota;
+    private Aluno aluno;
+    private Turma turma;
+    private Double nota;
 
-    public Matricula(MatriculaID matriculaID, LocalDate dataMatricula, double nota) {
+    public Matricula(MatriculaID matriculaID, LocalDate dataMatricula, Double nota) {
         this.matriculaID = matriculaID;
         this.dataMatricula = dataMatricula;
         this.nota = nota;
@@ -25,17 +28,29 @@ public class Matricula {
 
     public void setMatriculaID(MatriculaID matriculaID) { this.matriculaID = matriculaID; }
 
+    @ManyToOne
+    @JoinColumn(name = "aluno_cpf", insertable = false, updatable = false)
+    public Aluno getAluno() { return aluno; }
+
+    public void setAluno(Aluno aluno) { this.aluno = aluno; }
+
+    @ManyToOne
+    @JoinColumn(name = "turma_id", insertable = false, updatable = false)
+    public Turma getTurma() { return turma; }
+
+    public void setTurma(Turma turma) { this.turma = turma; }
+
     @Column(nullable = false)
     public LocalDate getDataMatricula() { return dataMatricula; }
 
     public void setDataMatricula(LocalDate date) { this.dataMatricula = date; }
 
-    @Column(nullable = false)
-    public double getNota() { return nota; }
+    @Column
+    public @Nullable Double getNota() { return nota; }
 
-    public void setNota(double nota) { this.nota = nota; }
+    public void setNota(@Nullable Double nota) { this.nota = nota; }
 
     @Override
-    public String toString() { return matriculaID.getAluno() + " - " + matriculaID.getTurma(); }
+    public String toString() { return this.getAluno() + " - " + this.getTurma().getId(); }
 
 }

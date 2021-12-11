@@ -57,5 +57,4 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
 
     @Override
     public List<Aluno> getAll() { return dao.toList(); }
-
 }

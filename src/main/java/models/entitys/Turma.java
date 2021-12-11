@@ -1,29 +1,32 @@
 package models.entitys;
 
 import models.Estado;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import static javax.persistence.FetchType.EAGER;
 import static models.Estado.*;
 
 @Entity
 public class Turma {
-    private String id;
+    private int id;
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private LocalTime horario;
     private int limite;
+    private Boolean fechada;
     private Estado estado;
     private Curso curso;
     private Professor responsavel;
     private List<Matricula> matriculas;
 
-    public Turma(String id,
+    public Turma(int id,
                  LocalDate dataInicio,
                  LocalDate dataFim,
                  LocalTime horario,
@@ -49,16 +52,18 @@ public class Turma {
     public long getVagas() {
         if (matriculas == null || matriculas.size() == 0)
             return limite;
-        return matriculas
-                .stream()
+        Matricula[] array = new Matricula[limite];
+        for (int i = 0; i < matriculas.size(); i++)
+            array[i] = matriculas.get(i);
+        return Arrays.stream(array)
                 .filter(Objects::isNull)
                 .count();
     }
 
     @Id
-    public String getId() { return id; }
+    public int getId() { return id; }
 
-    public void setId(String id) { this.id = id; }
+    public void setId(int id) { this.id = id; }
 
     @Column(nullable = false)
     public LocalDate getDataInicio() { return dataInicio; }
@@ -80,6 +85,11 @@ public class Turma {
 
     public void setLimite(int limite) { this.limite = limite; }
 
+    @Column(updatable = false)
+    public Boolean getFechada() { return fechada; }
+
+    public void setFechada(Boolean fechada) { this.fechada = fechada; }
+
     @Column(nullable = false)
     public Estado getEstado() { return estado; }
 
@@ -95,19 +105,21 @@ public class Turma {
 
     public void setResponsavel(Professor professor) { this.responsavel = professor; }
 
-    @OneToMany(mappedBy = "matriculaID.turma")
+    @OneToMany(mappedBy = "turma")
     public List<Matricula> getMatriculas() { return matriculas; }
 
     public void setMatriculas(List<Matricula> matriculas) { this.matriculas = matriculas; }
 
     @Override
-    public String toString() { return id; }
+    public String toString() { return id + " - " + responsavel + " - " + curso; }
 
     @PostPersist
     @PostUpdate
     @PostLoad
     public void changedListener() {
-        if (dataFim.isBefore(LocalDate.now()))
+        if (fechada != null && fechada)
+            estado = FECHADA;
+        else if (dataFim.isBefore(LocalDate.now()))
             estado = AULAS_ENCERRADAS;
         else if (this.getVagas() == 0)
             estado = MATRICULAS_ENCERRADAS;

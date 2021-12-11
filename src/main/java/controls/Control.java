@@ -200,7 +200,7 @@ public final class Control {
     }
 
     public void saveTurma() {
-        String id;
+        int id;
         LocalDate dataInicio;
         LocalDate dataFim;
         LocalTime horario;
@@ -209,7 +209,7 @@ public final class Control {
         Professor responsavel;
         TurmaView turmaView = viewControl.getView(TURMA_VIEW);
         try {
-            id = turmaView.getId().replaceAll("\\s","");
+            id = Integer.parseInt(turmaView.getId());
             dataInicio = LocalDate.parse(turmaView.getDataInicio(), dateFormatter);
             dataFim = LocalDate.parse(turmaView.getDataFim(), dateFormatter);
             horario = LocalTime.parse(turmaView.getHorario(), timeFormatter);
@@ -223,7 +223,7 @@ public final class Control {
     }
 
     public void updateTurma() {
-        String id;
+        int id;
         LocalDate dataInicio;
         LocalDate dataFim;
         LocalTime horario;
@@ -232,7 +232,7 @@ public final class Control {
         Professor responsavel;
         TurmaView turmaView = viewControl.getView(TURMA_VIEW);
         try {
-            id = turmaView.getId().trim();
+            id = Integer.parseInt(turmaView.getId());
             dataInicio = turmaView.getDataInicio().equals("__/__/____") ?
                     null : LocalDate.parse(turmaView.getDataInicio(), dateFormatter);
             dataFim = turmaView.getDataFim().equals("__/__/____") ?
@@ -254,7 +254,7 @@ public final class Control {
         TurmaView turmaView = viewControl.getView(TURMA_VIEW);
         try {
             turma = turmaView.getListView().getSelectedValue();
-            String id = turma.getId();
+            int id = turma.getId();
             turmaControl.delete(id);
         } catch (Exception e) {
             this.showMessage("Erro ao deletar turma");
@@ -277,16 +277,13 @@ public final class Control {
         }
     }
 
-    public void updateMatricula() {
-    }
-
     public void deleteMatricula() {
         Matricula matricula;
         MatriculaView matriculaView = viewControl.getView(MATRICULA_VIEW);
         try {
             matricula = matriculaView.getListView().getSelectedValue();
-            Aluno aluno = matricula.getMatriculaID().getAluno();
-            Turma turma = matricula.getMatriculaID().getTurma();
+            Aluno aluno = matricula.getAluno();
+            Turma turma = matricula.getTurma();
             matriculaControl.delete(aluno, turma);
         } catch (Exception e) {
             this.showMessage("Erro ao deletar matricula");

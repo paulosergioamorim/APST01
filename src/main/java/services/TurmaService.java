@@ -13,7 +13,7 @@ import static models.Estado.FECHADA;
 
 public record TurmaService(TurmaDAO dao) implements ITurmaService {
     @Override
-    public int save(String id,
+    public int save(int id,
                     LocalDate dataInicio,
                     LocalDate dataFim,
                     LocalTime horario,
@@ -38,7 +38,7 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
     }
 
     @Override
-    public int update(String id,
+    public int update(int id,
                       LocalDate dataInicio,
                       LocalDate dataFim,
                       LocalTime horario,
@@ -73,7 +73,7 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(int id) {
         if (!dao.exists(id))
             return 1;
         Turma turma = dao.load(id);
@@ -86,7 +86,7 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
     }
 
     @Override
-    public Turma get(String id) { return dao.get(id); }
+    public Turma get(int id) { return dao.get(id); }
 
     @Override
     public List<Turma> getAll() { return dao.toList(); }

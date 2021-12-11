@@ -20,6 +20,7 @@ public class ViewControl {
     private ProfessorView professorView;
     private TurmaView turmaView;
     private MatriculaView matriculaView;
+    private NotasView notasView;
 
     public ViewControl(Control control) {
         this.control = control;
@@ -67,6 +68,11 @@ public class ViewControl {
             case MATRICULA_VIEW -> {
                 matriculaView = (matriculaView == null) ? new MatriculaView(control) : matriculaView;
                 return (T) matriculaView;
+            }
+            case NOTAS_VIEW -> {
+                Turma turma = turmaView.getListView().getSelectedValue();
+                notasView = (notasView == null) ? new NotasView(control, turma) : notasView;
+                return (T) notasView;
             }
             default -> { return null; }
         }

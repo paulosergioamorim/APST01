@@ -6,6 +6,7 @@ import controls.Control;
 import models.entitys.Aluno;
 import models.entitys.Matricula;
 import models.entitys.Turma;
+import views.cells.MatriculaCell;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -48,8 +49,8 @@ public class MatriculaView extends JFrame {
     }
 
     public void clearFields() {
-        turma.setSelectedIndex(0);
-        aluno.setSelectedIndex(0);
+        turma.setSelectedItem(null);
+        aluno.setSelectedItem(null);
         dataMatricula.setValue(null);
     }
 
@@ -79,6 +80,8 @@ public class MatriculaView extends JFrame {
         aluno = new JComboBox<>(alunoModel);
         dataMatricula = new JFormattedTextField(new DefaultFormatterFactory(dateMask));
         listView = new JList<>();
+        MatriculaCell cell = new MatriculaCell();
+        listView.setCellRenderer(cell);
         List<Matricula> matriculas = control.getMatriculaControl().getAll();
         this.updateListViewer(matriculas);
     }

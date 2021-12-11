@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IMatriculaService {
-    int save(MatriculaID matriculaID, LocalDate dataMatricula, double nota);
-    int update(MatriculaID matriculaID, LocalDate dataMatricula, double nota);
+    int save(Aluno aluno, Turma turma, LocalDate dataMatricula, Double nota);
+    int update(Aluno aluno, Turma turma, LocalDate dataMatricula, Double nota);
     int delete(MatriculaID matriculaID);
     Matricula get(MatriculaID matriculaID);
     List<Matricula> getAll();

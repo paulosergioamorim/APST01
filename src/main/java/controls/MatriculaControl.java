@@ -4,6 +4,7 @@ import models.MatriculaID;
 import models.entitys.Aluno;
 import models.entitys.Matricula;
 import models.entitys.Turma;
+import org.jetbrains.annotations.NotNull;
 import services.MatriculaService;
 
 import java.time.LocalDate;
@@ -13,8 +14,7 @@ import static models.View.MATRICULA_VIEW;
 
 public record MatriculaControl(Control control, MatriculaService service) {
     public void save(Aluno aluno, Turma turma, LocalDate dataMatricula) {
-        MatriculaID matriculaID = new MatriculaID(aluno, turma);
-        int code = service.save(matriculaID, dataMatricula, 0);
+        int code = service.save(aluno, turma, dataMatricula, null);
         switch (code) {
             case 0 -> {
                 control.showMessage("Matrícula salva com sucesso!");
@@ -28,8 +28,7 @@ public record MatriculaControl(Control control, MatriculaService service) {
     }
 
     public void update(Aluno aluno, Turma turma, LocalDate dataMatricula, double nota) {
-        MatriculaID matriculaID = new MatriculaID(aluno, turma);
-        int code = service.update(matriculaID, dataMatricula, nota);
+        int code = service.update(aluno, turma, dataMatricula, nota);
         switch (code) {
             case 0 -> {
                 control.showMessage("Matrícula atualizada com sucesso!");
@@ -43,8 +42,8 @@ public record MatriculaControl(Control control, MatriculaService service) {
         }
     }
 
-    public void delete(Aluno aluno, Turma turma) {
-        MatriculaID matriculaID = new MatriculaID(aluno, turma);
+    public void delete(@NotNull Aluno aluno, @NotNull Turma turma) {
+        MatriculaID matriculaID = new MatriculaID(aluno.getCpf(), turma.getId());
         int code = service.delete(matriculaID);
         switch (code) {
             case 0 -> {
@@ -53,12 +52,12 @@ public record MatriculaControl(Control control, MatriculaService service) {
                 control.updateListViewer(MATRICULA_VIEW);
             }
             case 1 -> control.showMessage("Matrícula não existe!");
-            case 2 -> control.showMessage("A matrícula não pode ser excluída pois a turma não está fechada!");
+            case 2 -> control.showMessage("A matrícula não pode ser excluída pois não possui nota!");
         }
     }
 
-    public Matricula get(Aluno aluno, Turma turma) {
-        MatriculaID matriculaID = new MatriculaID(aluno, turma);
+    public Matricula get(@NotNull Aluno aluno, @NotNull Turma turma) {
+        MatriculaID matriculaID = new MatriculaID(aluno.getCpf(), turma.getId());
         return service.get(matriculaID);
     }
 

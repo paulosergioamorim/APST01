@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Generic DAO Hibernate Class
@@ -37,7 +36,8 @@ public abstract class DAO<T, K> {
 
     private @NotNull String getEntityName() {
         String name = entity.getAnnotation(Entity.class).name();
-        if (name.isEmpty()) return entity.getSimpleName();
+        if (name.isEmpty())
+            return entity.getSimpleName();
         return name;
     }
 
@@ -133,8 +133,8 @@ public abstract class DAO<T, K> {
     public long count() {
         this.open();
         try {
-            String sql = "select count(*) from " + this.getEntityName();
-            return (long) session.createQuery(sql).uniqueResult();
+            String hql = "select count(*) from " + this.getEntityName();
+            return (long) session.createQuery(hql).uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
@@ -152,8 +152,8 @@ public abstract class DAO<T, K> {
     public List<T> toList() {
         this.open();
         try {
-            String sql = "from " + this.getEntityName();
-            return session.createQuery(sql).getResultList();
+            String hql = "from " + this.getEntityName();
+            return session.createQuery(hql).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();

@@ -22,7 +22,7 @@ public class MainView extends JFrame {
         super("Program");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(panel);
-        this.setSize(300, 600);
+        this.setSize(300, 300);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
 

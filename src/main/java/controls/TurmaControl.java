@@ -12,7 +12,7 @@ import java.util.List;
 import static models.View.TURMA_VIEW;
 
 public record TurmaControl(Control control, TurmaService service) {
-    public void save(String id,
+    public void save(int id,
                      LocalDate dataInicio,
                      LocalDate dataFim,
                      LocalTime horario,
@@ -34,7 +34,7 @@ public record TurmaControl(Control control, TurmaService service) {
         }
     }
 
-    public void update(String id,
+    public void update(int id,
                        LocalDate dataInicio,
                        LocalDate dataFim,
                        LocalTime horario,
@@ -56,7 +56,7 @@ public record TurmaControl(Control control, TurmaService service) {
         }
     }
 
-    public void delete(String id) {
+    public void delete(int id) {
         int code = service.delete(id);
         switch (code) {
             case 0 -> {
@@ -70,7 +70,7 @@ public record TurmaControl(Control control, TurmaService service) {
         }
     }
 
-    public Turma get(String id) { return service.get(id); }
+    public Turma get(int id) { return service.get(id); }
 
     public List<Turma> getAll() { return service.getAll(); }
 }
