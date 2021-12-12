@@ -11,6 +11,8 @@ import views.cells.TurmaCell;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static models.Format.*;
@@ -41,9 +43,52 @@ public class TurmaView extends JFrame {
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
 
-        saveButton.addActionListener(e -> control.saveTurma());
-        updateButton.addActionListener(e -> control.updateTurma());
-        deleteButton.addActionListener(e -> control.deleteTurma());
+        saveButton.addActionListener(e -> this.saveTurma());
+        updateButton.addActionListener(e -> this.updateTurma());
+        deleteButton.addActionListener(e -> this.deleteTurma());
+    }
+
+    private void saveTurma() {
+        try {
+            int id = Integer.parseInt(idField.getText());
+            LocalDate dataInicio = LocalDate.parse(dataInicioField.getText(), dateFormatter);
+            LocalDate dataFim = LocalDate.parse(dataFimField.getText(), dateFormatter);
+            LocalTime horario = LocalTime.parse(horarioField.getText(), timeFormatter);
+            int limite = Integer.parseInt(limiteField.getText());
+            Curso curso = (Curso) cursoBox.getSelectedItem();
+            Professor responsavel = (Professor) responsavelBox.getSelectedItem();
+            control.saveTurma(id, dataInicio, dataFim, horario, limite, curso, responsavel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            control.showMessage("Erro ao salvar turma!");
+        }
+    }
+
+    private void updateTurma() {
+        try {
+            int id = Integer.parseInt(idField.getText());
+            LocalDate dataInicio = LocalDate.parse(dataInicioField.getText(), dateFormatter);
+            LocalDate dataFim = LocalDate.parse(dataFimField.getText(), dateFormatter);
+            LocalTime horario = LocalTime.parse(horarioField.getText(), timeFormatter);
+            int limite = Integer.parseInt(limiteField.getText());
+            Curso curso = (Curso) cursoBox.getSelectedItem();
+            Professor responsavel = (Professor) responsavelBox.getSelectedItem();
+            control.updateTurma(id, dataInicio, dataFim, horario, limite, curso, responsavel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            control.showMessage("Erro ao atualizar turma!");
+        }
+    }
+
+    private void deleteTurma() {
+        try {
+            Turma turma = listView.getSelectedValue();
+            int id = turma != null ? turma.getId() : -1;
+            control.deleteTurma(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            control.showMessage("Erro ao deletar turma!");
+        }
     }
 
     @Override
@@ -67,22 +112,6 @@ public class TurmaView extends JFrame {
         model.addAll(turmas);
         listView.setModel(model);
     }
-
-    public String getId() { return idField.getText(); }
-
-    public String getDataInicio() { return dataInicioField.getText(); }
-
-    public String getDataFim() { return dataFimField.getText(); }
-
-    public String getHorario() { return horarioField.getText(); }
-
-    public String getLimite() { return limiteField.getText(); }
-
-    public Curso getCurso() { return (Curso) cursoBox.getSelectedItem(); }
-
-    public Professor getResponsavel() { return (Professor) responsavelBox.getSelectedItem(); }
-
-    public JList<Turma> getListView() { return listView; }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

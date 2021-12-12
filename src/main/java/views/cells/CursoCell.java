@@ -55,7 +55,8 @@ public class CursoCell implements ListCellRenderer<Curso> {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new FormLayout("center:50px:grow,left:4dlu:noGrow,center:250px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:grow", "fill:13px:grow"));
+        panel.setLayout(new FormLayout("center:50px:grow,left:4dlu:noGrow,center:250px:grow,left:4dlu:noGrow," +
+                                               "center:50px:grow,left:4dlu:noGrow,center:50px:grow", "fill:13px:grow"));
         panel.setBackground(new Color(-13487566));
         panel.setPreferredSize(new Dimension(-1, 30));
         id = new JLabel();

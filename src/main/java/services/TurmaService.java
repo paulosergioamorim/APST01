@@ -20,12 +20,18 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
                     int limite,
                     Curso curso,
                     Professor professor) {
-        if (dao.exists(id)) return 1;
-        if (dataInicio.isAfter(dataFim)) return 2;
-        if (dataInicio.isBefore(LocalDate.now())) return 3;
-        if (dataFim.isBefore(LocalDate.now())) return 4;
-        if (dataInicio.isEqual(dataFim)) return 5;
-        if (limite <= 0) return 6;
+        if (dao.exists(id))
+            return 1;
+        if (dataInicio.isAfter(dataFim))
+            return 2;
+        if (dataInicio.isBefore(LocalDate.now()))
+            return 3;
+        if (dataFim.isBefore(LocalDate.now()))
+            return 4;
+        if (dataInicio.isEqual(dataFim))
+            return 5;
+        if (limite <= 0)
+            return 6;
         Turma turma = new Turma(id, dataInicio, dataFim, horario, limite, curso, professor);
         dao.save(turma);
         return 0;
@@ -39,8 +45,9 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
                       int limite,
                       Curso curso,
                       Professor responsavel) {
-        if (!dao.exists(id)) return 1;
         Turma turma = dao.get(id);
+        if (turma == null)
+            return 1;
 
         dataInicio = dataInicio == null ? turma.getDataInicio() : dataInicio;
         dataFim = dataFim == null ? turma.getDataFim() : dataFim;
@@ -61,9 +68,11 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
 
     @Override
     public int close(int id) {
-        if (!dao.exists(id)) return 1;
+        if (!dao.exists(id))
+            return 1;
         Turma turma = dao.get(id);
-        if (turma.getEstado() == FECHADA) return 2;
+        if (turma.getEstado() == FECHADA)
+            return 2;
         turma.setEstado(FECHADA);
         dao.update(turma);
         return 0;
@@ -71,10 +80,13 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
 
     @Override
     public int delete(int id) {
-        if (!dao.exists(id)) return 1;
         Turma turma = dao.get(id);
-        if (turma.getEstado() != FECHADA) return 2;
-        if (!turma.getMatriculas().isEmpty()) return 3;
+        if (turma == null)
+            return 1;
+        if (turma.getEstado() != FECHADA)
+            return 2;
+        if (!turma.getMatriculas().isEmpty())
+            return 3;
         dao.delete(turma);
         return 0;
     }
@@ -84,4 +96,11 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
 
     @Override
     public List<Turma> getAll() { return dao.toList(); }
+
+    public boolean allContainsNotas(int id) {
+        return this.get(id)
+                .getMatriculas()
+                .stream()
+                .allMatch(m -> m.getNota() != null);
+    }
 }

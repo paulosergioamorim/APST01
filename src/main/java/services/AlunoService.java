@@ -22,8 +22,9 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
 
     @Override
     public int update(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
-        if (!dao.exists(cpf)) return 1;
         Aluno aluno = dao.get(cpf);
+        if (aluno == null)
+            return 1;
 
         nome = nome == null ? aluno.getNome() : nome;
         sexo = sexo == null ? aluno.getSexo() : sexo;
@@ -39,8 +40,9 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
 
     @Override
     public int delete(long cpf) {
-        if (!dao.exists(cpf)) return 1;
         Aluno aluno = dao.get(cpf);
+        if (aluno == null) return 1;
+        if (dao.containsMatriculas(aluno)) return 2;
         dao.delete(aluno);
         return 0;
     }

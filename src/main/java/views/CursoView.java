@@ -36,9 +36,46 @@ public class CursoView extends JFrame {
         this.setSize(600, 600);
         this.setLocationRelativeTo(null);
 
-        saveButton.addActionListener(e -> control.saveCurso());
-        updateButton.addActionListener(e -> control.updateCurso());
-        deleteButton.addActionListener(e -> control.deleteCurso());
+        saveButton.addActionListener(e -> this.saveCurso());
+        updateButton.addActionListener(e -> this.updateCurso());
+        deleteButton.addActionListener(e -> this.deleteCurso());
+    }
+
+    private void saveCurso() {
+        try {
+            int id = Integer.parseInt(idField.getText());
+            String nome = nomeField.getText().trim();
+            String sigla = siglaField.getText().trim();
+            int cargaHoraria = Integer.parseInt(cargaHorariaField.getText());
+            control.saveCurso(id, nome, sigla, cargaHoraria);
+        } catch (Exception e) {
+            e.printStackTrace();
+            control.showMessage("Erro ao salvar curso!");
+        }
+    }
+
+    private void updateCurso() {
+        try {
+            int id = Integer.parseInt(idField.getText());
+            String nome = nomeField.getText().trim();
+            String sigla = siglaField.getText().trim();
+            int cargaHoraria = Integer.parseInt(cargaHorariaField.getText());
+            control.updateCurso(id, nome, sigla, cargaHoraria);
+        } catch (Exception e) {
+            e.printStackTrace();
+            control.showMessage("Erro ao atualizar curso!");
+        }
+    }
+
+    private void deleteCurso() {
+        try {
+            Curso curso = listView.getSelectedValue();
+            int id = curso != null ? curso.getId() : -1;
+            control.deleteCurso(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            control.showMessage("Erro ao deletar curso!");
+        }
     }
 
     @Override
@@ -59,16 +96,6 @@ public class CursoView extends JFrame {
         modelCurso.addAll(cursos);
         listView.setModel(modelCurso);
     }
-
-    public String getId() { return idField.getText(); }
-
-    public String getNome() { return nomeField.getText(); }
-
-    public String getSigla() { return siglaField.getText(); }
-
-    public String getCargaHoraria() { return cargaHorariaField.getText(); }
-
-    public JList<Curso> getListView() { return listView; }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

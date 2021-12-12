@@ -11,10 +11,12 @@ import views.cells.MatriculaCell;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static models.Estado.MATRICULAS_ABERTAS;
+import static models.Format.dateFormatter;
 import static models.Format.dateMask;
 import static models.View.MAIN_VIEW;
 
@@ -39,9 +41,47 @@ public class MatriculaView extends JFrame {
         this.setSize(600, 600);
         this.setLocationRelativeTo(null);
 
-        saveButton.addActionListener(e -> control.saveMatricula());
-        updateButton.addActionListener(e -> control.updateMatricula());
-        deleteButton.addActionListener(e -> control.deleteMatricula());
+        saveButton.addActionListener(e -> this.saveMatricula());
+        updateButton.addActionListener(e -> this.updateMatricula());
+        deleteButton.addActionListener(e -> this.deleteMatricula());
+    }
+
+    private void saveMatricula() {
+        try {
+            Aluno aluno = (Aluno) alunoBox.getSelectedItem();
+            Turma turma = (Turma) turmaBox.getSelectedItem();
+            LocalDate dataMatricula = dataMatriculaField.getText().equals("__/__/____") ?
+                    LocalDate.now() : LocalDate.parse(dataMatriculaField.getText(), dateFormatter);
+            control.saveMatricula(aluno, turma, dataMatricula);
+        } catch (Exception e) {
+            e.printStackTrace();
+            control.showMessage("Erro ao salvar matricula!");
+        }
+    }
+
+    private void updateMatricula() {
+        try {
+            Aluno aluno = (Aluno) alunoBox.getSelectedItem();
+            Turma turma = (Turma) turmaBox.getSelectedItem();
+            LocalDate dataMatricula = dataMatriculaField.getText().equals("__/__/____") ?
+                    LocalDate.now() : LocalDate.parse(dataMatriculaField.getText(), dateFormatter);
+            control.updateMatricula(aluno, turma, dataMatricula);
+        } catch (Exception e) {
+            e.printStackTrace();
+            control.showMessage("Erro ao atualizar matricula!");
+        }
+    }
+
+    private void deleteMatricula() {
+        try {
+            Matricula matricula = listView.getSelectedValue();
+            Aluno aluno = matricula.getAluno();
+            Turma turma = matricula.getTurma();
+            control.deleteMatricula(aluno, turma);
+        } catch (Exception e) {
+            e.printStackTrace();
+            control.showMessage("Erro ao deletar matricula");
+        }
     }
 
     @Override
@@ -63,19 +103,11 @@ public class MatriculaView extends JFrame {
     }
 
     public void updateTurmaBox() {
-        List<Turma> turmas = control.getTurmaControl().getAllTurmasVagas();
+        List<Turma> turmas = control.getTurmaControl().getAll();
         DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
         turmaModel.addAll(turmas);
         turmaBox.setModel(turmaModel);
     }
-
-    public Turma getTurma() { return (Turma) turmaBox.getSelectedItem(); }
-
-    public Aluno getAluno() { return (Aluno) alunoBox.getSelectedItem(); }
-
-    public String getDataMatricula() { return dataMatriculaField.getText(); }
-
-    public JList<Matricula> getListView() { return listView; }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

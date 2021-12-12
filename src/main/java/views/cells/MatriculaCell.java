@@ -64,7 +64,10 @@ public class MatriculaCell implements ListCellRenderer<Matricula> {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new FormLayout("center:200px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:noGrow,left:4dlu:noGrow,center:100px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:100px:grow", "center:d:grow"));
+        panel.setLayout(new FormLayout("center:200px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow," +
+                                               "center:50px:noGrow,left:4dlu:noGrow,center:100px:grow," +
+                                               "left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:100px:grow"
+                , "center:d:grow"));
         panel.setBackground(new Color(-13487566));
         panel.setPreferredSize(new Dimension(-1, 30));
         aluno = new JLabel();

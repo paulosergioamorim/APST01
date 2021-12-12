@@ -1,13 +1,11 @@
 package controls;
 
-import models.Estado;
 import models.entitys.*;
 import services.TurmaService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static models.Estado.FECHADA;
 import static models.Estado.MATRICULAS_ABERTAS;
@@ -59,7 +57,7 @@ public record TurmaControl(Control control, TurmaService service) {
         }
     }
 
-    public void close(int id) {
+    public void fechar(int id) {
         int code = service.close(id);
         switch (code) {
             case 0 -> {
@@ -76,7 +74,7 @@ public record TurmaControl(Control control, TurmaService service) {
         int code = service.delete(id);
         switch (code) {
             case 0 -> {
-                control.showMessage("Turma deletada com sucesso!");
+                control.showMessage("Turma removida com sucesso!");
                 control.clearFields(TURMA_VIEW);
                 control.updateListViewer(TURMA_VIEW);
             }
@@ -90,32 +88,11 @@ public record TurmaControl(Control control, TurmaService service) {
 
     public List<Turma> getAll() { return service.getAll(); }
 
-    public List<Turma> getAllTurmasVagas() {
-        return service.getAll()
-                .stream()
-                .filter(t -> t.getVagas() > 0 && t.getEstado() == MATRICULAS_ABERTAS)
-                .toList();
-    }
-
-    public List<Turma> getAllTurmasNonClosed() {
-        return service.getAll()
-                .stream()
-                .filter(t -> t.getEstado() != FECHADA)
-                .toList();
-    }
-
     public List<Aluno> getAlunos(int id) {
         return service.get(id)
                 .getMatriculas()
                 .stream()
                 .map(Matricula::getAluno)
                 .toList();
-    }
-
-    public boolean allContainsNotas(int id) {
-        return service.get(id)
-                .getMatriculas()
-                .stream()
-                .allMatch(m -> m.getNota() != null);
     }
 }

@@ -7,8 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static models.Estado.FECHADA;
-
 public class ProfessorDAO extends DAO<Professor, Long> {
     public ProfessorDAO(Configuration configuration, @NotNull Class<Professor> entity) {
         super(configuration, entity);

@@ -11,11 +11,16 @@ import static models.Format.cursoNomePattern;
 public record CursoService(CursoDAO dao) implements ICursoService {
     @Override
     public int save(int id, String nome, String sigla, int cargaHoraria) {
-        if (dao.exists(id)) return 1;
-        if (!nome.matches(cursoNomePattern.pattern())) return 2;
-        if (dao.existsBySigla(sigla)) return 3;
-        if (sigla.length() > 5) return 4;
-        if (cargaHoraria < 0) return 5;
+        if (dao.exists(id))
+            return 1;
+        if (!nome.matches(cursoNomePattern.pattern()))
+            return 2;
+        if (dao.existsBySigla(sigla))
+            return 3;
+        if (sigla.length() > 5)
+            return 4;
+        if (cargaHoraria < 0)
+            return 5;
         Curso curso = new Curso(id, nome, sigla, cargaHoraria);
         dao.save(curso);
         return 0;
@@ -23,17 +28,22 @@ public record CursoService(CursoDAO dao) implements ICursoService {
 
     @Override
     public int update(int id, String nome, String sigla, int cargaHoraria) {
-        if (!dao.exists(id)) return 1;
         Curso curso = dao.get(id);
+        if (curso == null)
+            return 1;
 
         nome = nome == null ? curso.getNome() : nome;
         sigla = sigla == null ? curso.getSigla() : sigla;
         cargaHoraria = cargaHoraria == 0 ? curso.getCargaHoraria() : cargaHoraria;
 
-        if (!nome.matches(cursoNomePattern.pattern())) return 2;
-        if (dao.existsBySigla(sigla)) return 3;
-        if (sigla.length() > 5) return 4;
-        if (cargaHoraria <= 0) return 5;
+        if (!nome.matches(cursoNomePattern.pattern()))
+            return 2;
+        if (dao.existsBySigla(sigla))
+            return 3;
+        if (sigla.length() > 5)
+            return 4;
+        if (cargaHoraria <= 0)
+            return 5;
 
         curso = new Curso(id, nome, sigla, cargaHoraria);
         dao.update(curso);
@@ -42,9 +52,11 @@ public record CursoService(CursoDAO dao) implements ICursoService {
 
     @Override
     public int delete(int id) {
-        if (!dao.exists(id)) return 1;
         Curso curso = dao.load(id);
-        if (curso.getTurmas().stream().anyMatch(t -> t.getEstado() != FECHADA)) return 2;
+        if (curso == null)
+            return 1;
+        if (curso.getTurmas().stream().anyMatch(t -> t.getEstado() != FECHADA))
+            return 2;
         dao.delete(curso);
         return 0;
     }

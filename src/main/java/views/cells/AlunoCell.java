@@ -60,7 +60,9 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new FormLayout("center:50px:grow,left:4dlu:noGrow,center:200px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:grow", "center:d:grow"));
+        panel.setLayout(new FormLayout("center:50px:grow,left:4dlu:noGrow,center:200px:grow,left:4dlu:noGrow," +
+                                               "center:50px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow," +
+                                               "center:50px:grow", "center:d:grow"));
         panel.setBackground(new Color(-13487566));
         panel.setPreferredSize(new Dimension(-1, 30));
         idade = new JLabel();

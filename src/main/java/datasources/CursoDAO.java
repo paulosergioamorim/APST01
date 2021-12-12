@@ -17,6 +17,8 @@ public class CursoDAO extends DAO<Curso, Integer> {
             Curso curso = (Curso) session.createQuery(hql)
                     .setParameter("id", id)
                     .uniqueResult();
+            if (curso == null)
+                return null;
             Hibernate.initialize(curso.getTurmas());
             return curso;
         } finally {
@@ -28,7 +30,9 @@ public class CursoDAO extends DAO<Curso, Integer> {
         this.open();
         try {
             String sql = "from Curso where sigla = :sigla";
-            return session.createQuery(sql).setParameter("sigla", sigla).uniqueResult() != null;
+            return session.createQuery(sql)
+                    .setParameter("sigla", sigla)
+                    .uniqueResult() != null;
         } finally {
             this.close();
         }

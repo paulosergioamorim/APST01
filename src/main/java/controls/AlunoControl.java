@@ -32,6 +32,7 @@ public record AlunoControl(Control control, AlunoService service) {
                 control.updateListViewer(ALUNO_VIEW);
             }
             case 1 -> control.showMessage("Aluno não encontrado!");
+            case 2 -> control.showMessage("Esse aluno possuí matriculas!");
         }
     }
 

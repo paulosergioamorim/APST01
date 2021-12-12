@@ -48,7 +48,7 @@ public class Curso {
 
     public void setCargaHoraria(int cargaHoraria) { this.cargaHoraria = cargaHoraria; }
 
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "curso", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Turma> getTurmas() { return turmas; }
 
     public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }

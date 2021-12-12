@@ -53,6 +53,7 @@ public record MatriculaControl(Control control, MatriculaService service) {
             }
             case 1 -> control.showMessage("Matrícula não existe!");
             case 4 -> control.showMessage("A nota deve estar entre 0 e 10!");
+            case 5 -> control.showMessage("A turma dessa matricula está fechada");
         }
     }
 
