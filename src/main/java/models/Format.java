@@ -35,7 +35,7 @@ public class Format {
             dateMask.setPlaceholderCharacter('_');
             timeMask = new MaskFormatter("##:##");
             timeMask.setPlaceholderCharacter('_');
-        } catch (final ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }

@@ -18,17 +18,17 @@ public enum Estado {
 
     static {
         map = new HashMap<>();
-        for (final Estado estado : values())
+        for (Estado estado : values())
             map.put(estado.value, estado);
     }
 
-    Estado(final String value) { this.value = value; }
+    Estado(String value) { this.value = value; }
 
-    public String getValue() { return this.value; }
+    public String getValue() { return value; }
 
-    public static Estado getState(final String value) { return map.get(value); }
+    public static Estado getState(String value) { return map.get(value); }
 
-    public static String valueOf(@NotNull final Estado value) { return value.getValue(); }
+    public static String valueOf(@NotNull Estado value) { return value.getValue(); }
 
     @Override
     public @NotNull String toString() {

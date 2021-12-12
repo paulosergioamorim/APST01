@@ -21,18 +21,13 @@ public class ServiceFactory {
         matriculaDAO = createMatriculaDAO();
     }
 
-    @Contract(" -> new")
     public static @NotNull AlunoService createAlunoService() { return new AlunoService(alunoDAO); }
 
-    @Contract(" -> new")
     public static @NotNull ProfessorService createProfessorService() { return new ProfessorService(professorDAO); }
 
-    @Contract(" -> new")
     public static @NotNull CursoService createCursoService() { return new CursoService(cursoDAO); }
 
-    @Contract(" -> new")
     public static @NotNull TurmaService createTurmaService() { return new TurmaService(turmaDAO); }
 
-    @Contract(" -> new")
     public static @NotNull MatriculaService createMatriculaService() { return new MatriculaService(matriculaDAO); }
 }

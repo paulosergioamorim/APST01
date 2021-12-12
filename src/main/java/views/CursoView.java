@@ -27,57 +27,57 @@ public class CursoView extends JFrame {
     private JTextField siglaField;
     private JFormattedTextField cargaHorariaField;
 
-    public CursoView(final Control control) {
+    public CursoView(Control control) {
         super("Cursos");
         this.control = control;
         this.$$$setupUI$$$();
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.setContentPane(this.panel);
+        this.setContentPane(panel);
         this.setSize(600, 600);
         this.setLocationRelativeTo(null);
 
-        this.saveButton.addActionListener(e -> control.saveCurso());
-        this.updateButton.addActionListener(e -> control.updateCurso());
-        this.deleteButton.addActionListener(e -> control.deleteCurso());
+        saveButton.addActionListener(e -> control.saveCurso());
+        updateButton.addActionListener(e -> control.updateCurso());
+        deleteButton.addActionListener(e -> control.deleteCurso());
     }
 
     @Override
     public void dispose() {
-        this.control.changeView(MAIN_VIEW);
+        control.changeView(MAIN_VIEW);
         super.dispose();
     }
 
     public void clearFields() {
-        this.idField.setValue(null);
-        this.nomeField.setText(null);
-        this.siglaField.setText(null);
-        this.cargaHorariaField.setValue(null);
+        idField.setValue(null);
+        nomeField.setText(null);
+        siglaField.setText(null);
+        cargaHorariaField.setValue(null);
     }
 
-    public void updateListViewer(final List<Curso> cursos) {
-        final DefaultListModel<Curso> modelCurso = new DefaultListModel<>();
+    public void updateListViewer(List<Curso> cursos) {
+        DefaultListModel<Curso> modelCurso = new DefaultListModel<>();
         modelCurso.addAll(cursos);
-        this.listView.setModel(modelCurso);
+        listView.setModel(modelCurso);
     }
 
-    public String getId() { return this.idField.getText(); }
+    public String getId() { return idField.getText(); }
 
-    public String getNome() { return this.nomeField.getText(); }
+    public String getNome() { return nomeField.getText(); }
 
-    public String getSigla() { return this.siglaField.getText(); }
+    public String getSigla() { return siglaField.getText(); }
 
-    public String getCargaHoraria() { return this.cargaHorariaField.getText(); }
+    public String getCargaHoraria() { return cargaHorariaField.getText(); }
 
-    public JList<Curso> getListView() { return this.listView; }
+    public JList<Curso> getListView() { return listView; }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        this.idField = new JFormattedTextField(int4Mask);
-        this.cargaHorariaField = new JFormattedTextField(int4Mask);
-        this.listView = new JList<>();
-        final CursoCell cell = new CursoCell();
-        this.listView.setCellRenderer(cell);
-        final List<Curso> cursos = this.control.getCursoControl().getAll();
+        idField = new JFormattedTextField(int4Mask);
+        cargaHorariaField = new JFormattedTextField(int4Mask);
+        listView = new JList<>();
+        CursoCell cell = new CursoCell();
+        listView.setCellRenderer(cell);
+        List<Curso> cursos = control.getCursoControl().getAll();
         this.updateListViewer(cursos);
     }
 

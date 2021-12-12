@@ -6,15 +6,15 @@ import org.hibernate.cfg.Configuration;
 import org.jetbrains.annotations.NotNull;
 
 public class CursoDAO extends DAO<Curso, Integer> {
-    public CursoDAO(final Configuration configuration, @NotNull final Class<Curso> entity) {
+    public CursoDAO(Configuration configuration, @NotNull Class<Curso> entity) {
         super(configuration, entity);
     }
 
-    public Curso load(final Integer id) {
+    public Curso load(Integer id) {
         this.open();
         try {
             final String hql = "from Curso fetch all properties where id = :id";
-            return (Curso) this.session.createQuery(hql)
+            return (Curso) session.createQuery(hql)
                     .setParameter("id", id)
                     .uniqueResult();
         } finally {
@@ -22,11 +22,11 @@ public class CursoDAO extends DAO<Curso, Integer> {
         }
     }
 
-    public boolean existsBySigla(final String sigla) {
+    public boolean existsBySigla(String sigla) {
         this.open();
         try {
             final String sql = "from Curso where sigla = :sigla";
-            return this.session.createQuery(sql).setParameter("sigla", sigla).uniqueResult() != null;
+            return session.createQuery(sql).setParameter("sigla", sigla).uniqueResult() != null;
         } finally {
             this.close();
         }

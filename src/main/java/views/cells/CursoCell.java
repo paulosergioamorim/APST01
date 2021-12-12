@@ -15,23 +15,23 @@ public class CursoCell implements ListCellRenderer<Curso> {
     private JLabel cargaHoraria;
 
     @Override
-    public Component getListCellRendererComponent(final JList<? extends Curso> list, final Curso value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-        final String id = String.valueOf(value.getId());
-        final String nome = value.getNome();
-        final String sigla = value.getSigla();
-        final String cargaHoraria = String.valueOf(value.getCargaHoraria());
+    public Component getListCellRendererComponent(JList<? extends Curso> list, Curso value, int index, boolean isSelected, boolean cellHasFocus) {
+        String id = String.valueOf(value.getId());
+        String nome = value.getNome();
+        String sigla = value.getSigla();
+        String cargaHoraria = String.valueOf(value.getCargaHoraria());
         this.id.setText(id);
         this.nome.setText(nome);
         this.sigla.setText(sigla);
         this.cargaHoraria.setText(cargaHoraria);
         if (isSelected) {
-            this.panel.setBackground(list.getSelectionBackground());
-            this.panel.setForeground(list.getSelectionForeground());
+            panel.setBackground(list.getSelectionBackground());
+            panel.setForeground(list.getSelectionForeground());
         } else {
-            this.panel.setBackground(list.getBackground());
-            this.panel.setForeground(list.getForeground());
+            panel.setBackground(list.getBackground());
+            panel.setForeground(list.getForeground());
         }
-        return this.panel;
+        return panel;
     }
 
     {

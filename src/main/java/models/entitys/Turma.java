@@ -22,13 +22,13 @@ public class Turma {
     private Professor responsavel;
     private List<Matricula> matriculas;
 
-    public Turma(final int id,
-                 final LocalDate dataInicio,
-                 final LocalDate dataFim,
-                 final LocalTime horario,
-                 final int limite,
-                 final Curso curso,
-                 final Professor responsavel) {
+    public Turma(int id,
+                 LocalDate dataInicio,
+                 LocalDate dataFim,
+                 LocalTime horario,
+                 int limite,
+                 Curso curso,
+                 Professor responsavel) {
         this.id = id;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -36,72 +36,72 @@ public class Turma {
         this.limite = limite;
         this.curso = curso;
         this.responsavel = responsavel;
-        this.matriculas = new ArrayList<>();
-        this.estado = MATRICULAS_ABERTAS;
+        matriculas = new ArrayList<>();
+        estado = MATRICULAS_ABERTAS;
     }
 
     public Turma() { }
 
     @Transient
-    public int getVagas() { return this.limite - this.matriculas.size(); }
+    public int getVagas() { return limite - matriculas.size(); }
 
     @Id
-    public int getId() { return this.id; }
+    public int getId() { return id; }
 
-    public void setId(final int id) { this.id = id; }
-
-    @Column(nullable = false)
-    public LocalDate getDataInicio() { return this.dataInicio; }
-
-    public void setDataInicio(final LocalDate dataInicio) { this.dataInicio = dataInicio; }
+    public void setId(int id) { this.id = id; }
 
     @Column(nullable = false)
-    public LocalDate getDataFim() { return this.dataFim; }
+    public LocalDate getDataInicio() { return dataInicio; }
 
-    public void setDataFim(final LocalDate dataFim) { this.dataFim = dataFim; }
-
-    @Column(nullable = false)
-    public LocalTime getHorario() { return this.horario; }
-
-    public void setHorario(final LocalTime horario) { this.horario = horario; }
+    public void setDataInicio(LocalDate dataInicio) { this.dataInicio = dataInicio; }
 
     @Column(nullable = false)
-    public int getLimite() { return this.limite; }
+    public LocalDate getDataFim() { return dataFim; }
 
-    public void setLimite(final int limite) { this.limite = limite; }
+    public void setDataFim(LocalDate dataFim) { this.dataFim = dataFim; }
 
     @Column(nullable = false)
-    public Estado getEstado() { return this.estado; }
+    public LocalTime getHorario() { return horario; }
 
-    public void setEstado(final Estado estado) { this.estado = estado; }
+    public void setHorario(LocalTime horario) { this.horario = horario; }
+
+    @Column(nullable = false)
+    public int getLimite() { return limite; }
+
+    public void setLimite(int limite) { this.limite = limite; }
+
+    @Column(nullable = false)
+    public Estado getEstado() { return estado; }
+
+    public void setEstado(Estado estado) { this.estado = estado; }
 
     @ManyToOne(optional = false)
-    public Curso getCurso() { return this.curso; }
+    public Curso getCurso() { return curso; }
 
-    public void setCurso(final Curso curso) { this.curso = curso; }
+    public void setCurso(Curso curso) { this.curso = curso; }
 
     @ManyToOne(optional = false)
-    public Professor getResponsavel() { return this.responsavel; }
+    public Professor getResponsavel() { return responsavel; }
 
-    public void setResponsavel(final Professor professor) { this.responsavel = professor; }
+    public void setResponsavel(Professor professor) { responsavel = professor; }
 
     @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
-    public List<Matricula> getMatriculas() { return this.matriculas; }
+    public List<Matricula> getMatriculas() { return matriculas; }
 
-    public void setMatriculas(final List<Matricula> matriculas) { this.matriculas = matriculas; }
+    public void setMatriculas(List<Matricula> matriculas) { this.matriculas = matriculas; }
 
     @Override
-    public String toString() { return this.id + " - " + this.curso; }
+    public String toString() { return id + " - " + curso; }
 
     @PostPersist
     @PostUpdate
     @PostLoad
     public void updateEstado() {
-        if (this.estado != FECHADA) {
-            if (this.dataFim.isBefore(LocalDate.now())) this.estado = AULAS_ENCERRADAS;
-            else if (this.getVagas() == 0) this.estado = MATRICULAS_ENCERRADAS;
-            else if (this.dataInicio.isBefore(LocalDate.now())) this.estado = EM_ANDAMENTO;
-            else this.estado = MATRICULAS_ABERTAS;
+        if (estado != FECHADA) {
+            if (dataFim.isBefore(LocalDate.now())) estado = AULAS_ENCERRADAS;
+            else if (this.getVagas() == 0) estado = MATRICULAS_ENCERRADAS;
+            else if (dataInicio.isBefore(LocalDate.now())) estado = EM_ANDAMENTO;
+            else estado = MATRICULAS_ABERTAS;
         }
     }
 }

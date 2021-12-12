@@ -11,10 +11,10 @@ import java.util.Arrays;
 public class EstadoConverter implements AttributeConverter<Estado, String> {
 
     @Override
-    public String convertToDatabaseColumn(@NotNull final Estado estado) { return Estado.valueOf(estado); }
+    public String convertToDatabaseColumn(@NotNull Estado estado) { return Estado.valueOf(estado); }
 
     @Override
-    public Estado convertToEntityAttribute(final String string) {
+    public Estado convertToEntityAttribute(String string) {
         if (Arrays.stream(Estado.values()).noneMatch(e -> e.getValue().equals(string))) {
             throw new IllegalArgumentException("String inválida");
         }

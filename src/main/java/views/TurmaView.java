@@ -32,77 +32,77 @@ public class TurmaView extends JFrame {
     private JComboBox<Curso> cursoBox;
     private JComboBox<Professor> responsavelBox;
 
-    public TurmaView(final Control control) {
+    public TurmaView(Control control) {
         super("Turmas");
         this.control = control;
         this.$$$setupUI$$$();
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.setContentPane(this.panel);
+        this.setContentPane(panel);
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
 
-        this.saveButton.addActionListener(e -> control.saveTurma());
-        this.updateButton.addActionListener(e -> control.updateTurma());
-        this.deleteButton.addActionListener(e -> control.deleteTurma());
+        saveButton.addActionListener(e -> control.saveTurma());
+        updateButton.addActionListener(e -> control.updateTurma());
+        deleteButton.addActionListener(e -> control.deleteTurma());
     }
 
     @Override
     public void dispose() {
-        this.control.changeView(MAIN_VIEW);
+        control.changeView(MAIN_VIEW);
         super.dispose();
     }
 
     public void clearFields() {
-        this.idField.setValue(null);
-        this.dataInicioField.setValue(null);
-        this.dataFimField.setValue(null);
-        this.horarioField.setValue(null);
-        this.limiteField.setValue(null);
-        this.cursoBox.setSelectedItem(null);
-        this.responsavelBox.setSelectedItem(null);
+        idField.setValue(null);
+        dataInicioField.setValue(null);
+        dataFimField.setValue(null);
+        horarioField.setValue(null);
+        limiteField.setValue(null);
+        cursoBox.setSelectedItem(null);
+        responsavelBox.setSelectedItem(null);
     }
 
-    public void updateListViewer(final List<Turma> turmas) {
-        final DefaultListModel<Turma> model = new DefaultListModel<>();
+    public void updateListViewer(List<Turma> turmas) {
+        DefaultListModel<Turma> model = new DefaultListModel<>();
         model.addAll(turmas);
-        this.listView.setModel(model);
+        listView.setModel(model);
     }
 
-    public String getId() { return this.idField.getText(); }
+    public String getId() { return idField.getText(); }
 
-    public String getDataInicio() { return this.dataInicioField.getText(); }
+    public String getDataInicio() { return dataInicioField.getText(); }
 
-    public String getDataFim() { return this.dataFimField.getText(); }
+    public String getDataFim() { return dataFimField.getText(); }
 
-    public String getHorario() { return this.horarioField.getText(); }
+    public String getHorario() { return horarioField.getText(); }
 
-    public String getLimite() { return this.limiteField.getText(); }
+    public String getLimite() { return limiteField.getText(); }
 
-    public Curso getCurso() { return (Curso) this.cursoBox.getSelectedItem(); }
+    public Curso getCurso() { return (Curso) cursoBox.getSelectedItem(); }
 
-    public Professor getResponsavel() { return (Professor) this.responsavelBox.getSelectedItem(); }
+    public Professor getResponsavel() { return (Professor) responsavelBox.getSelectedItem(); }
 
-    public JList<Turma> getListView() { return this.listView; }
+    public JList<Turma> getListView() { return listView; }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        this.idField = new JFormattedTextField(int4Mask);
-        this.dataInicioField = new JFormattedTextField(dateMask);
-        this.dataFimField = new JFormattedTextField(dateMask);
-        this.limiteField = new JFormattedTextField(int2Mask);
-        this.horarioField = new JFormattedTextField(timeMask);
-        final List<Curso> cursos = this.control.getCursoControl().getAll();
-        final DefaultComboBoxModel<Curso> cursoModel = new DefaultComboBoxModel<>();
+        idField = new JFormattedTextField(int4Mask);
+        dataInicioField = new JFormattedTextField(dateMask);
+        dataFimField = new JFormattedTextField(dateMask);
+        limiteField = new JFormattedTextField(int2Mask);
+        horarioField = new JFormattedTextField(timeMask);
+        List<Curso> cursos = control.getCursoControl().getAll();
+        DefaultComboBoxModel<Curso> cursoModel = new DefaultComboBoxModel<>();
         cursoModel.addAll(cursos);
-        this.cursoBox = new JComboBox<>(cursoModel);
-        final List<Professor> professores = this.control.getProfessorControl().getAll();
-        final DefaultComboBoxModel<Professor> professorModel = new DefaultComboBoxModel<>();
+        cursoBox = new JComboBox<>(cursoModel);
+        List<Professor> professores = control.getProfessorControl().getAll();
+        DefaultComboBoxModel<Professor> professorModel = new DefaultComboBoxModel<>();
         professorModel.addAll(professores);
-        this.responsavelBox = new JComboBox<>(professorModel);
-        this.listView = new JList<>();
-        final TurmaCell cell = new TurmaCell(this.control.getTurmaControl());
-        this.listView.setCellRenderer(cell);
-        final List<Turma> turmas = this.control.getTurmaControl().getAll();
+        responsavelBox = new JComboBox<>(professorModel);
+        listView = new JList<>();
+        TurmaCell cell = new TurmaCell(control.getTurmaControl());
+        listView.setCellRenderer(cell);
+        List<Turma> turmas = control.getTurmaControl().getAll();
         this.updateListViewer(turmas);
     }
 

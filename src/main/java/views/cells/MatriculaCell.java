@@ -20,13 +20,13 @@ public class MatriculaCell implements ListCellRenderer<Matricula> {
     private JLabel curso;
 
     @Override
-    public Component getListCellRendererComponent(final JList<? extends Matricula> list, @NotNull final Matricula value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-        final String aluno = value.getAluno().getNome();
-        final String turma = String.valueOf(value.getTurma().getId());
-        final String curso = value.getTurma().getCurso().getSigla();
-        final String dataMatricula = value.getDataMatricula().format(dateFormatter);
-        final String nota = value.getNota() == null ? "--" : String.valueOf(value.getNota());
-        final String situacao = value.getSituacao();
+    public Component getListCellRendererComponent(JList<? extends Matricula> list, @NotNull Matricula value, int index, boolean isSelected, boolean cellHasFocus) {
+        String aluno = value.getAluno().getNome();
+        String turma = String.valueOf(value.getTurma().getId());
+        String curso = value.getTurma().getCurso().getSigla();
+        String dataMatricula = value.getDataMatricula().format(dateFormatter);
+        String nota = value.getNota() == null ? "--" : String.valueOf(value.getNota());
+        String situacao = value.getSituacao();
         this.aluno.setText(aluno);
         this.turma.setText(turma);
         this.curso.setText(curso);
@@ -34,13 +34,13 @@ public class MatriculaCell implements ListCellRenderer<Matricula> {
         this.nota.setText(nota);
         this.situacao.setText(situacao);
         if (isSelected) {
-            this.panel.setBackground(list.getSelectionBackground());
-            this.panel.setForeground(list.getSelectionForeground());
+            panel.setBackground(list.getSelectionBackground());
+            panel.setForeground(list.getSelectionForeground());
         } else {
-            this.panel.setBackground(list.getBackground());
-            this.panel.setForeground(list.getForeground());
+            panel.setBackground(list.getBackground());
+            panel.setForeground(list.getForeground());
         }
-        return this.panel;
+        return panel;
     }
 
     {

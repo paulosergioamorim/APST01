@@ -18,25 +18,25 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
     private JPanel panel;
 
     @Override
-    public Component getListCellRendererComponent(final JList<? extends Aluno> list, final Aluno value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-        final String cpf = String.valueOf(value.getCpf());
-        final String nome = value.getNome();
-        final String idade = value.getIdade() + " anos";
-        final String sexo = String.valueOf(value.getSexo());
-        final String dataNascimento = value.getDataNascimento().format(dateFormatter);
+    public Component getListCellRendererComponent(JList<? extends Aluno> list, Aluno value, int index, boolean isSelected, boolean cellHasFocus) {
+        String cpf = String.valueOf(value.getCpf());
+        String nome = value.getNome();
+        String idade = value.getIdade() + " anos";
+        String sexo = String.valueOf(value.getSexo());
+        String dataNascimento = value.getDataNascimento().format(dateFormatter);
         this.cpf.setText(cpf);
         this.nome.setText(nome);
         this.idade.setText(idade);
         this.sexo.setText(sexo);
         this.dataNascimento.setText(dataNascimento);
         if (isSelected) {
-            this.panel.setBackground(list.getSelectionBackground());
-            this.panel.setForeground(list.getSelectionForeground());
+            panel.setBackground(list.getSelectionBackground());
+            panel.setForeground(list.getSelectionForeground());
         } else {
-            this.panel.setBackground(list.getBackground());
-            this.panel.setForeground(list.getForeground());
+            panel.setBackground(list.getBackground());
+            panel.setForeground(list.getForeground());
         }
-        return this.panel;
+        return panel;
     }
 
     {

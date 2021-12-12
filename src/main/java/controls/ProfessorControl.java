@@ -10,50 +10,50 @@ import java.util.List;
 import static models.View.PROFESSOR_VIEW;
 
 public record ProfessorControl(Control control, ProfessorService service) {
-    public void save(final long cpf, final String nome, final Sexo sexo, final LocalDate dataNascimento, final String titulacao) {
-        final int code = this.service.save(cpf, nome, sexo, dataNascimento, titulacao);
+    public void save(long cpf, String nome, Sexo sexo, LocalDate dataNascimento, String titulacao) {
+        int code = service.save(cpf, nome, sexo, dataNascimento, titulacao);
         switch (code) {
             case 0 -> {
-                this.control.showMessage("Professor salvo com sucesso!");
-                this.control.clearFields(PROFESSOR_VIEW);
-                this.control.updateListViewer(PROFESSOR_VIEW);
+                control.showMessage("Professor salvo com sucesso!");
+                control.clearFields(PROFESSOR_VIEW);
+                control.updateListViewer(PROFESSOR_VIEW);
             }
-            case 1 -> this.control.showMessage("Professor já cadastrado!");
-            case 2 -> this.control.showMessage("Esse nome não é válido");
-            case 3 -> this.control.showMessage("A data de nascimento não pode ser futura");
-            case 4 -> this.control.showMessage("Titulação não pode ser vazia");
+            case 1 -> control.showMessage("Professor já cadastrado!");
+            case 2 -> control.showMessage("Esse nome não é válido");
+            case 3 -> control.showMessage("A data de nascimento não pode ser futura");
+            case 4 -> control.showMessage("Titulação não pode ser vazia");
         }
     }
 
-    public void update(final long cpf, final String nome, final Sexo sexo, final LocalDate dataNascimento, final String titulacao) {
-        final int code = this.service.update(cpf, nome, sexo, dataNascimento, titulacao);
+    public void update(long cpf, String nome, Sexo sexo, LocalDate dataNascimento, String titulacao) {
+        int code = service.update(cpf, nome, sexo, dataNascimento, titulacao);
         switch (code) {
             case 0 -> {
-                this.control.showMessage("Professor atualizado com sucesso!");
-                this.control.clearFields(PROFESSOR_VIEW);
-                this.control.updateListViewer(PROFESSOR_VIEW);
+                control.showMessage("Professor atualizado com sucesso!");
+                control.clearFields(PROFESSOR_VIEW);
+                control.updateListViewer(PROFESSOR_VIEW);
             }
-            case 1 -> this.control.showMessage("Professor não encontrado!");
-            case 2 -> this.control.showMessage("Esse nome não é válido");
-            case 3 -> this.control.showMessage("A data de nascimento não pode ser futura");
-            case 4 -> this.control.showMessage("Titulação não pode ser vazia");
+            case 1 -> control.showMessage("Professor não encontrado!");
+            case 2 -> control.showMessage("Esse nome não é válido");
+            case 3 -> control.showMessage("A data de nascimento não pode ser futura");
+            case 4 -> control.showMessage("Titulação não pode ser vazia");
         }
     }
 
-    public void delete(final long cpf) {
-        final int code = this.service.delete(cpf);
+    public void delete(long cpf) {
+        int code = service.delete(cpf);
         switch (code) {
             case 0 -> {
-                this.control.showMessage("Professor removido com sucesso!");
-                this.control.clearFields(PROFESSOR_VIEW);
-                this.control.updateListViewer(PROFESSOR_VIEW);
+                control.showMessage("Professor removido com sucesso!");
+                control.clearFields(PROFESSOR_VIEW);
+                control.updateListViewer(PROFESSOR_VIEW);
             }
-            case 1 -> this.control.showMessage("Professor não encontrado!");
-            case 2 -> this.control.showMessage("Professor não pode ser removido! Ele possui turmas ativas!");
+            case 1 -> control.showMessage("Professor não encontrado!");
+            case 2 -> control.showMessage("Professor não pode ser removido! Ele possui turmas ativas!");
         }
     }
 
-    public Professor get(final long cpf) { return this.service.get(cpf); }
+    public Professor get(long cpf) { return service.get(cpf); }
 
-    public List<Professor> getAll() { return this.service.getAll(); }
+    public List<Professor> getAll() { return service.getAll(); }
 }

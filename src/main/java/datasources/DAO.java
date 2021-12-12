@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,44 +18,44 @@ import java.util.List;
  * @version 1.0
  */
 public abstract class DAO<T, K> {
-    private final SessionFactory sessionFactory;
+    private final SessionFactory factory;
     private final Class<T> entity;
     protected Session session;
 
     /**
-     * @param configuration Configuration to be used
+     * @param cfg    Configuration to be used
      * @param entity Entity Class
      */
-    public DAO(@NotNull final Configuration configuration, @NotNull final Class<T> entity) {
-        this.sessionFactory = configuration.buildSessionFactory();
+    public DAO(@NotNull Configuration cfg, @NotNull Class<T> entity) {
+        factory = cfg.buildSessionFactory();
         if (entity.getAnnotation(Entity.class) == null)
             throw new IllegalArgumentException("Class must be annotated with @Entity");
         this.entity = entity;
     }
 
     private @NotNull String getEntityName() {
-        final String name = this.entity.getAnnotation(Entity.class).name();
+        String name = entity.getAnnotation(Entity.class).name();
         if (name.isEmpty())
-            return this.entity.getSimpleName();
+            return entity.getSimpleName();
         return name;
     }
 
-    protected void open() { this.session = this.sessionFactory.openSession(); }
+    protected void open() { session = factory.openSession(); }
 
-    protected void close() { this.session.close(); }
+    protected void close() { session.close(); }
 
     /**
      * Save entity in database
      *
      * @param t Entity to be saved
      */
-    public void save(final T t) {
+    public void save(T t) {
         this.open();
         try {
-            this.session.beginTransaction();
-            this.session.save(t);
-            this.session.getTransaction().commit();
-        } catch (final Exception e) {
+            session.beginTransaction();
+            session.save(t);
+            session.getTransaction().commit();
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             this.close();
@@ -68,13 +67,13 @@ public abstract class DAO<T, K> {
      *
      * @param t Entity to be updated
      */
-    public void update(final T t) {
+    public void update(T t) {
         this.open();
         try {
-            this.session.beginTransaction();
-            this.session.update(t);
-            this.session.getTransaction().commit();
-        } catch (final Exception e) {
+            session.beginTransaction();
+            session.update(t);
+            session.getTransaction().commit();
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             this.close();
@@ -86,13 +85,13 @@ public abstract class DAO<T, K> {
      *
      * @param t Entity to be deleted
      */
-    public void delete(final T t) {
+    public void delete(T t) {
         this.open();
         try {
-            this.session.beginTransaction();
-            this.session.delete(t);
-            this.session.getTransaction().commit();
-        } catch (final Exception e) {
+            session.beginTransaction();
+            session.delete(t);
+            session.getTransaction().commit();
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             this.close();
@@ -105,13 +104,10 @@ public abstract class DAO<T, K> {
      * @param key Key to find entity
      * @return Entity found
      */
-    public T get(final K key) {
+    public T get(K key) {
         this.open();
         try {
-            return this.session.get(this.entity, (Serializable) key);
-        } catch (final Exception e) {
-            e.printStackTrace();
-            return null;
+            return session.get(entity, (Serializable) key);
         } finally {
             this.close();
         }
@@ -123,7 +119,7 @@ public abstract class DAO<T, K> {
      * @param key Key to find entity
      * @return True if entity exists, false otherwise
      */
-    public boolean exists(final K key) { return this.get(key) != null; }
+    public boolean exists(K key) { return this.get(key) != null; }
 
     /**
      * Count objects in entity
@@ -133,11 +129,8 @@ public abstract class DAO<T, K> {
     public long count() {
         this.open();
         try {
-            final String hql = "select count(*) from " + this.getEntityName();
-            return (long) this.session.createQuery(hql).uniqueResult();
-        } catch (final Exception e) {
-            e.printStackTrace();
-            return 0;
+            String hql = "select count(*) from " + this.getEntityName();
+            return (long) session.createQuery(hql).uniqueResult();
         } finally {
             this.close();
         }
@@ -152,11 +145,8 @@ public abstract class DAO<T, K> {
     public List<T> toList() {
         this.open();
         try {
-            final String hql = "from " + this.getEntityName();
-            return this.session.createQuery(hql).getResultList();
-        } catch (final Exception e) {
-            e.printStackTrace();
-            return new ArrayList<>();
+            String hql = "from " + this.getEntityName();
+            return session.createQuery(hql).getResultList();
         } finally {
             this.close();
         }

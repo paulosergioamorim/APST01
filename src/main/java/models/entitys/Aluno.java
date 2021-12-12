@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 public class Aluno extends Pessoa {
-    public Aluno(final long cpf, final String nome, final Sexo sexo, final LocalDate dataNascimento) {
+    public Aluno(long cpf, String nome, Sexo sexo, LocalDate dataNascimento) {
         super(cpf, nome, sexo, dataNascimento);
     }
 

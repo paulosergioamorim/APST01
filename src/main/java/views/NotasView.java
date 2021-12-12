@@ -24,64 +24,64 @@ public class NotasView extends JFrame {
     private JButton fecharTurmaButton;
     private JButton salvarNotaButton;
 
-    public NotasView(final Control control) {
+    public NotasView(Control control) {
         super("Notas");
         this.control = control;
         this.$$$setupUI$$$();
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.setContentPane(this.panel);
+        this.setContentPane(panel);
         this.setSize(500, 300);
         this.setLocationRelativeTo(null);
 
-        this.turmaBox.addActionListener(e -> this.populateAlunos());
-        this.salvarNotaButton.addActionListener(e -> control.setNota());
-        this.fecharTurmaButton.addActionListener(e -> control.closeTurma());
+        turmaBox.addActionListener(e -> this.populateAlunos());
+        salvarNotaButton.addActionListener(e -> control.setNota());
+        fecharTurmaButton.addActionListener(e -> control.closeTurma());
     }
 
     @Override
     public void dispose() {
-        this.control.changeView(MAIN_VIEW);
+        control.changeView(MAIN_VIEW);
         super.dispose();
     }
 
     private void populateAlunos() {
-        final Turma turma = (Turma) this.turmaBox.getSelectedItem();
+        Turma turma = (Turma) turmaBox.getSelectedItem();
         if (turma != null) {
-            final List<Aluno> alunos = this.control.getTurmaControl().getAlunos(turma.getId());
-            final DefaultComboBoxModel<Aluno> alunoModel = new DefaultComboBoxModel<>();
+            List<Aluno> alunos = control.getTurmaControl().getAlunos(turma.getId());
+            DefaultComboBoxModel<Aluno> alunoModel = new DefaultComboBoxModel<>();
             alunoModel.addAll(alunos);
-            this.alunoBox.setModel(alunoModel);
+            alunoBox.setModel(alunoModel);
 
-            final boolean bool = this.control.getTurmaControl().allContainsNotas(turma.getId()) || turma.getMatriculas().isEmpty();
-            this.fecharTurmaButton.setEnabled(bool);
+            boolean bool = control.getTurmaControl().allContainsNotas(turma.getId()) || turma.getMatriculas().isEmpty();
+            fecharTurmaButton.setEnabled(bool);
         }
     }
 
-    public Turma getTurma() { return (Turma) this.turmaBox.getSelectedItem(); }
+    public Turma getTurma() { return (Turma) turmaBox.getSelectedItem(); }
 
-    public Aluno getAluno() { return (Aluno) this.alunoBox.getSelectedItem(); }
+    public Aluno getAluno() { return (Aluno) alunoBox.getSelectedItem(); }
 
-    public String getNota() { return this.notaField.getText(); }
+    public String getNota() { return notaField.getText(); }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        this.notaField = new JFormattedTextField(decimalMask);
+        notaField = new JFormattedTextField(decimalMask);
 
-        this.turmaBox = new JComboBox<>();
-        final List<Turma> turmas = this.control.getTurmaControl().getAll().stream().filter(t -> t.getEstado() != FECHADA).collect(Collectors.toList());
-        final DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
+        turmaBox = new JComboBox<>();
+        List<Turma> turmas = control.getTurmaControl().getAll().stream().filter(t -> t.getEstado() != FECHADA).collect(Collectors.toList());
+        DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
         turmaModel.addAll(turmas);
-        this.turmaBox.setModel(turmaModel);
-        this.turmaBox.setSelectedItem(null);
+        turmaBox.setModel(turmaModel);
+        turmaBox.setSelectedItem(null);
 
-        this.alunoBox = new JComboBox<>();
+        alunoBox = new JComboBox<>();
         this.populateAlunos();
     }
 
     public void clearFields() {
-        this.turmaBox.setSelectedItem(null);
-        this.alunoBox.setSelectedItem(null);
-        this.notaField.setValue(null);
+        turmaBox.setSelectedItem(null);
+        alunoBox.setSelectedItem(null);
+        notaField.setValue(null);
     }
 
     /**

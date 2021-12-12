@@ -25,19 +25,19 @@ public class TurmaCell implements ListCellRenderer<Turma> {
     private JLabel curso;
     private JLabel responsavel;
 
-    public TurmaCell(final TurmaControl turmaControl) { this.turmaControl = turmaControl; }
+    public TurmaCell(TurmaControl turmaControl) { this.turmaControl = turmaControl; }
 
     @Override
-    public Component getListCellRendererComponent(final JList<? extends Turma> list, Turma value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-        value = this.turmaControl.service().dao().load(value.getId());
-        final String id = String.valueOf(value.getId());
-        final String dataInicio = value.getDataInicio().format(dateFormatter);
-        final String dataFim = value.getDataFim().format(dateFormatter);
-        final String horario = value.getHorario().format(timeFormatter);
-        final String vagas = value.getVagas() + " vagas";
-        final String estado = Estado.valueOf(value.getEstado());
-        final String curso = value.getCurso().getSigla();
-        final String responsavel = value.getResponsavel().getNome();
+    public Component getListCellRendererComponent(JList<? extends Turma> list, Turma value, int index, boolean isSelected, boolean cellHasFocus) {
+        value = turmaControl.service().dao().load(value.getId());
+        String id = String.valueOf(value.getId());
+        String dataInicio = value.getDataInicio().format(dateFormatter);
+        String dataFim = value.getDataFim().format(dateFormatter);
+        String horario = value.getHorario().format(timeFormatter);
+        String vagas = value.getVagas() + " vagas";
+        String estado = Estado.valueOf(value.getEstado());
+        String curso = value.getCurso().getSigla();
+        String responsavel = value.getResponsavel().getNome();
         this.id.setText(id);
         this.dataInicio.setText(dataInicio);
         this.dataFim.setText(dataFim);
@@ -47,13 +47,13 @@ public class TurmaCell implements ListCellRenderer<Turma> {
         this.curso.setText(curso);
         this.responsavel.setText(responsavel);
         if (isSelected) {
-            this.panel.setBackground(list.getSelectionBackground());
-            this.panel.setForeground(list.getSelectionForeground());
+            panel.setBackground(list.getSelectionBackground());
+            panel.setForeground(list.getSelectionForeground());
         } else {
-            this.panel.setBackground(list.getBackground());
-            this.panel.setForeground(list.getForeground());
+            panel.setBackground(list.getBackground());
+            panel.setForeground(list.getForeground());
         }
-        return this.panel;
+        return panel;
     }
 
     {

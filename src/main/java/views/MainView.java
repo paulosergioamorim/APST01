@@ -18,23 +18,23 @@ public class MainView extends JFrame {
     private JButton matriculaViewButton;
     private JButton notasButton;
 
-    public MainView(final Control control) {
+    public MainView(Control control) {
         super("Program");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setContentPane(this.panel);
+        this.setContentPane(panel);
         this.setSize(300, 300);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
 
-        final ImageIcon icon = new ImageIcon("src/main/images/icon.png");
+        ImageIcon icon = new ImageIcon("src/main/images/icon.png");
         this.setIconImage(icon.getImage());
 
-        this.alunoViewButton.addActionListener(e -> control.changeView(ALUNO_VIEW));
-        this.cursoViewButton.addActionListener(e -> control.changeView(CURSO_VIEW));
-        this.professorViewButton.addActionListener(e -> control.changeView(PROFESSOR_VIEW));
-        this.turmaViewButton.addActionListener(e -> control.changeView(TURMA_VIEW));
-        this.matriculaViewButton.addActionListener(e -> control.changeView(MATRICULA_VIEW));
-        this.notasButton.addActionListener(e -> control.changeView(NOTAS_VIEW));
+        alunoViewButton.addActionListener(e -> control.changeView(ALUNO_VIEW));
+        cursoViewButton.addActionListener(e -> control.changeView(CURSO_VIEW));
+        professorViewButton.addActionListener(e -> control.changeView(PROFESSOR_VIEW));
+        turmaViewButton.addActionListener(e -> control.changeView(TURMA_VIEW));
+        matriculaViewButton.addActionListener(e -> control.changeView(MATRICULA_VIEW));
+        notasButton.addActionListener(e -> control.changeView(NOTAS_VIEW));
     }
 
     {

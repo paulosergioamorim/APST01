@@ -10,16 +10,16 @@ import java.util.List;
 import static models.Estado.FECHADA;
 
 public class ProfessorDAO extends DAO<Professor, Long> {
-    public ProfessorDAO(final Configuration configuration, @NotNull final Class<Professor> entity) {
+    public ProfessorDAO(Configuration configuration, @NotNull Class<Professor> entity) {
         super(configuration, entity);
     }
 
     @SuppressWarnings("unchecked")
-    public boolean isActive(final Professor professor) {
+    public boolean isActive(Professor professor) {
         this.open();
         try {
             final String hql = "from Turma where responsavel = :professor";
-            final List<Turma> turmas = this.session.createQuery(hql)
+            List<Turma> turmas = session.createQuery(hql)
                     .setParameter("professor", professor)
                     .getResultList();
             return turmas.stream().anyMatch(turma -> turma.getEstado() != FECHADA);

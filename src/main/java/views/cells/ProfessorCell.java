@@ -19,13 +19,13 @@ public class ProfessorCell implements ListCellRenderer<Professor> {
     private JLabel titulacao;
 
     @Override
-    public Component getListCellRendererComponent(final JList<? extends Professor> list, final Professor value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-        final String cpf = String.valueOf(value.getCpf());
-        final String nome = value.getNome();
-        final String idade = value.getIdade() + " anos";
-        final String sexo = value.getSexo().toString();
-        final String dataNascimento = value.getDataNascimento().format(dateFormatter);
-        final String titulacao = value.getTitulacao();
+    public Component getListCellRendererComponent(JList<? extends Professor> list, Professor value, int index, boolean isSelected, boolean cellHasFocus) {
+        String cpf = String.valueOf(value.getCpf());
+        String nome = value.getNome();
+        String idade = value.getIdade() + " anos";
+        String sexo = value.getSexo().toString();
+        String dataNascimento = value.getDataNascimento().format(dateFormatter);
+        String titulacao = value.getTitulacao();
         this.cpf.setText(cpf);
         this.nome.setText(nome);
         this.idade.setText(idade);
@@ -33,13 +33,13 @@ public class ProfessorCell implements ListCellRenderer<Professor> {
         this.dataNascimento.setText(dataNascimento);
         this.titulacao.setText(titulacao);
         if (isSelected) {
-            this.panel.setBackground(list.getSelectionBackground());
-            this.panel.setForeground(list.getSelectionForeground());
+            panel.setBackground(list.getSelectionBackground());
+            panel.setForeground(list.getSelectionForeground());
         } else {
-            this.panel.setBackground(list.getBackground());
-            this.panel.setForeground(list.getForeground());
+            panel.setBackground(list.getBackground());
+            panel.setForeground(list.getForeground());
         }
-        return this.panel;
+        return panel;
     }
 
     {
