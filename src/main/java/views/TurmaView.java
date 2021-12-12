@@ -100,7 +100,7 @@ public class TurmaView extends JFrame {
         professorModel.addAll(professores);
         responsavelBox = new JComboBox<>(professorModel);
         listView = new JList<>();
-        TurmaCell cell = new TurmaCell(control.getTurmaControl());
+        TurmaCell cell = new TurmaCell();
         listView.setCellRenderer(cell);
         List<Turma> turmas = control.getTurmaControl().getAll();
         this.updateListViewer(turmas);

@@ -85,7 +85,7 @@ public class Turma {
 
     public void setResponsavel(Professor professor) { responsavel = professor; }
 
-    @OneToMany(mappedBy = "turma")
+    @OneToMany(mappedBy = "turma", fetch = FetchType.EAGER)
     public List<Matricula> getMatriculas() { return matriculas; }
 
     public void setMatriculas(List<Matricula> matriculas) { this.matriculas = matriculas; }

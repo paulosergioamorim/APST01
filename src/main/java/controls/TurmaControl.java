@@ -91,16 +91,14 @@ public record TurmaControl(Control control, TurmaService service) {
     public List<Turma> getAll() { return service.getAll(); }
 
     public List<Turma> getAllTurmasVagas() {
-        return service.dao()
-                .loadAll()
+        return service.getAll()
                 .stream()
                 .filter(t -> t.getVagas() > 0 && t.getEstado() == MATRICULAS_ABERTAS)
                 .toList();
     }
 
     public List<Turma> getAllTurmasNonClosed() {
-        return service.dao()
-                .loadAll()
+        return service.getAll()
                 .stream()
                 .filter(t -> t.getEstado() != FECHADA)
                 .toList();
