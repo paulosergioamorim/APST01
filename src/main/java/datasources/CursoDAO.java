@@ -13,10 +13,12 @@ public class CursoDAO extends DAO<Curso, Integer> {
     public Curso load(Integer id) {
         this.open();
         try {
-            final String hql = "from Curso fetch all properties where id = :id";
-            return (Curso) session.createQuery(hql)
+            String hql = "from Curso where id = :id";
+            Curso curso = (Curso) session.createQuery(hql)
                     .setParameter("id", id)
                     .uniqueResult();
+            Hibernate.initialize(curso.getTurmas());
+            return curso;
         } finally {
             this.close();
         }
@@ -25,7 +27,7 @@ public class CursoDAO extends DAO<Curso, Integer> {
     public boolean existsBySigla(String sigla) {
         this.open();
         try {
-            final String sql = "from Curso where sigla = :sigla";
+            String sql = "from Curso where sigla = :sigla";
             return session.createQuery(sql).setParameter("sigla", sigla).uniqueResult() != null;
         } finally {
             this.close();

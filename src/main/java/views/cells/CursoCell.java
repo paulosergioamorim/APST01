@@ -15,7 +15,11 @@ public class CursoCell implements ListCellRenderer<Curso> {
     private JLabel cargaHoraria;
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Curso> list, Curso value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends Curso> list,
+                                                  Curso value,
+                                                  int index,
+                                                  boolean isSelected,
+                                                  boolean cellHasFocus) {
         String id = String.valueOf(value.getId());
         String nome = value.getNome();
         String sigla = value.getSigla();
@@ -27,7 +31,8 @@ public class CursoCell implements ListCellRenderer<Curso> {
         if (isSelected) {
             panel.setBackground(list.getSelectionBackground());
             panel.setForeground(list.getSelectionForeground());
-        } else {
+        }
+        else {
             panel.setBackground(list.getBackground());
             panel.setForeground(list.getForeground());
         }
@@ -51,23 +56,23 @@ public class CursoCell implements ListCellRenderer<Curso> {
     private void $$$setupUI$$$() {
         panel = new JPanel();
         panel.setLayout(new FormLayout("center:50px:grow,left:4dlu:noGrow,center:250px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:grow", "fill:13px:grow"));
-        panel.setBackground(new Color(- 13487566));
-        panel.setPreferredSize(new Dimension(- 1, 30));
+        panel.setBackground(new Color(-13487566));
+        panel.setPreferredSize(new Dimension(-1, 30));
         id = new JLabel();
-        id.setForeground(new Color(- 3618616));
+        id.setForeground(new Color(-3618616));
         id.setText("ID");
         CellConstraints cc = new CellConstraints();
         panel.add(id, cc.xy(1, 1));
         nome = new JLabel();
-        nome.setForeground(new Color(- 3618616));
+        nome.setForeground(new Color(-3618616));
         nome.setText("Nome");
         panel.add(nome, cc.xy(3, 1));
         sigla = new JLabel();
-        sigla.setForeground(new Color(- 3618616));
+        sigla.setForeground(new Color(-3618616));
         sigla.setText("Sigla");
         panel.add(sigla, cc.xy(5, 1));
         cargaHoraria = new JLabel();
-        cargaHoraria.setForeground(new Color(- 3618616));
+        cargaHoraria.setForeground(new Color(-3618616));
         cargaHoraria.setText("Carga Horária");
         panel.add(cargaHoraria, cc.xy(7, 1));
     }
@@ -76,4 +81,5 @@ public class CursoCell implements ListCellRenderer<Curso> {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
+
 }

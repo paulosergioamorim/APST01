@@ -18,7 +18,7 @@ public class ProfessorDAO extends DAO<Professor, Long> {
     public boolean isActive(Professor professor) {
         this.open();
         try {
-            final String hql = "from Turma where responsavel = :professor";
+            String hql = "from Turma where responsavel = :professor";
             List<Turma> turmas = session.createQuery(hql)
                     .setParameter("professor", professor)
                     .getResultList();

@@ -50,7 +50,6 @@ public record MatriculaService(MatriculaDAO dao) implements IMatriculaService {
     public int delete(MatriculaID matriculaID) {
         Matricula matricula = dao.get(matriculaID);
         if (matricula == null) return 1;
-        if (matricula.getNota() != null) return 2;
         dao.delete(matricula);
         return 0;
     }

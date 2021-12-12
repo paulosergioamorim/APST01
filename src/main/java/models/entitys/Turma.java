@@ -85,7 +85,7 @@ public class Turma {
 
     public void setResponsavel(Professor professor) { responsavel = professor; }
 
-    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "turma")
     public List<Matricula> getMatriculas() { return matriculas; }
 
     public void setMatriculas(List<Matricula> matriculas) { this.matriculas = matriculas; }

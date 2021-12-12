@@ -18,7 +18,11 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
     private JPanel panel;
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Aluno> list, Aluno value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends Aluno> list,
+                                                  Aluno value,
+                                                  int index,
+                                                  boolean isSelected,
+                                                  boolean cellHasFocus) {
         String cpf = String.valueOf(value.getCpf());
         String nome = value.getNome();
         String idade = value.getIdade() + " anos";
@@ -32,7 +36,8 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
         if (isSelected) {
             panel.setBackground(list.getSelectionBackground());
             panel.setForeground(list.getSelectionForeground());
-        } else {
+        }
+        else {
             panel.setBackground(list.getBackground());
             panel.setForeground(list.getForeground());
         }
@@ -56,28 +61,28 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
     private void $$$setupUI$$$() {
         panel = new JPanel();
         panel.setLayout(new FormLayout("center:50px:grow,left:4dlu:noGrow,center:200px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:grow,left:4dlu:noGrow,center:50px:grow", "center:d:grow"));
-        panel.setBackground(new Color(- 13487566));
-        panel.setPreferredSize(new Dimension(- 1, 30));
+        panel.setBackground(new Color(-13487566));
+        panel.setPreferredSize(new Dimension(-1, 30));
         idade = new JLabel();
-        idade.setForeground(new Color(- 3618616));
+        idade.setForeground(new Color(-3618616));
         idade.setText("Idade");
         CellConstraints cc = new CellConstraints();
         panel.add(idade, cc.xy(5, 1));
         dataNascimento = new JLabel();
-        dataNascimento.setForeground(new Color(- 3618616));
+        dataNascimento.setForeground(new Color(-3618616));
         dataNascimento.setText("Data de Nascimento");
         panel.add(dataNascimento, cc.xy(9, 1));
         sexo = new JLabel();
-        sexo.setForeground(new Color(- 3618616));
+        sexo.setForeground(new Color(-3618616));
         sexo.setText("Sexo");
         panel.add(sexo, cc.xy(7, 1));
         cpf = new JLabel();
-        cpf.setForeground(new Color(- 3618616));
+        cpf.setForeground(new Color(-3618616));
         cpf.setHorizontalAlignment(2);
         cpf.setText("CPF");
         panel.add(cpf, cc.xy(1, 1));
         nome = new JLabel();
-        nome.setForeground(new Color(- 3618616));
+        nome.setForeground(new Color(-3618616));
         nome.setText("Nome");
         panel.add(nome, cc.xy(3, 1));
     }
@@ -86,4 +91,5 @@ public class AlunoCell implements ListCellRenderer<Aluno> {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
+
 }

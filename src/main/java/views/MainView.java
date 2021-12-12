@@ -53,8 +53,8 @@ public class MainView extends JFrame {
      */
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), - 1, - 1));
-        panel.setBackground(new Color(- 13487566));
+        panel.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), -1, -1));
+        panel.setBackground(new Color(-13487566));
         alunoViewButton = new JButton();
         alunoViewButton.setBorderPainted(true);
         alunoViewButton.setContentAreaFilled(true);
@@ -71,7 +71,7 @@ public class MainView extends JFrame {
         matriculaViewButton = new JButton();
         matriculaViewButton.setFocusPainted(false);
         matriculaViewButton.setText("Matriculas");
-        panel.add(matriculaViewButton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(- 1, 30), null, 0, false));
+        panel.add(matriculaViewButton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 30), null, 0, false));
         turmaViewButton = new JButton();
         turmaViewButton.setText("Turmas");
         panel.add(turmaViewButton, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -85,4 +85,5 @@ public class MainView extends JFrame {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() { return panel; }
+
 }
