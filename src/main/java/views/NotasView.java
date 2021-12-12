@@ -57,6 +57,14 @@ public class NotasView extends JFrame {
         }
     }
 
+    public void populateTurmas() {
+        List<Turma> turmas = control.getTurmaControl().getAllTurmasNonClosed();
+        DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
+        turmaModel.addAll(turmas);
+        turmaBox.setModel(turmaModel);
+        turmaBox.setSelectedItem(null);
+    }
+
     public Turma getTurma() { return (Turma) turmaBox.getSelectedItem(); }
 
     public Aluno getAluno() { return (Aluno) alunoBox.getSelectedItem(); }
@@ -68,11 +76,7 @@ public class NotasView extends JFrame {
         notaField = new JFormattedTextField(decimalMask);
 
         turmaBox = new JComboBox<>();
-        List<Turma> turmas = control.getTurmaControl().getAll().stream().filter(t -> t.getEstado() != FECHADA).collect(Collectors.toList());
-        DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
-        turmaModel.addAll(turmas);
-        turmaBox.setModel(turmaModel);
-        turmaBox.setSelectedItem(null);
+        this.populateTurmas();
 
         alunoBox = new JComboBox<>();
         this.populateAlunos();

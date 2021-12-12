@@ -15,14 +15,14 @@ public class ProfessorDAO extends DAO<Professor, Long> {
     }
 
     @SuppressWarnings("unchecked")
-    public boolean isActive(Professor professor) {
+    public boolean containsTurmas(Professor professor) {
         this.open();
         try {
             String hql = "from Turma where responsavel = :professor";
             List<Turma> turmas = session.createQuery(hql)
                     .setParameter("professor", professor)
                     .getResultList();
-            return turmas.stream().anyMatch(turma -> turma.getEstado() != FECHADA);
+            return !turmas.isEmpty();
         } finally {
             this.close();
         }

@@ -62,6 +62,13 @@ public class MatriculaView extends JFrame {
         listView.setModel(model);
     }
 
+    public void updateTurmaBox() {
+        List<Turma> turmas = control.getTurmaControl().getAllTurmasVagas();
+        DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
+        turmaModel.addAll(turmas);
+        turmaBox.setModel(turmaModel);
+    }
+
     public Turma getTurma() { return (Turma) turmaBox.getSelectedItem(); }
 
     public Aluno getAluno() { return (Aluno) alunoBox.getSelectedItem(); }
@@ -74,11 +81,8 @@ public class MatriculaView extends JFrame {
         // TODO: place custom component creation code here
         dataMatriculaField = new JFormattedTextField(dateMask);
 
-        List<Turma> turmas = control.getTurmaControl().getAll();
-        turmas = turmas.stream().filter(t -> t.getEstado() == MATRICULAS_ABERTAS).collect(Collectors.toList());
-        DefaultComboBoxModel<Turma> turmaModel = new DefaultComboBoxModel<>();
-        turmaModel.addAll(turmas);
-        turmaBox = new JComboBox<>(turmaModel);
+        turmaBox = new JComboBox<>();
+        this.updateTurmaBox();
 
         List<Aluno> alunos = control.getAlunoControl().getAll();
         DefaultComboBoxModel<Aluno> alunoModel = new DefaultComboBoxModel<>();

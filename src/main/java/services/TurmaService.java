@@ -72,7 +72,7 @@ public record TurmaService(TurmaDAO dao) implements ITurmaService {
     @Override
     public int delete(int id) {
         if (!dao.exists(id)) return 1;
-        Turma turma = dao.get(id);
+        Turma turma = dao.load(id);
         if (turma.getEstado() != FECHADA) return 2;
         if (!turma.getMatriculas().isEmpty()) return 3;
         dao.delete(turma);

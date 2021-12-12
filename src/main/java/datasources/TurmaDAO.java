@@ -5,6 +5,8 @@ import org.hibernate.Hibernate;
 import org.hibernate.cfg.Configuration;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class TurmaDAO extends DAO<Turma, Integer> {
     public TurmaDAO(Configuration configuration, @NotNull Class<Turma> entity) {
         super(configuration, entity);
@@ -19,6 +21,19 @@ public class TurmaDAO extends DAO<Turma, Integer> {
                     .uniqueResult();
             Hibernate.initialize(turma.getMatriculas());
             return turma;
+        } finally {
+            this.close();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Turma> loadAll() {
+        this.open();
+        try {
+            String hql = "from Turma";
+            List<Turma> turmas = session.createQuery(hql).list();
+            turmas.forEach(t -> Hibernate.initialize(t.getMatriculas()));
+            return turmas;
         } finally {
             this.close();
         }

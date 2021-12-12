@@ -48,7 +48,7 @@ public record ProfessorService(ProfessorDAO dao) implements IProfessorService {
     public int delete(long cpf) {
         Professor professor = dao.get(cpf);
         if (professor == null) return 1;
-        if (dao.isActive(professor)) return 2;
+        if (dao.containsTurmas(professor)) return 2;
         dao.delete(professor);
         return 0;
     }

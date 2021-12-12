@@ -1,12 +1,16 @@
 package controls;
 
+import models.Estado;
 import models.entitys.*;
 import services.TurmaService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static models.Estado.FECHADA;
+import static models.Estado.MATRICULAS_ABERTAS;
 import static models.View.NOTAS_VIEW;
 import static models.View.TURMA_VIEW;
 
@@ -61,6 +65,7 @@ public record TurmaControl(Control control, TurmaService service) {
             case 0 -> {
                 control.showMessage("Turma fechada com sucesso!");
                 control.clearFields(NOTAS_VIEW);
+                control.updateListViewer(NOTAS_VIEW);
             }
             case 1 -> control.showMessage("Turma não encontrada!");
             case 2 -> control.showMessage("Turma já está fechada!");
@@ -84,6 +89,22 @@ public record TurmaControl(Control control, TurmaService service) {
     public Turma get(int id) { return service.get(id); }
 
     public List<Turma> getAll() { return service.getAll(); }
+
+    public List<Turma> getAllTurmasVagas() {
+        return service.dao()
+                .loadAll()
+                .stream()
+                .filter(t -> t.getVagas() > 0 && t.getEstado() == MATRICULAS_ABERTAS)
+                .toList();
+    }
+
+    public List<Turma> getAllTurmasNonClosed() {
+        return service.dao()
+                .loadAll()
+                .stream()
+                .filter(t -> t.getEstado() != FECHADA)
+                .toList();
+    }
 
     public List<Aluno> getAlunos(int id) {
         return service.get(id)

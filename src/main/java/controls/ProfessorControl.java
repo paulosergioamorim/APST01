@@ -49,7 +49,7 @@ public record ProfessorControl(Control control, ProfessorService service) {
                 control.updateListViewer(PROFESSOR_VIEW);
             }
             case 1 -> control.showMessage("Professor não encontrado!");
-            case 2 -> control.showMessage("Professor não pode ser removido! Ele possui turmas ativas!");
+            case 2 -> control.showMessage("Professor não pode ser removido! Ele possui turmas!");
         }
     }
 

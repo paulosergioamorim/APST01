@@ -43,7 +43,7 @@ public final class Control {
 
     public void showMessage(String message) { viewControl.showMessage(message); }
 
-    public void updateListViewer(View view) { viewControl.updateListViewer(view); }
+    public void updateListViewer(View view) { viewControl.updateViewer(view); }
 
     public void clearFields(View view) { viewControl.clearFields(view); }
 

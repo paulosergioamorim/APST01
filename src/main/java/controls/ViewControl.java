@@ -89,7 +89,7 @@ public class ViewControl {
         }
     }
 
-    public void updateListViewer(@NotNull View view) {
+    public void updateViewer(@NotNull View view) {
         switch (view) {
             case ALUNO_VIEW -> {
                 List<Aluno> alunos = control.getAlunoControl().getAll();
@@ -110,7 +110,9 @@ public class ViewControl {
             case MATRICULA_VIEW -> {
                 List<Matricula> matriculas = control.getMatriculaControl().getAll();
                 matriculaView.updateListViewer(matriculas);
+                matriculaView.updateTurmaBox();
             }
+            case NOTAS_VIEW -> notasView.populateTurmas();
         }
     }
 }
