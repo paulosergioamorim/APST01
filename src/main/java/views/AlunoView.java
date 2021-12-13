@@ -46,7 +46,7 @@ public class AlunoView extends JFrame {
     private void saveAluno() {
         try {
             long cpf = Long.parseLong(cpfField.getText().replaceAll("\\D", ""));
-            String nome = nomeField.getText();
+            String nome = nomeField.getText().trim();
             Sexo sexo = (Sexo) sexoBox.getSelectedItem();
             LocalDate dataNascimento = LocalDate.parse(dataNascimentoField.getText(), dateFormatter);
             control.saveAluno(cpf, nome, sexo, dataNascimento);
@@ -59,9 +59,10 @@ public class AlunoView extends JFrame {
     private void updateAluno() {
         try {
             long cpf = Long.parseLong(cpfField.getText().replaceAll("\\D", ""));
-            String nome = nomeField.getText();
+            String nome = nomeField.getText().trim();
             Sexo sexo = (Sexo) sexoBox.getSelectedItem();
-            LocalDate dataNascimento = LocalDate.parse(dataNascimentoField.getText(), dateFormatter);
+            LocalDate dataNascimento = dataNascimentoField.getText().equals("__/__/____") ?
+                    null : LocalDate.parse(dataNascimentoField.getText(), dateFormatter);
             control.updateAluno(cpf, nome, sexo, dataNascimento);
         } catch (NumberFormatException e) {
             e.printStackTrace();

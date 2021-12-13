@@ -61,9 +61,10 @@ public class ProfessorView extends JFrame {
     private void updateProfessor() {
         try {
             long cpf = Long.parseLong(cpfField.getText().replaceAll("\\D", ""));
-            String nome = nomeField.getText();
+            String nome = nomeField.getText().trim();
             Sexo sexo = (Sexo) sexoBox.getSelectedItem();
-            LocalDate dataNascimento = LocalDate.parse(dataNascimentoField.getText(), dateFormatter);
+            LocalDate dataNascimento = dataNascimentoField.getText().equals("__/__/____") ?
+                    null : LocalDate.parse(dataNascimentoField.getText(), dateFormatter);
             String titulacao = titulacaoField.getText().trim();
             control.updateProfessor(cpf, nome, sexo, dataNascimento, titulacao);
         } catch (Exception e) {

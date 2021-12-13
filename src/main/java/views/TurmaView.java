@@ -67,9 +67,12 @@ public class TurmaView extends JFrame {
     private void updateTurma() {
         try {
             int id = Integer.parseInt(idField.getText());
-            LocalDate dataInicio = LocalDate.parse(dataInicioField.getText(), dateFormatter);
-            LocalDate dataFim = LocalDate.parse(dataFimField.getText(), dateFormatter);
-            LocalTime horario = LocalTime.parse(horarioField.getText(), timeFormatter);
+            LocalDate dataInicio = dataInicioField.getText().equals("__/__/____") ?
+                    null : LocalDate.parse(dataInicioField.getText(), dateFormatter);
+            LocalDate dataFim = dataFimField.getText().equals("__/__/____") ?
+                    null : LocalDate.parse(dataFimField.getText(), dateFormatter);
+            LocalTime horario = horarioField.getText().equals("__:__") ?
+                    null : LocalTime.parse(horarioField.getText(), timeFormatter);
             int limite = Integer.parseInt(limiteField.getText());
             Curso curso = (Curso) cursoBox.getSelectedItem();
             Professor responsavel = (Professor) responsavelBox.getSelectedItem();

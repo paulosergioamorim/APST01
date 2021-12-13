@@ -35,10 +35,10 @@ public record ProfessorService(ProfessorDAO dao) implements IProfessorService {
         if (responsavel == null)
             return 1;
 
-        nome = nome == null ? responsavel.getNome() : nome;
+        nome = nome.isEmpty() ? responsavel.getNome() : nome;
         sexo = sexo == null ? responsavel.getSexo() : sexo;
         dataNascimento = dataNascimento == null ? responsavel.getDataNascimento() : dataNascimento;
-        titulacao = titulacao == null ? responsavel.getTitulacao() : titulacao;
+        titulacao = titulacao.isEmpty() ? responsavel.getTitulacao() : titulacao;
 
         if (!nome.matches(pessoaNomePattern.pattern()))
             return 2;

@@ -33,7 +33,7 @@ public record CursoControl(Control control, CursoService service) {
                 control.updateListViewer(CURSO_VIEW);
             }
             case 1 -> control.showMessage("Curso não encontrado!");
-            case 2 -> control.showMessage("Curso não pode ser excluído pois possuí turmas ativas!");
+            case 2 -> control.showMessage("Curso não pode ser excluído pois possuí turmas!");
         }
     }
 

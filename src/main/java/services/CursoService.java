@@ -32,8 +32,8 @@ public record CursoService(CursoDAO dao) implements ICursoService {
         if (curso == null)
             return 1;
 
-        nome = nome == null ? curso.getNome() : nome;
-        sigla = sigla == null ? curso.getSigla() : sigla;
+        nome = nome.isEmpty() ? curso.getNome() : nome;
+        sigla = sigla.isEmpty() ? curso.getSigla() : sigla;
         cargaHoraria = cargaHoraria == 0 ? curso.getCargaHoraria() : cargaHoraria;
 
         if (!nome.matches(cursoNomePattern.pattern()))
@@ -55,7 +55,7 @@ public record CursoService(CursoDAO dao) implements ICursoService {
         Curso curso = dao.load(id);
         if (curso == null)
             return 1;
-        if (curso.getTurmas().stream().anyMatch(t -> t.getEstado() != FECHADA))
+        if (!curso.getTurmas().isEmpty())
             return 2;
         dao.delete(curso);
         return 0;

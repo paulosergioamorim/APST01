@@ -26,7 +26,7 @@ public record AlunoService(AlunoDAO dao) implements IAlunoService {
         if (aluno == null)
             return 1;
 
-        nome = nome == null ? aluno.getNome() : nome;
+        nome = nome.isEmpty() ? aluno.getNome() : nome;
         sexo = sexo == null ? aluno.getSexo() : sexo;
         dataNascimento = dataNascimento == null ? aluno.getDataNascimento() : dataNascimento;
 
